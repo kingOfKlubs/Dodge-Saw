@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.iOS;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Movement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
     Vector2 _direction;
     Ray _ray;
     float _initialSpeed;
+    float angle;
 
     #endregion
 
@@ -29,7 +31,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
-        _velocity = new Vector2(1,1);
+        _velocity = new Vector2(0,1);
         _direction = this.transform.up;
         _initialSpeed = _moveSpeed;
     }
@@ -42,8 +44,7 @@ public class Movement : MonoBehaviour
         Reflect();
         Move();
 
-      float Xspeed = Input.GetAxis("Horizontal");
-      float Yspeed = Input.GetAxis("Vertical");
+      
 
         //_rigid.velocity = new Vector2(Xspeed, Yspeed);      
     }
@@ -91,6 +92,58 @@ public class Movement : MonoBehaviour
         }
         else
             _moveSpeed = _initialSpeed;
+
+
+        float xSpeed = CrossPlatformInputManager.GetAxis("Horizontal");
+        float ySpeed = CrossPlatformInputManager.GetAxis("Vertical");
+        if (Mathf.Abs(xSpeed) < .9f && Mathf.Abs(ySpeed) < .9f)
+            return;
+
+        angle = Mathf.Atan2(xSpeed, ySpeed);
+        angle = Mathf.Rad2Deg * angle;
+        angle += Camera.main.transform.eulerAngles.y;
+
+        if (angle < 110 && angle > 70)
+        {
+            _velocity = new Vector2(1, 0);
+            _direction = _velocity;
+        }
+        else if (angle < 70 && angle > 20)
+        {
+            _velocity = new Vector2(1, 1);
+            _direction = _velocity;
+        }
+        else if (angle < 20 && angle > -20)
+        {
+            _velocity = new Vector2(0, 1);
+            _direction = _velocity;
+        }
+        else if (angle < -20 && angle > -70)
+        {
+            _velocity = new Vector2(-1, 1);
+            _direction = _velocity;
+        }
+        else if (angle < -70 && angle > -110)
+        {
+            _velocity = new Vector2(-1, 0);
+            _direction = _velocity;
+        }
+        else if (angle < -110 && angle > -160)
+        {
+            _velocity = new Vector2(-1, -1);
+            _direction = _velocity;
+        }
+        else if (angle < -160 && angle > 160) 
+        {
+            _velocity = new Vector2(0, -1);
+            _direction = _velocity;
+        }
+        else if (angle < 160 && angle > 110)
+        {
+            _velocity = new Vector2(1, -1);
+            _direction = _velocity;
+        }
+        Debug.Log(angle);
     }
 
 

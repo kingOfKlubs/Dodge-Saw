@@ -82,12 +82,16 @@ public class Movement : MonoBehaviour
     //moves the pentagon based on touch input
     public void Move()
     {
+        if(Input.GetMouseButton(1))
+        {
+            _moveSpeed = .3f;
+        }
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                _moveSpeed = 1;
+                _moveSpeed = .3f;
             }
         }
         else
@@ -108,17 +112,17 @@ public class Movement : MonoBehaviour
             _velocity = new Vector2(1, 0);
             _direction = _velocity;
         }
-        else if (angle < 70 && angle > 20)
+        else if (angle < 70 && angle > 30)
         {
             _velocity = new Vector2(1, 1);
             _direction = _velocity;
         }
-        else if (angle < 20 && angle > -20)
+        else if (angle < 30 && angle > -30)
         {
             _velocity = new Vector2(0, 1);
             _direction = _velocity;
         }
-        else if (angle < -20 && angle > -70)
+        else if (angle < -30 && angle > -70)
         {
             _velocity = new Vector2(-1, 1);
             _direction = _velocity;
@@ -128,17 +132,17 @@ public class Movement : MonoBehaviour
             _velocity = new Vector2(-1, 0);
             _direction = _velocity;
         }
-        else if (angle < -110 && angle > -160)
+        else if (angle < -110 && angle > -150)
         {
             _velocity = new Vector2(-1, -1);
             _direction = _velocity;
         }
-        else if (angle < -160 && angle > 160) 
+        else if (angle < -150 || angle > 150) 
         {
             _velocity = new Vector2(0, -1);
             _direction = _velocity;
         }
-        else if (angle < 160 && angle > 110)
+        else if (angle < 150 && angle > 110)
         {
             _velocity = new Vector2(1, -1);
             _direction = _velocity;

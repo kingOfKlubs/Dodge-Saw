@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     Ray _ray;
     float _initialSpeed;
     float angle;
-
+    Animator anim;
     #endregion
 
     Touch touch;
@@ -34,6 +34,7 @@ public class Movement : MonoBehaviour
         _velocity = new Vector2(0,1);
         _direction = this.transform.up;
         _initialSpeed = _moveSpeed;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -92,10 +93,14 @@ public class Movement : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 _moveSpeed = .3f;
+                anim.speed = .3f;
             }
         }
         else
+        {
             _moveSpeed = _initialSpeed;
+            anim.speed = 1;
+        }
 
 
         float xSpeed = CrossPlatformInputManager.GetAxis("Horizontal");

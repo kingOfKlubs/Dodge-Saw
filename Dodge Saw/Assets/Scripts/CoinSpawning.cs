@@ -31,7 +31,7 @@ public class CoinSpawning : MonoBehaviour
         if(time <= 0)
         {
             SpawnCoins();
-            time = _startTime;
+            time = Random.Range(4,_startTime);
         }
     }
 
@@ -39,7 +39,7 @@ public class CoinSpawning : MonoBehaviour
     public void SpawnCoins()
     {
         
-            _position = new Vector2(Random.Range(-2.5f, 2.5f), Random.Range(-3,6));
+            _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f,4.5f));
             GameObject CoinClone = Instantiate(_coin, _position, Quaternion.identity);
             Destroy(CoinClone, 15f);
             

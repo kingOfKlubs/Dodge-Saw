@@ -7,6 +7,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool _isGamePaused = false;
     public GameObject _pauseMenuUI;
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     void Update()
     {
         if (CrossPlatformInputManager.GetButtonDown("Cancel"))

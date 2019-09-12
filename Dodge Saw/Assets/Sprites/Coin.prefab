@@ -130,3 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cost: 10
+  collect: {fileID: 773577609059814020, guid: 0573ab9edbf7145858c0b439b1ef91a9, type: 3}

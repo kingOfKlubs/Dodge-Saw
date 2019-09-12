@@ -7,6 +7,7 @@ using UnityEngine.Audio;
 public class SceneChanger : MonoBehaviour
 {
     public AudioMixer mixer;
+    public GameObject _gameOverUI;
 
     public void StartGame()
     {
@@ -25,6 +26,7 @@ public class SceneChanger : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -32,5 +34,17 @@ public class SceneChanger : MonoBehaviour
     {
         mixer.SetFloat("volume", volume);
         Debug.Log(volume);
+    }
+
+    public void Update()
+    {
+        if(Movement.Death == true)
+        {
+            
+                _gameOverUI.SetActive(true);
+            
+        }
+            else
+                _gameOverUI.SetActive(false);
     }
 }

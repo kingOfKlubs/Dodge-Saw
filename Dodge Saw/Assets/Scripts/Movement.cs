@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     public float _moveSpeed;
     public static bool Death;
     public ParticleSystem Warp;
+    public ParticleSystem Warp1;
     public float _coolDownTime = -5;
     public Image _coolDownImage;
     public float _startTime = 0;
@@ -81,8 +82,8 @@ public class Movement : MonoBehaviour
         {
             _velocity = Vector2.Reflect(_direction, _hit.normal);
             _direction = _velocity;
+		    FindObjectOfType<AudioManager>().Play("Bump");
         }
-
     }
 
     public GameStates UpdateStates(GameStates newGameState)
@@ -113,7 +114,10 @@ public class Movement : MonoBehaviour
         _moveSpeed = _initialSpeed;
         anim.speed = 1;
         Warp.playbackSpeed = 1;
-        if(_coolDownImage.fillAmount != 1)
+        Warp1.playbackSpeed = 1;
+        Warp.GetComponentInChildren<ParticleSystem>().playbackSpeed = 1;
+        Warp1.GetComponentInChildren<ParticleSystem>().playbackSpeed = 1;
+        if (_coolDownImage.fillAmount != 1)
             _coolDownImage.fillAmount = 1;
 
 
@@ -125,6 +129,9 @@ public class Movement : MonoBehaviour
         _moveSpeed = _initialSpeed;
         anim.speed = 1;
         Warp.playbackSpeed = 1;
+        Warp.GetComponentInChildren<ParticleSystem>().playbackSpeed = 1;
+        Warp1.playbackSpeed = 1;
+        Warp1.GetComponentInChildren<ParticleSystem>().playbackSpeed = 1;
         float counter = 5;
         counter -= Time.deltaTime;
         _coolDownImage.fillAmount += _coolDownTime / counter * Time.deltaTime; 
@@ -139,6 +146,10 @@ public class Movement : MonoBehaviour
         _moveSpeed = .3f;
         anim.speed = .3f;
         Warp.playbackSpeed = .3f;
+        Warp1.playbackSpeed = .3f;
+        Warp.GetComponentInChildren<ParticleSystem>().playbackSpeed = .3f;
+        Warp1.GetComponentInChildren<ParticleSystem>().playbackSpeed = .3f;
+        //FindObjectOfType<AudioManager>().Play("");
     }
     //moves the pentagon based on touch input
     public void Move()
@@ -192,12 +203,12 @@ public class Movement : MonoBehaviour
         angle = Mathf.Rad2Deg * angle;
         angle += Camera.main.transform.eulerAngles.y;
 
-        if (angle < 120 && angle > 60)
+        if (angle < 130 && angle > 50)
         {
             _velocity = new Vector2(1, 0);
             _direction = _velocity;
         }
-        else if (angle < 60 && angle > 40)
+        else if (angle < 50 && angle > 40)
         {
             _velocity = new Vector2(1, 1);
             _direction = _velocity;
@@ -207,17 +218,17 @@ public class Movement : MonoBehaviour
             _velocity = new Vector2(0, 1);
             _direction = _velocity;
         }
-        else if (angle < -40 && angle > -60)
+        else if (angle < -40 && angle > -50)
         {
             _velocity = new Vector2(-1, 1);
             _direction = _velocity;
         }
-        else if (angle < -60 && angle > -120)
+        else if (angle < -50 && angle > -130)
         {
             _velocity = new Vector2(-1, 0);
             _direction = _velocity;
         }
-        else if (angle < -120 && angle > -140)
+        else if (angle < -130 && angle > -140)
         {
             _velocity = new Vector2(-1, -1);
             _direction = _velocity;
@@ -227,7 +238,7 @@ public class Movement : MonoBehaviour
             _velocity = new Vector2(0, -1);
             _direction = _velocity;
         }
-        else if (angle < 140 && angle > 120)
+        else if (angle < 140 && angle > 130)
         {
             _velocity = new Vector2(1, -1);
             _direction = _velocity;

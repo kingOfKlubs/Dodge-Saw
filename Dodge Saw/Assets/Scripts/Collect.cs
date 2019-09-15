@@ -13,6 +13,7 @@ public class Collect : MonoBehaviour
             Score._score += _cost;
             this.gameObject.SetActive(false);
             ParticleSystem clone = Instantiate(collect, transform.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().Play("Coin");
             Destroy(clone, 3);
         }
     }

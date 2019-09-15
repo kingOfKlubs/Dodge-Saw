@@ -15,14 +15,14 @@ public class Bounce : MonoBehaviour
     Transform playerPos;
     public float _dst;
     Vector2 _velocity;
-    
+    Animator anim;
     Vector2 _direction;
     Ray _ray;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody2D>();
         _Player = GameObject.FindGameObjectWithTag("Player");
         movement = _Player.GetComponent<Movement>();
@@ -49,13 +49,13 @@ public class Bounce : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 _moveSpeed = .3f;
-
+                anim.speed = .3f;
             }
         }
         else
         {
             _moveSpeed = 5;
-
+            anim.speed = 1;
         }
 
         _rigid.velocity = new Vector2(_moveDirection.x, _moveDirection.y) * _moveSpeed;
@@ -99,8 +99,8 @@ public class Bounce : MonoBehaviour
                 GameObject clone = Instantiate(_Player, collision.transform.position, Quaternion.identity);
                 clone.transform.localScale = new Vector3(10f, 10f, 10f);
                 clone.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)) * movement._moveSpeed * .5f;
-
-                Destroy(clone, 7);
+				FindObjectOfType<AudioManager>().Play("PlayerCrash");
+				Destroy(clone, 7);
 
             }
         }

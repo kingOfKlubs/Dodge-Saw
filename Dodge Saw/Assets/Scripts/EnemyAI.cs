@@ -10,10 +10,22 @@ public class EnemyAI : MonoBehaviour
     public Transform _Player;
     public float _startTime;
     public ParticleSystem ring;
-    public GameObject[] enemies = new GameObject[3]; 
+    public GameObject[] enemies = new GameObject[3];
+    public Color[] colors;
+    public GameObject Particle1;
+    public GameObject Particle2;
     #endregion
-
+    Camera camera;
     float time;
+    int index = 0;
+    bool shouldChange = false;
+    bool hasChanged = false;
+
+    private void Awake()
+    {
+        camera = Camera.main;
+        
+    }
     
 
     private void Start()
@@ -27,6 +39,30 @@ public class EnemyAI : MonoBehaviour
     {
         //KeepInBounds();
         Timer();
+        if(shouldChange)
+        {
+
+            var startColor = camera.backgroundColor;
+            var endColor = colors[0];
+            if (index + 1 < colors.Length)
+            {
+                endColor = colors[index + 1];
+            }
+        
+
+            Color newColor = Color.Lerp(startColor, endColor, Time.deltaTime * 5);
+            SetColor(newColor);
+            if (newColor == endColor)
+            {
+                shouldChange = false;
+                if (index + 1 < colors.Length)
+                {
+                    index++;
+                }
+                else
+                    index = 0;
+            }
+        }
     }
 
     public void Timer()
@@ -37,6 +73,15 @@ public class EnemyAI : MonoBehaviour
             SpawnEnemies();
             time = Random.Range(5,_startTime);
         }
+    }
+
+    public void SetColor(Color color)
+    {
+        
+        camera.backgroundColor = color;
+
+       
+
     }
 
     //Spawn Coins randomly on the screen
@@ -57,23 +102,52 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (Score._score >= 50 && Score._score < 99)
         {
-            GameObject EnemyClone = Instantiate(enemies[1], _position, Quaternion.identity);
+            index = 0;
+            shouldChange = true;
+            Particle1.SetActive(false);
+            Particle2.SetActive(true);
+            GameObject EnemyClone = Instantiate(enemies[0], _position, Quaternion.identity);
             Destroy(EnemyClone, 10f);
         }
         else if (Score._score >= 100 && Score._score < 199)
         {
+            index = 1;
+            shouldChange = true;
+            Particle1.SetActive(true);
+            Particle2.SetActive(false);
             GameObject EnemyClone = Instantiate(enemies[2], _position, Quaternion.identity);
-            Destroy(EnemyClone, 10f);
+            Destroy(EnemyClone, 5f);
         }
-        else if (Score._score >= 200)
+        else if (Score._score >= 200 && Score._score < 399)
         {
-            GameObject EnemyClone = Instantiate(enemies[Random.Range(0,2)], _position, Quaternion.identity);
-            Destroy(EnemyClone, 10f);
+            index = 0;
+            shouldChange = true;
+            
+            Particle1.SetActive(false);
+            Particle2.SetActive(true);
+            GameObject EnemyClone = Instantiate(enemies[Random.Range(0,3)], _position, Quaternion.identity);
+            Destroy(EnemyClone, 15f);
+        }
+        else if(Score._score>= 400)
+        {
+            index = 1;
+                shouldChange = true;
+            
+            Particle1.SetActive(true);
+            Particle2.SetActive(false);
+            GameObject EnemyClone = Instantiate(enemies[Random.Range(0, 3)], _position, Quaternion.identity);
+            Destroy(EnemyClone, 15f);
+            GameObject EnemyClone1 = Instantiate(enemies[Random.Range(0, 3)], _position, Quaternion.identity);
+            Destroy(EnemyClone1, 15f);
         }
         else
         {
-            GameObject EnemyClone = Instantiate(enemies[0], _position, Quaternion.identity);
-            Destroy(EnemyClone, 10f);
+           
+            //SetColor(colors[index]);
+            Particle1.SetActive(true);
+            Particle2.SetActive(false);
+            GameObject EnemyClone = Instantiate(enemies[1], _position, Quaternion.identity);
+            Destroy(EnemyClone, 15f);
         }
         
     }

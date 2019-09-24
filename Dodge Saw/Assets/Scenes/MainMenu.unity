@@ -6132,6 +6132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixer: {fileID: 0}
   _gameOverUI: {fileID: 0}
+  startGameName: GameLevel
+  mainMenuName: MainMenu
 --- !u!1001 &1459333373
 PrefabInstance:
   m_ObjectHideFlags: 0

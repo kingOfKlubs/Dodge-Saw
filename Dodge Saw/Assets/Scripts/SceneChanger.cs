@@ -8,11 +8,14 @@ public class SceneChanger : MonoBehaviour
 {
     public AudioMixer mixer;
     public GameObject _gameOverUI;
+    [SerializeField]
+    public string startGameName;
+    public string mainMenuName;
     AudioManager AM;
 
     public void StartGame()
     {
-        SceneManager.LoadScene("GameLevel");
+        SceneManager.LoadScene(startGameName);
         AM = FindObjectOfType<AudioManager>();
     }
 
@@ -33,7 +36,7 @@ public class SceneChanger : MonoBehaviour
         Time.timeScale = 1;
 		FindObjectOfType<AudioManager>().Play("Theme");
         FindObjectOfType<AudioManager>().Stop("HipHop");
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(mainMenuName);
     }
 
     public void SetVolume(float volume)
@@ -44,14 +47,16 @@ public class SceneChanger : MonoBehaviour
 
     public void Update()
     {
-
-        if(Movement.Death == true)
+        if (_gameOverUI != null)
         {
-            
+            if (Movement.Death == true)
+            {
+
                 _gameOverUI.SetActive(true);
-            
-        }
+
+            }
             else
                 _gameOverUI.SetActive(false);
+        }
     }
 }

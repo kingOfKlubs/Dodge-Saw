@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5538176189873957745}
   - component: {fileID: 5538176189873957744}
   - component: {fileID: 5538176189873957647}
-  - component: {fileID: 4604706043583566139}
   - component: {fileID: 943678274125562444}
+  - component: {fileID: 9079718735220341381}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -101,22 +101,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &4604706043583566139
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5538176189873957646}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5.12
 --- !u!114 &943678274125562444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +115,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cost: 10
   collect: {fileID: 773577609059814020, guid: 0573ab9edbf7145858c0b439b1ef91a9, type: 3}
+--- !u!136 &9079718735220341381
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5538176189873957646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.48
+  m_Height: 10.18
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3613067136226681706}
   - component: {fileID: 3613067136225354570}
   - component: {fileID: 3613067136224256394}
-  - component: {fileID: 3613067135243306037}
   - component: {fileID: 3613067135243306030}
-  - component: {fileID: 6608301865510531769}
   - component: {fileID: 6843477983017839875}
+  - component: {fileID: 3642184711889592723}
+  - component: {fileID: 5877537300105307121}
   m_Layer: 0
   m_Name: PentagonSpike
   m_TagString: Untagged
@@ -82,22 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!58 &3613067135243306037
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3613067136226459466}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00044406037, y: -0.00009174376}
-  serializedVersion: 2
-  m_Radius: 0.026034163
 --- !u!95 &3613067135243306030
 Animator:
   serializedVersion: 3
@@ -117,27 +101,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &6608301865510531769
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3613067136226459466}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &6843477983017839875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +116,34 @@ MonoBehaviour:
   _Player: {fileID: 0}
   _moveDirection: {x: 0, y: 0}
   movement: {fileID: 0}
+  _ring: {fileID: 0}
+--- !u!54 &3642184711889592723
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613067136226459466}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 0
+--- !u!136 &5877537300105307121
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613067136226459466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.027074177
+  m_Height: 0.049350474
+  m_Direction: 1
+  m_Center: {x: -0.00000049732625, y: 0.00000027567148, z: 0.00000063469633}

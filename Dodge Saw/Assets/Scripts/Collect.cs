@@ -6,7 +6,7 @@ public class Collect : MonoBehaviour
 {
     public int _cost;
     public ParticleSystem collect;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.tag == "Player")
         {

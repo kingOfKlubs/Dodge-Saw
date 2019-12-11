@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public GameObject _Player;
-    Rigidbody2D _rigid;
+    Rigidbody _rigid;
     public Vector2 _moveDirection;
     public Movement movement;
     public ParticleSystem _ring;
@@ -19,20 +19,23 @@ public class Attack : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        _rigid = GetComponent<Rigidbody2D>();
+        _rigid = GetComponent<Rigidbody>();
         _Player = GameObject.FindGameObjectWithTag("Player");
-        movement = _Player.GetComponent<Movement>();
-        _moveSpeed = movement._moveSpeed;
-        playerPos = _Player.transform;
-        Ray _ray = new Ray(transform.position, _Player.transform.position);
-        RaycastHit _hit;
-        if (Physics.Raycast(_ray, out _hit))
+        if (_Player != null)
         {
-                _moveDirection = (playerPos.position - transform.position).normalized;
-            
-        }
+            movement = _Player.GetComponent<Movement>();
+            _moveSpeed = movement._moveSpeed;
+            playerPos = _Player.transform;
 
-       
+            Ray _ray = new Ray(transform.position, _Player.transform.position);
+            RaycastHit _hit;
+            if (Physics.Raycast(_ray, out _hit))
+            {
+                _moveDirection = (playerPos.position - transform.position).normalized;
+
+            }
+
+        }
 
     }
 
@@ -61,7 +64,7 @@ public class Attack : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
         {
@@ -71,7 +74,7 @@ public class Attack : MonoBehaviour
             {
                 GameObject clone = Instantiate(_Player, collision.transform.position, Quaternion.identity);
                 clone.transform.localScale = new Vector3(10f, 10f, 10f);
-                clone.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)) * movement._moveSpeed *.5f;
+                clone.GetComponent<Rigidbody>().velocity = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)) * movement._moveSpeed *.5f;
 				FindObjectOfType<AudioManager>().Play("PlayerCrash");
                 Destroy(clone, 7);
 

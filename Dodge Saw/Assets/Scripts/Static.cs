@@ -5,7 +5,7 @@ using UnityEngine;
 public class Static : MonoBehaviour
 {
     public GameObject _Player;
-    Rigidbody2D _rigid;
+    Rigidbody _rigid;
     public Vector2 _moveDirection;
     public Movement movement;
     public ParticleSystem _ring;
@@ -19,7 +19,7 @@ public class Static : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        _rigid = GetComponent<Rigidbody2D>();
+        _rigid = GetComponent<Rigidbody>();
         _Player = GameObject.FindGameObjectWithTag("Player");
         movement = _Player.GetComponent<Movement>();
         _moveSpeed = movement._moveSpeed;
@@ -61,7 +61,7 @@ public class Static : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
         {
@@ -71,7 +71,7 @@ public class Static : MonoBehaviour
             {
                 GameObject clone = Instantiate(_Player, collision.transform.position, Quaternion.identity);
                 clone.transform.localScale = new Vector3(10f, 10f, 10f);
-                clone.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)) * movement._moveSpeed * .5f;
+                clone.GetComponent<Rigidbody>().velocity = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f)) * movement._moveSpeed * .5f;
 				FindObjectOfType<AudioManager>().Play("PlayerCrash");
 				Destroy(clone, 7);
 

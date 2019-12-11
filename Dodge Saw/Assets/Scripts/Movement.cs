@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
 
     #region Private Variables
     Vector2 _velocity;
-    Rigidbody2D _rigid;
+    Rigidbody _rigid;
     Vector2 _direction;
     Ray _ray;
     float _initialSpeed;
@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         Death = false;
-        _rigid = GetComponent<Rigidbody2D>();
+        _rigid = GetComponent<Rigidbody>();
         _velocity = new Vector2(0, 1);
         _direction = this.transform.up;
         _initialSpeed = _moveSpeed;
@@ -248,10 +248,7 @@ public class Movement : MonoBehaviour
 
     void CoolDown()
     {
-        Debug.Log("Time.time is " + Time.time);
-        Debug.Log("Next time can stop is " + nextTimeCanStop);
-
-        
+              
             if (_needCoolDown && Time.time > nextTimeCanStop)
             {
                 nextTimeCanStop = Time.time + _coolDownTime;

@@ -8,6 +8,11 @@ TagManager:
   - Border
   - Slider
   - ShopItem
+  - Warp
+  - Warp1
+  - AltWarp
+  - AltWarp1
+  - TimerUI
   layers:
   - Default
   - TransparentFX

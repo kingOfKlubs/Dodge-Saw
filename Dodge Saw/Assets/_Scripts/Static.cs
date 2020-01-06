@@ -22,19 +22,19 @@ public class Static : MonoBehaviour
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _Player = GameObject.FindGameObjectWithTag("Player");
-        movement = _Player.GetComponent<Movement>();
-        _moveSpeed = movement._moveSpeed;
-        playerPos = _Player.transform;
-        Ray _ray = new Ray(transform.position, _Player.transform.position);
-        RaycastHit _hit;
-        if (Physics.Raycast(_ray, out _hit))
+        if (_Player != null)
         {
-            _moveDirection = Vector2.zero;
+            movement = _Player.GetComponent<Movement>();
+            _moveSpeed = movement._moveSpeed;
+            playerPos = _Player.transform;
+            Ray _ray = new Ray(transform.position, _Player.transform.position);
+            RaycastHit _hit;
+            if (Physics.Raycast(_ray, out _hit))
+            {
+                _moveDirection = Vector2.zero;
 
+            }
         }
-
-
-
     }
 
     // Update is called once per frame
@@ -56,8 +56,6 @@ public class Static : MonoBehaviour
         }
 
         _rigid.velocity = new Vector2(_moveDirection.x, _moveDirection.y) * _moveSpeed;
-
-
     }
 
 

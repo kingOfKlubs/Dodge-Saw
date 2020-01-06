@@ -10841,12 +10841,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
-  slider: {fileID: 100561443}
+  slider: {fileID: 0}
   _gameOverUI: {fileID: 0}
   _gameOverRewardUI: {fileID: 0}
   startGameName: GameLevel
   mainMenuName: MainMenu
   rewardNumber: {fileID: 0}
+  persisterName: StoreObjects
+  objectsToPersist:
+  - {fileID: 11400000, guid: 42fc07e34bc73420b94c4fb7a893d769, type: 2}
+  - {fileID: 11400000, guid: 9ec3d0e91c90b48298b398c84be116b7, type: 2}
+  - {fileID: 11400000, guid: 3c0f9ef7e8a6e429a8eeb6279abff7ed, type: 2}
+  - {fileID: 11400000, guid: 4f585fc73ad084695bf765141eed01ca, type: 2}
+  - {fileID: 11400000, guid: f4e7ee5e910724e7e9d1a04a9429a8db, type: 2}
+  - {fileID: 11400000, guid: 00c2f0d97333c46818b8815f8cb4fff0, type: 2}
+  - {fileID: 11400000, guid: 837c942f7d5e049eb8898f37cf05ab10, type: 2}
+  - {fileID: 11400000, guid: 6b4df092e08a54544856ca5f46fd5209, type: 2}
+  - {fileID: 11400000, guid: 5c1821caa98c14154a3661206bbb00e4, type: 2}
+  - {fileID: 11400000, guid: db34b089dc3d04c9ea68fbc5b5c79599, type: 2}
+  - {fileID: 11400000, guid: 8d8b1c1c8f0854061a96d5b196639ab5, type: 2}
+  - {fileID: 11400000, guid: 724ad28c6839c46aa9b681460cfcdc57, type: 2}
+  - {fileID: 11400000, guid: 81716c018a8ae47c6aef13dd0772b52f, type: 2}
+  - {fileID: 11400000, guid: e5343652fee2547578ba1f2105ce8076, type: 2}
+  - {fileID: 11400000, guid: ded3653cb30e74706ab30f54b9ef65f8, type: 2}
+  - {fileID: 11400000, guid: b90d6ebaa0de747849f58c92e0096707, type: 2}
+  - {fileID: 11400000, guid: 409e1327d47d145adb884ef69d147a42, type: 2}
+  - {fileID: 11400000, guid: 4a7188061d724439791bc1e4c7e0795f, type: 2}
+  - {fileID: 11400000, guid: 9a47a734453304a6390397dbf407cb58, type: 2}
+  - {fileID: 11400000, guid: 6b6d3bb17f8d942ccad5cc0fc8bec449, type: 2}
+  - {fileID: 11400000, guid: 98122e89b199d46c1b5719c6764ca768, type: 2}
+  - {fileID: 11400000, guid: 8f27b3a80609944baaa0f06321387819, type: 2}
+  - {fileID: 11400000, guid: 6aaeca7e85eb24ab5b1ddb3471bf21a2, type: 2}
+  - {fileID: 11400000, guid: b9e36c07574fd4631b7f8c38d8597a05, type: 2}
+  - {fileID: 11400000, guid: e351927e4acc94deab643bc4ca0566fe, type: 2}
+  - {fileID: 11400000, guid: 5f3922582fe5b487b8e9bc59fa8746a5, type: 2}
+  - {fileID: 11400000, guid: b0d44ef063d564ceb8ab7fc4b4e15a81, type: 2}
+  - {fileID: 11400000, guid: 3ba41efe7129847959edaaa21c1bd65e, type: 2}
+  - {fileID: 11400000, guid: ea59630168b794c4e895fb7f11b2c72a, type: 2}
+  - {fileID: 11400000, guid: 20fb0c392a4fd4485ac4cb018d91b94b, type: 2}
+  - {fileID: 11400000, guid: dc6815955d14347edb1f82f70854e0d2, type: 2}
+  - {fileID: 11400000, guid: 5937f6183a9d64ea3af8f4ded7fd6a20, type: 2}
+  - {fileID: 11400000, guid: a08580ea3ac2b4c5fb2b27642a38eb3b, type: 2}
+  - {fileID: 11400000, guid: c7a2feb877d444543b06cd17e930f805, type: 2}
+  - {fileID: 11400000, guid: 8f9f360970f6d4b0098b82c18ef4406b, type: 2}
+  - {fileID: 11400000, guid: 09b5d5e5e19ff4b75bf374c969975500, type: 2}
+  - {fileID: 11400000, guid: ddb3940611e0949579e49b7b8b47a9c6, type: 2}
+  canFindData: 1
 --- !u!1 &1439456833
 GameObject:
   m_ObjectHideFlags: 0

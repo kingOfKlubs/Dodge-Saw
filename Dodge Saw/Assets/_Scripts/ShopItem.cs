@@ -18,6 +18,8 @@ public class ShopItem : ScriptableObject
     //for the Raw Image
     public Texture texture;
     public Color color;
+    public Color color2;
+    public Gradient gradient;
 
     //for the name
     public string _itemName;
@@ -39,5 +41,5 @@ public class ShopItem : ScriptableObject
     {
         hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
-    public enum ItemType { Player, Trail, Enemies, Warp, Death}
+    public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death}
 }

@@ -24,20 +24,21 @@ public class Attack : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         if (_deathEffect != null)
         {
-            movement = _player.GetComponent<Movement>();
-            _moveSpeed = movement._moveSpeed;
-            playerPos = _player.transform;
-
-            Ray _ray = new Ray(transform.position, _player.transform.position);
-            RaycastHit _hit;
-            if (Physics.Raycast(_ray, out _hit))
+            if(_player != null)
             {
-                _moveDirection = (playerPos.position - transform.position).normalized;
+                movement = _player.GetComponent<Movement>();
+                _moveSpeed = movement._moveSpeed;
+                playerPos = _player.transform;
 
+                Ray _ray = new Ray(transform.position, _player.transform.position);
+                RaycastHit _hit;
+                if (Physics.Raycast(_ray, out _hit))
+                {
+                    _moveDirection = (playerPos.position - transform.position).normalized;
+
+                }
             }
-
         }
-
     }
 
     // Update is called once per frame
@@ -57,13 +58,8 @@ public class Attack : MonoBehaviour
             _moveSpeed = 5;
             anim.speed = 1;
         }
-
         _rigid.velocity = new Vector2(_moveDirection.x, _moveDirection.y) * _moveSpeed;
-
-
     }
-
-
 
     void OnTriggerEnter(Collider collision)
     {
@@ -73,9 +69,7 @@ public class Attack : MonoBehaviour
             Destroy(collision.gameObject);
             GameObject clone = Instantiate(_deathEffect, collision.transform.position, collision.transform.rotation);
             FindObjectOfType<AudioManager>().Play("PlayerCrash");
-            Destroy(clone, 7);
-
-            
+            Destroy(clone, 7);    
         }
     }
 }

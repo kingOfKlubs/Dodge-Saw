@@ -99,8 +99,8 @@ public class RoundManager : MonoBehaviour
             index = 0;
             
             Particle1.SetActive(false);
-
             Particle2.SetActive(true);
+            InitializePlayerCharacteristics.SetWarpColor();
 
         }
 		else if (Score._score >= 200 && Score._score < 349)
@@ -111,6 +111,7 @@ public class RoundManager : MonoBehaviour
            
             Particle1.SetActive(true);
             Particle2.SetActive(false);
+            InitializePlayerCharacteristics.SetWarpColor();
 
         }
 		else if (Score._score >= 350 && Score._score < 499)
@@ -121,7 +122,7 @@ public class RoundManager : MonoBehaviour
             
             Particle1.SetActive(false);
             Particle2.SetActive(true);
-
+            InitializePlayerCharacteristics.SetWarpColor();
         }
 		else if (Score._score >= 500 && Score._score < 649)
         { 
@@ -130,7 +131,7 @@ public class RoundManager : MonoBehaviour
            
             Particle1.SetActive(true);
             Particle2.SetActive(false);
-
+            InitializePlayerCharacteristics.SetWarpColor();
         }
         else if (Score._score >= 650)
         {
@@ -139,7 +140,7 @@ public class RoundManager : MonoBehaviour
 
             Particle1.SetActive(false);
             Particle2.SetActive(true);
-
+            InitializePlayerCharacteristics.SetWarpColor();
         }
         else
 		{

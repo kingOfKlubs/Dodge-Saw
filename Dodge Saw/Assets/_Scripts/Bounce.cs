@@ -27,19 +27,18 @@ public class Bounce : MonoBehaviour
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _Player = GameObject.FindGameObjectWithTag("Player");
-        movement = _Player.GetComponent<Movement>();
-        _moveSpeed = movement._moveSpeed;
-        playerPos = _Player.transform;
-        Ray _ray = new Ray(transform.position, _Player.transform.position);
-        RaycastHit _hit;
-        if (Physics.Raycast(_ray, out _hit, layer))
+        if (_Player != null)
         {
-            _moveDirection = (playerPos.position - transform.position).normalized;
-
+            movement = _Player.GetComponent<Movement>();
+            _moveSpeed = movement._moveSpeed;
+            playerPos = _Player.transform;
+            Ray _ray = new Ray(transform.position, _Player.transform.position);
+            RaycastHit _hit;
+            if (Physics.Raycast(_ray, out _hit, layer))
+            {
+                _moveDirection = (playerPos.position - transform.position).normalized;
+            }
         }
-
-
-
     }
 
     // Update is called once per frame

@@ -64,7 +64,7 @@ public class StoreManager : MonoBehaviour
         if(item.itemType == ShopItem.ItemType.Player)
         {
             // player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor",item.color);
-
+            
             PlayerPrefs.SetFloat("_playerColor.r", item.color.r);
             PlayerPrefs.SetFloat("_playerColor.g", item.color.g);
             PlayerPrefs.SetFloat("_playerColor.b", item.color.b);
@@ -73,9 +73,38 @@ public class StoreManager : MonoBehaviour
         if(item.itemType == ShopItem.ItemType.Trail)
         {
             Debug.Log("Equipped new trial");
-            PlayerPrefs.SetFloat("_trailColor.r", item.color.r);
-            PlayerPrefs.SetFloat("_trailColor.g", item.color.g);
-            PlayerPrefs.SetFloat("_trailColor.b", item.color.b);
+            //PlayerPrefs.SetFloat("_trailColor.r", item.color.r);
+            //PlayerPrefs.SetFloat("_trailColor.g", item.color.g);
+            //PlayerPrefs.SetFloat("_trailColor.b", item.color.b);
+            PlayerPrefsX.SetColor("_trailGradient1", item.gradient.colorKeys[0].color);
+            PlayerPrefsX.SetColor("_trailGradient2", item.gradient.colorKeys[1].color); 
+            PlayerPrefsX.SetColor("_trailGradient3", item.gradient.colorKeys[2].color);
+
+        }
+        if (item.itemType == ShopItem.ItemType.Warp)
+        {
+            Debug.Log("Equipped new Warp Color");
+            PlayerPrefsX.SetColor("_warpColor1", item.color);
+            PlayerPrefsX.SetColor("_warpColor2", item.color2);
+        }
+        if (item.itemType == ShopItem.ItemType.AltWarp)
+        {
+            Debug.Log("Equipped new AltWarp Color");
+            PlayerPrefsX.SetColor("_altWarpColor1", item.color);
+            PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
+        }
+        if (item.itemType == ShopItem.ItemType.Enemies)
+        {
+            Debug.Log("Equipped new AltWarp Color");
+            PlayerPrefsX.SetColor("EnemyColor", item.color);
+            //PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
+        }
+        if (item.itemType == ShopItem.ItemType.Death)
+        {
+            Debug.Log("Equipped new DeathEffect Color");
+            PlayerPrefsX.SetColor("_deathGradient1", item.gradient.colorKeys[0].color);
+            PlayerPrefsX.SetColor("_deathGradient2", item.gradient.colorKeys[1].color);
+            PlayerPrefsX.SetColor("_deathGradient3", item.gradient.colorKeys[2].color);
         }
         item.backgroundImage = EquippedItemBackground;
         item.equipped = true;
@@ -171,7 +200,7 @@ public class StoreManager : MonoBehaviour
             shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
             //assign texture from the prefab to the instantiated object
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
-            shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
+            //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
             //assign the cost from the pregab to the instantiated object
@@ -249,7 +278,7 @@ public class StoreManager : MonoBehaviour
             shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
             //assign texture from the prefab to the instantiated object
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
-            shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
+            //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
             //assign the cost from the pregab to the instantiated object

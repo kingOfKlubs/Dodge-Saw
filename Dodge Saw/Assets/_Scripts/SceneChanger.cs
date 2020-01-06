@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -16,7 +18,41 @@ public class SceneChanger : MonoBehaviour
     public string mainMenuName;
     public Text rewardNumber;
     AudioManager AM;
+    
+    [Header("Meta")]
+    public string persisterName;
+    [Header("Scriptable Objects")]
+    public List<ScriptableObject> objectsToPersist;
+    public bool canFindData;
 
+    protected void OnEnable()
+    {
+        for (int i = 0; i < objectsToPersist.Count; i++)
+        {
+            if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)) && canFindData)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
+                JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
+                file.Close();
+            }
+            else
+            {
+                //Do Nothing
+            }
+        }
+    }
+    protected void OnDisable()
+    {
+        for (int i = 0; i < objectsToPersist.Count; i++)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+            var json = JsonUtility.ToJson(objectsToPersist[i]);
+            bf.Serialize(file, json);
+            file.Close();
+        }
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(startGameName);
@@ -29,6 +65,14 @@ public class SceneChanger : MonoBehaviour
 
     public void QuitGame()
     {
+        for (int i = 0; i < objectsToPersist.Count; i++)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+            var json = JsonUtility.ToJson(objectsToPersist[i]);
+            bf.Serialize(file, json);
+            file.Close();
+        }
         Application.Quit();
     }
 

@@ -176,7 +176,7 @@ public class Movement : MonoBehaviour
     //moves the pentagon based on touch input
     public void Move()
     {
-        if (Input.touchCount > 0 || Input.GetMouseButton(0))
+        if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
             TouchPhase phase = touch.phase;

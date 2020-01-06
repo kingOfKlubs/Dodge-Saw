@@ -4709,7 +4709,6 @@ GameObject:
   - component: {fileID: 6864588792444964397}
   - component: {fileID: 6864588792447831565}
   - component: {fileID: 6864588792446733517}
-  - component: {fileID: 2823092876521835589}
   - component: {fileID: 6657940382952343333}
   - component: {fileID: 4850823928343958026}
   - component: {fileID: 8919407329509624674}
@@ -4782,23 +4781,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2823092876521835589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6864588792444539405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28cc9da9767f94503ae94c943aa1ea95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Player: {fileID: 0}
-  _deathEffect: {fileID: 0}
-  _moveDirection: {x: 0, y: 0}
-  movement: {fileID: 0}
-  _ring: {fileID: 0}
 --- !u!95 &6657940382952343333
 Animator:
   serializedVersion: 3

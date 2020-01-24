@@ -23,25 +23,33 @@ public class TutorialManager : MonoBehaviour
     private bool _hasTouched;
     bool oneTimeCall = false;
     private Vector2 _position = new Vector2(1, 1);
+    private bool _runTutorial;
     #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
-        _enemyAI = FindObjectOfType<EnemyAI>();
-        _enemyAI.gameObject.SetActive(false);       //this needs to be reactivated after tutorial is over
-        _movement = FindObjectOfType<Movement>();
-        _coinSpawning = FindObjectOfType<CoinSpawning>();
-        _coinSpawning._canSpawn = false;  //this needs to be reactivated after tutorial is over
+        if (PlayerPrefsX.GetBool("hasCompletedTutorial") == false)
+        {
+            _enemyAI = FindObjectOfType<EnemyAI>();
+            _enemyAI.gameObject.SetActive(false);       //this needs to be reactivated after tutorial is over
+            _movement = FindObjectOfType<Movement>();
+            _coinSpawning = FindObjectOfType<CoinSpawning>();
+            _coinSpawning._canSpawn = false;  //this needs to be reactivated after tutorial is over
+            _runTutorial = true;
+        }
+        else
+            _runTutorial = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerPrefsX.GetBool("hasCompletedTutorial")==false)
+        if(_runTutorial)
         {
             Tutorial();
+
         }
     }
 
@@ -108,7 +116,7 @@ public class TutorialManager : MonoBehaviour
         else if(_popUpIndex == 5)
         {
             _enemyAI.gameObject.SetActive(true);
-            _coinSpawning._canSpawn = true;
+            _coinSpawning._canSpawn = PlayerPrefsX.GetBool("");
             PlayerPrefsX.SetBool("hasCompletedTutorial", true);
         }
     }

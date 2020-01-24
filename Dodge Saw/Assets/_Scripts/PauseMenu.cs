@@ -18,7 +18,8 @@ public class PauseMenu : MonoBehaviour
         if(_isGamePaused)
         {
             Movement movement = FindObjectOfType<Movement>();
-            movement._coolDownImageLarge.gameObject.SetActive(false);
+            if (movement != null)
+                movement._coolDownImageLarge.gameObject.SetActive(false);
         }
 
         if (CrossPlatformInputManager.GetButtonDown("Cancel"))

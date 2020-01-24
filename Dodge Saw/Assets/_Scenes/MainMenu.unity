@@ -11257,7 +11257,7 @@ MonoBehaviour:
   startGameName: GameLevel
   mainMenuName: MainMenu
   rewardNumber: {fileID: 0}
-  persisterName: StoreObjects
+  persisterName: StoreObjects1
   objectsToPersist:
   - {fileID: 11400000, guid: 42fc07e34bc73420b94c4fb7a893d769, type: 2}
   - {fileID: 11400000, guid: 9ec3d0e91c90b48298b398c84be116b7, type: 2}

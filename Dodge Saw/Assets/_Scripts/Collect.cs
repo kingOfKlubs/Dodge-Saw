@@ -15,6 +15,7 @@ public class Collect : MonoBehaviour
             this.gameObject.SetActive(false);
             ParticleSystem clone = Instantiate(collect, transform.position, Quaternion.identity);
             FindObjectOfType<AudioManager>().Play("Coin");
+            if(FindObjectOfType<TutorialManager>() != null)
             FindObjectOfType<TutorialManager>()._hasCollectedCoin = true;
             Destroy(clone, 3);
         }

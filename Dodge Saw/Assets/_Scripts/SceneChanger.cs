@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using TMPro;
 
 public class SceneChanger : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class SceneChanger : MonoBehaviour
     [SerializeField]
     public string startGameName;
     public string mainMenuName;
-    public Text rewardNumber;
+    public TextMeshProUGUI rewardNumber;
     AudioManager AM;
     
     [Header("Meta")]
@@ -99,7 +100,7 @@ public class SceneChanger : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        mixer.SetFloat("volume", volume);
+        mixer.SetFloat("VolumeA", volume);
         PlayerPrefs.SetFloat("VolumeA", volume);
         
         
@@ -121,7 +122,7 @@ public class SceneChanger : MonoBehaviour
                 if(Score._reward > 0)
                 {
                     _gameOverRewardUI.SetActive(true);
-                    rewardNumber = gameObject.transform.GetChild(0).GetChild(6).GetChild(3).GetComponent<Text>();
+                    rewardNumber = gameObject.transform.GetChild(0).GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>();
                     rewardNumber.text = "+ " + Score._reward;
                     
                 }

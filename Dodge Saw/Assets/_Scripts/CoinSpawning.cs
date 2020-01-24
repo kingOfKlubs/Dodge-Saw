@@ -25,6 +25,7 @@ public class CoinSpawning : MonoBehaviour
         time = _startTime;
         bTime = _startTimeBronze;
         gTime = _startTimeGold;
+        _canSpawn = PlayerPrefsX.GetBool("hasCompletedTutorial");
     }
 
     // Update is called once per frame

@@ -18,10 +18,12 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(_highScore != null)
         _highScore.text = "Top: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         _scoreText = GetComponent<TextMeshProUGUI>();
         _score = 0;
         _scoreRecord = 0;
+        if(UI != null)
         UI.SetActive(false);
 
     }
@@ -29,6 +31,7 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_scoreText != null)
         _scoreText.text = "Score: " + _score;
         if (_score > PlayerPrefs.GetInt("HighScore", 0))
         {

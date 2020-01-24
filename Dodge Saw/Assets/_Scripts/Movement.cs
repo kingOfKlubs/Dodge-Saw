@@ -165,6 +165,7 @@ public class Movement : MonoBehaviour
         _coolDownImage.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImageLarge.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImage.gameObject.SetActive(false);
+        Debug.Log("this line was called");
         _coolDownImageLarge.gameObject.SetActive(true);
         _moveSpeed = .3f;
         anim.speed = .3f;

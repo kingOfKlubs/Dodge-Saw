@@ -92,6 +92,11 @@ public class SceneChanger : MonoBehaviour
 
     public void MainMenu()
     {
+        Movement player = FindObjectOfType<Movement>();
+        if(player != null)
+        {
+            Destroy(player.gameObject);
+        }
         Time.timeScale = 1;
         SceneManager.LoadScene(mainMenuName);
 		FindObjectOfType<AudioManager>().Play("Theme");
@@ -123,6 +128,7 @@ public class SceneChanger : MonoBehaviour
                 {
                     _gameOverRewardUI.SetActive(true);
                     rewardNumber = gameObject.transform.GetChild(0).GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>();
+                    if(rewardNumber != null)
                     rewardNumber.text = "+ " + Score._reward;
                     
                 }

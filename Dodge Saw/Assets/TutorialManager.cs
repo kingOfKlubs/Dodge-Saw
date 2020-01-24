@@ -39,6 +39,15 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerPrefsX.GetBool("hasCompletedTutorial")==false)
+        {
+            Tutorial();
+        }
+    }
+
+    public void Tutorial()
+    {
+
         for (int i = 0; i < _popups.Length; i++)
         {
             if (i == _popUpIndex)
@@ -71,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         {
             _popUpIndex++;
         }
-        else if(_popUpIndex == 2 && !_hasCollectedCoin)
+        else if (_popUpIndex == 2 && !_hasCollectedCoin)
         {
             if (!oneTimeCall)
             {
@@ -79,7 +88,7 @@ public class TutorialManager : MonoBehaviour
                 oneTimeCall = true;
             }
         }
-        else if (_popUpIndex == 2 && _hasCollectedCoin) 
+        else if (_popUpIndex == 2 && _hasCollectedCoin)
         {
             _popUpIndex++;
             oneTimeCall = false;
@@ -89,29 +98,48 @@ public class TutorialManager : MonoBehaviour
             if (!oneTimeCall)
             {
                 Invoke("SpawnEnemies", .001f);
-            
-
                 oneTimeCall = true;
             }
-
         }
-
+        else if(_popUpIndex == 4)
+        {
+            StartCoroutine("WaitForTime");
+        }
+        else if(_popUpIndex == 5)
+        {
+            _enemyAI.gameObject.SetActive(true);
+            _coinSpawning._canSpawn = true;
+            PlayerPrefsX.SetBool("hasCompletedTutorial", true);
+        }
     }
-        public void SpawnEnemies()
-        {
-            _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
-            StartCoroutine("WaitForRing");
-        }
 
-        IEnumerator WaitForRing()
-        {
-            ParticleSystem RingClone = Instantiate(_enemyAI.ring, _position, Quaternion.identity);
+
+    public void SpawnEnemies()
+    {
+        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
+        StartCoroutine("WaitForRing");
+    }
+
+    public void ResetTutorial()
+    {
+        PlayerPrefsX.SetBool("hasCompletedTutorial", false);
+    }
+
+    IEnumerator WaitForRing()
+    {
+        ParticleSystem RingClone = Instantiate(_enemyAI.ring, _position, Quaternion.identity);
     
-            yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2);
 
-            GameObject EnemyClone = Instantiate(_enemyAI.enemies[1], _position, Quaternion.identity);
-            Destroy(EnemyClone, 15f);
-            Destroy(RingClone, 3);
-            _popUpIndex++;
+        GameObject EnemyClone = Instantiate(_enemyAI.enemies[1], _position, Quaternion.identity);
+        Destroy(EnemyClone, 15f);
+        Destroy(RingClone, 3);
+        _popUpIndex++;
+    }
+    IEnumerator WaitForTime()
+    {
+        yield return new WaitForSeconds(4);
+        _popUpIndex++;
     }
 }
+

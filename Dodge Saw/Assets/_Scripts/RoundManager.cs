@@ -77,9 +77,12 @@ public class RoundManager : MonoBehaviour
 	}
 
     void Round()
-	{
-        if(enemyAI.gameObject.activeSelf == false)
-            enemyAI.gameObject.SetActive(true);
+    {
+        if (enemyAI != null)
+        {
+            if (enemyAI.gameObject.activeSelf == false)
+                enemyAI.gameObject.SetActive(true);
+        }
     }
 
     void RoundTransition()

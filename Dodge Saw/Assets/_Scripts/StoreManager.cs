@@ -377,6 +377,10 @@ public class StoreManager : MonoBehaviour
 
         }
     }
-        
-    
+    public void UnequipOtherEquippedItems()
+    {
+       //the current idea is to check other items of the same type if they are equipped with the ShopItem bool equipped
+       //if so change thier backgrounds and button text
+    }
+
 }

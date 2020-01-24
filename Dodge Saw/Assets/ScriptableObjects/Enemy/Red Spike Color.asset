@@ -47,6 +47,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Red
   _buttonText: Buy
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
   cost: 5
   equipped: 0
   purchased: 0

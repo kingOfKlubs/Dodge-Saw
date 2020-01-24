@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class Score : MonoBehaviour
@@ -10,15 +11,15 @@ public class Score : MonoBehaviour
     public static int _score;
     public static int _scoreRecord;
     public static int _reward;
-    public Text _scoreText;
-    public Text _highScore;
+    public TextMeshProUGUI _scoreText;
+    public TextMeshProUGUI _highScore;
     public GameObject UI;
 
     // Start is called before the first frame update
     void Start()
     {
         _highScore.text = "Top: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
-        _scoreText = GetComponent<Text>();
+        _scoreText = GetComponent<TextMeshProUGUI>();
         _score = 0;
         _scoreRecord = 0;
         UI.SetActive(false);

@@ -26,6 +26,8 @@ public class ShopItem : ScriptableObject
     //for the buttons text
     public string _buttonText;
 
+    public LayerMask _layer;
+
     //for the cost
     public int cost;
 

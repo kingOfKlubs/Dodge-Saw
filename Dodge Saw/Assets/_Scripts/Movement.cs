@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     //public variables
     public float _dst;
     public float _moveSpeed;
+    public float _distance;
     public static bool Death;
     public ParticleSystem Warp;
     public ParticleSystem Warp1;
@@ -201,50 +202,58 @@ public class Movement : MonoBehaviour
                    // Debug.Log("the end position is " + _endPos);
                     break;
             }
+            if(touch.phase == TouchPhase.Ended)
+            {
+                Vector2 swipeDir = _initialPos - _endPos;
+                _angle = Vector2.SignedAngle(Vector2.down, swipeDir);
 
-            Vector2 swipeDir = _initialPos - _endPos;
-            _angle = Vector2.SignedAngle(Vector2.down, swipeDir);
-           // Debug.Log("Calculated angle is " + _angle);
-            
-            if (_angle < 120 && _angle > 60)// move left
-            {
-                _velocity = new Vector2(-1, 0);
-                _direction = _velocity;
-            }
-            else if (_angle < 60 && _angle > 30)//move left and up  
-            {
-                _velocity = new Vector2(-1, 1);
-                _direction = _velocity;
-            }
-            else if (_angle < 30 && _angle > -30)//move up
-            {
-                _velocity = new Vector2(0, 1);
-                _direction = _velocity;
-            }
-            else if (_angle < -30 && _angle > -60)//move right and up  
-            {
-                _velocity = new Vector2(1, 1);
-                _direction = _velocity;
-            }
-            else if (_angle < -60 && _angle > -120)//move right
-            {
-                _velocity = new Vector2(1, 0);
-                _direction = _velocity;
-            }
-            else if (_angle < -120 && _angle > -150)//move right and down 
-            {
-                _velocity = new Vector2(1, -1);
-                _direction = _velocity;
-            }
-            else if (_angle < -150 || _angle > 150)//move down
-            {
-                _velocity = new Vector2(0, -1);
-                _direction = _velocity;
-            }
-            else if (_angle < 150 && _angle > 120)//move left and down 
-            {
-                _velocity = new Vector2(-1, -1);
-                _direction = _velocity;
+                _distance = Vector2.Distance(_initialPos, _endPos);
+                //Debug.Log("Calculated distance is " + distance);
+
+                if(_distance >= 150)
+                {
+
+                    if (_angle < 120 && _angle > 60)// move left
+                    {
+                        _velocity = new Vector2(-1, 0);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < 60 && _angle > 30)//move left and up  
+                    {
+                        _velocity = new Vector2(-1, 1);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < 30 && _angle > -30)//move up
+                    {
+                        _velocity = new Vector2(0, 1);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < -30 && _angle > -60)//move right and up  
+                    {
+                        _velocity = new Vector2(1, 1);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < -60 && _angle > -120)//move right
+                    {
+                        _velocity = new Vector2(1, 0);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < -120 && _angle > -150)//move right and down 
+                    {
+                        _velocity = new Vector2(1, -1);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < -150 || _angle > 150)//move down
+                    {
+                        _velocity = new Vector2(0, -1);
+                        _direction = _velocity;
+                    }
+                    else if (_angle < 150 && _angle > 120)//move left and down 
+                    {
+                        _velocity = new Vector2(-1, -1);
+                        _direction = _velocity;
+                    }
+                }
             }
         }
         else if (canSlowTime == false)

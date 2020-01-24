@@ -13,6 +13,7 @@ public class CoinSpawning : MonoBehaviour
     public float _startTime;
     public float _startTimeBronze;
     public float _startTimeGold;
+    public bool _canSpawn;
     #endregion
 
     float time;
@@ -30,7 +31,8 @@ public class CoinSpawning : MonoBehaviour
     void Update()
     {
         //KeepInBounds();
-        Timer();
+        if(_canSpawn)
+            Timer();
     }
 
     public void Timer()

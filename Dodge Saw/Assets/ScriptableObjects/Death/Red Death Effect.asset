@@ -47,6 +47,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   _itemName: Red
   _buttonText: Unequip
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
   cost: 0
   equipped: 1
   purchased: 1

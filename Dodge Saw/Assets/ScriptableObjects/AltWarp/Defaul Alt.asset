@@ -47,6 +47,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Default Alt
   _buttonText: Unequip
+  _layer:
+    serializedVersion: 2
+    m_Bits: 0
   cost: 0
   equipped: 1
   purchased: 1

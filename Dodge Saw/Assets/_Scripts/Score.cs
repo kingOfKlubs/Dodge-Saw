@@ -50,7 +50,7 @@ public class Score : MonoBehaviour
 
     public void GetMoney()
     {
-        if (_scoreRecord >= 100)
+        if (_scoreRecord >= 99)
         {
             _scoreRecord = 0;
             _reward++;

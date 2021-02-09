@@ -36,6 +36,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         SetPlayerColor();
         _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
         SetTrailColor();
+        _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
         SetWarpColor();
         SetEnemiesColor();
         enemyAi = FindObjectOfType<EnemyAI>();
@@ -76,7 +77,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
         gradient.SetKeys(colorKey, alphaKey);
 
-        _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+       
     }
     public static void SetWarpColor()
     {

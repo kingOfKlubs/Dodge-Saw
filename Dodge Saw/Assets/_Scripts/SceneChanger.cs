@@ -127,9 +127,8 @@ public class SceneChanger : MonoBehaviour
                 if(Score._reward > 0)
                 {
                     _gameOverRewardUI.SetActive(true);
-                    rewardNumber = gameObject.transform.GetChild(0).GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>();
                     if(rewardNumber != null)
-                    rewardNumber.text = "+ " + Score._reward;
+                       rewardNumber.text = "+ " + Score._reward;
                     
                 }
                 if (Input.GetMouseButtonUp(0))

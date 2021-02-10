@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
     Touch touch;
     private GameStates currentState;
     bool canSlowTime;
+    Vector2 swipeDir;
+    bool pressed;
+    TouchPhase phase;
     #endregion
 
 
@@ -69,7 +72,7 @@ public class Movement : MonoBehaviour
         
         CoolDown();
         SwitchStates();
-
+        TestingMovement();
         
     }
 
@@ -165,7 +168,6 @@ public class Movement : MonoBehaviour
         _coolDownImage.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImageLarge.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImage.gameObject.SetActive(false);
-        Debug.Log("this line was called");
         _coolDownImageLarge.gameObject.SetActive(true);
         _moveSpeed = .3f;
         anim.speed = .3f;
@@ -181,7 +183,7 @@ public class Movement : MonoBehaviour
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
-            TouchPhase phase = touch.phase;
+            phase = touch.phase;
             _timeStopped -= Time.deltaTime;
 
 
@@ -205,7 +207,7 @@ public class Movement : MonoBehaviour
             }
             if(touch.phase == TouchPhase.Ended)
             {
-                Vector2 swipeDir = _initialPos - _endPos;
+                swipeDir = _initialPos - _endPos;
                 _angle = Vector2.SignedAngle(Vector2.down, swipeDir);
 
                 _distance = Vector2.Distance(_initialPos, _endPos);
@@ -265,26 +267,50 @@ public class Movement : MonoBehaviour
         {
             UpdateStates(GameStates.NormalTime);
         }
+    }
 
-
-
-
-        /* THIS IS THE OLD WAY TO MOVE THE PLAYER WITH AN VIRTUAL ANALOG STICK */
-        //float xSpeed = CrossPlatformInputManager.GetAxis("Horizontal");
-        //float ySpeed = CrossPlatformInputManager.GetAxis("Vertical");
-        //if (Mathf.Abs(xSpeed) < .9f && Mathf.Abs(ySpeed) < .9f)
-        //    return;
-        //_angle = Mathf.Atan2(xSpeed, ySpeed);
-        //_angle = Mathf.Rad2Deg * _angle;
-        //_angle += Camera.main.transform.eulerAngles.y;
-
-
-        /* THIS IS THE NEW ATTEMP AT SWIPE CONTROLS */
-       
-
-        // it doesnt reflect bc the angle is always calculating and never updates with the velocity
-        // Note: left and right are reversed based on the angle calculated 
-        
+    void TestingMovement()
+    {
+        if (Input.GetKeyDown("a"))//move left
+        {
+            _velocity = new Vector2(-1, 0);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("a") && Input.GetKeyDown("w"))//move left and up  
+        {
+            _velocity = new Vector2(-1, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w"))//move up
+        {
+            _velocity = new Vector2(0, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w") && Input.GetKeyDown("d"))//move right and up  
+        {
+            _velocity = new Vector2(1, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("d"))//move right
+        {
+            _velocity = new Vector2(1, 0);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("s") && Input.GetKeyDown("d"))//move right and down 
+        {
+            _velocity = new Vector2(1, -1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("s"))//move down
+        {
+            _velocity = new Vector2(0, -1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w") && Input.GetKeyDown("a"))//move left and down 
+        {
+            _velocity = new Vector2(-1, -1);
+            _direction = _velocity;
+        }
     }
 
     void CoolDown()

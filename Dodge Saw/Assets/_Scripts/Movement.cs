@@ -66,7 +66,7 @@ public class Movement : MonoBehaviour
         KeepInBounds();
         Reflect();
         Move();
-        
+        TestingMovement();
         CoolDown();
         SwitchStates();
 
@@ -265,26 +265,50 @@ public class Movement : MonoBehaviour
         {
             UpdateStates(GameStates.NormalTime);
         }
+    }
 
-
-
-
-        /* THIS IS THE OLD WAY TO MOVE THE PLAYER WITH AN VIRTUAL ANALOG STICK */
-        //float xSpeed = CrossPlatformInputManager.GetAxis("Horizontal");
-        //float ySpeed = CrossPlatformInputManager.GetAxis("Vertical");
-        //if (Mathf.Abs(xSpeed) < .9f && Mathf.Abs(ySpeed) < .9f)
-        //    return;
-        //_angle = Mathf.Atan2(xSpeed, ySpeed);
-        //_angle = Mathf.Rad2Deg * _angle;
-        //_angle += Camera.main.transform.eulerAngles.y;
-
-
-        /* THIS IS THE NEW ATTEMP AT SWIPE CONTROLS */
-       
-
-        // it doesnt reflect bc the angle is always calculating and never updates with the velocity
-        // Note: left and right are reversed based on the angle calculated 
-        
+    void TestingMovement()
+    {
+        if (Input.GetKeyDown("a"))//move left
+        {
+            _velocity = new Vector2(-1, 0);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("a") && Input.GetKeyDown("w"))//move left and up  
+        {
+            _velocity = new Vector2(-1, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w"))//move up
+        {
+            _velocity = new Vector2(0, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w") && Input.GetKeyDown("d"))//move right and up  
+        {
+            _velocity = new Vector2(1, 1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("d"))//move right
+        {
+            _velocity = new Vector2(1, 0);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("s") && Input.GetKeyDown("d"))//move right and down 
+        {
+            _velocity = new Vector2(1, -1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("s"))//move down
+        {
+            _velocity = new Vector2(0, -1);
+            _direction = _velocity;
+        }
+        else if (Input.GetKeyDown("w") && Input.GetKeyDown("a"))//move left and down 
+        {
+            _velocity = new Vector2(-1, -1);
+            _direction = _velocity;
+        }
     }
 
     void CoolDown()

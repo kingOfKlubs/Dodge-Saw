@@ -66,11 +66,9 @@ public class Movement : MonoBehaviour
         KeepInBounds();
         Reflect();
         Move();
-        TestingMovement();
+        PcMovement();
         CoolDown();
         SwitchStates();
-
-        
     }
 
     public void KeepInBounds()
@@ -267,7 +265,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void TestingMovement()
+    void PcMovement()
     {
         if (Input.GetKey("space"))
         {

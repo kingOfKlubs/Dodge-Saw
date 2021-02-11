@@ -8,8 +8,6 @@ public class GoldCurrency : MonoBehaviour
 	
 	public static int _bank;
 	public Text _currencyText;
-   
-    
 
 	// Start is called before the first frame update
 	void Start()
@@ -27,12 +25,6 @@ public class GoldCurrency : MonoBehaviour
         }
 
         _currencyText.text = "" + PlayerPrefs.GetInt("Currency", 0).ToString();
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		
 	}
 
     public void AddMoneyToBank(int coins)

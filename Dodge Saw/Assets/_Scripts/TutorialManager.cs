@@ -43,7 +43,7 @@ public class TutorialManager : MonoBehaviour
         else
         {
             _runTutorial = false;
-            Destroy(this.gameObject);
+            Destroy(this);
         }
     }
 
@@ -139,6 +139,11 @@ public class TutorialManager : MonoBehaviour
     public void ResetTutorial()
     {
         PlayerPrefsX.SetBool("hasCompletedTutorial", false);
+    }
+
+    public void CompleteTutorial()
+    {
+        PlayerPrefsX.SetBool("hasCompletedTutorial", true);
     }
 
     IEnumerator WaitForRing()

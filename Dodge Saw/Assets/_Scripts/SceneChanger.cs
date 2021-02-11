@@ -107,19 +107,14 @@ public class SceneChanger : MonoBehaviour
     {
         mixer.SetFloat("VolumeA", volume);
         PlayerPrefs.SetFloat("VolumeA", volume);
-        
-        
     }
 
     public void Update()
     {
- 
-       
         if (_gameOverUI != null)
         {
             if (Movement.Death == true)
             {
-
                 _gameOverUI.SetActive(true);
                 Movement movement = FindObjectOfType<Movement>();
                 if(movement != null)
@@ -127,7 +122,6 @@ public class SceneChanger : MonoBehaviour
                 if(Score._reward > 0)
                 {
                     _gameOverRewardUI.SetActive(true);
-                    rewardNumber = gameObject.transform.GetChild(0).GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>();
                     if(rewardNumber != null)
                     rewardNumber.text = "+ " + Score._reward;
                     

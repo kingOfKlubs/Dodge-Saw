@@ -269,45 +269,65 @@ public class Movement : MonoBehaviour
 
     void TestingMovement()
     {
-        if (Input.GetKeyDown("a"))//move left
+        if (Input.GetKey("space"))
         {
-            _velocity = new Vector2(-1, 0);
-            _direction = _velocity;
+            _timeStopped -= Time.deltaTime;
+
+            if (_needCoolDown == false && _timeStopped > 0 && canSlowTime)
+                UpdateStates(GameStates.SlowTime);
+            else if (_needCoolDown == false && _timeStopped <= 0)
+            {
+                UpdateStates(GameStates.CoolTime);
+                _needCoolDown = true;
+            }
+            if (Input.GetKeyDown("a"))//move left
+            {
+                _velocity = new Vector2(-1, 0);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("q"))//move left and up  
+            {
+                _velocity = new Vector2(-1, 1);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("w"))//move up
+            {
+                _velocity = new Vector2(0, 1);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("e"))//move right and up  
+            {
+                _velocity = new Vector2(1, 1);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("d"))//move right
+            {
+                _velocity = new Vector2(1, 0);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("x"))//move right and down 
+            {
+                _velocity = new Vector2(1, -1);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("s"))//move down
+            {
+                _velocity = new Vector2(0, -1);
+                _direction = _velocity;
+            }
+            else if (Input.GetKeyDown("z"))//move left and down 
+            {
+                _velocity = new Vector2(-1, -1);
+                _direction = _velocity;
+            }
         }
-        else if (Input.GetKeyDown("a") && Input.GetKeyDown("w"))//move left and up  
+        else if (canSlowTime == false)
         {
-            _velocity = new Vector2(-1, 1);
-            _direction = _velocity;
+            UpdateStates(GameStates.CoolTime);
         }
-        else if (Input.GetKeyDown("w"))//move up
+        else
         {
-            _velocity = new Vector2(0, 1);
-            _direction = _velocity;
-        }
-        else if (Input.GetKeyDown("w") && Input.GetKeyDown("d"))//move right and up  
-        {
-            _velocity = new Vector2(1, 1);
-            _direction = _velocity;
-        }
-        else if (Input.GetKeyDown("d"))//move right
-        {
-            _velocity = new Vector2(1, 0);
-            _direction = _velocity;
-        }
-        else if (Input.GetKeyDown("s") && Input.GetKeyDown("d"))//move right and down 
-        {
-            _velocity = new Vector2(1, -1);
-            _direction = _velocity;
-        }
-        else if (Input.GetKeyDown("s"))//move down
-        {
-            _velocity = new Vector2(0, -1);
-            _direction = _velocity;
-        }
-        else if (Input.GetKeyDown("w") && Input.GetKeyDown("a"))//move left and down 
-        {
-            _velocity = new Vector2(-1, -1);
-            _direction = _velocity;
+            UpdateStates(GameStates.NormalTime);
         }
     }
 

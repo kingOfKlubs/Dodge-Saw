@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5580413315891936213}
   - component: {fileID: 3734696184406487582}
   - component: {fileID: 1541983442759712241}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: pentagonStump
   m_TagString: Untagged
   m_Icon: {fileID: 0}

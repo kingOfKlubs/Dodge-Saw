@@ -43,11 +43,8 @@ public class Movement : MonoBehaviour
     bool canSlowTime;
     #endregion
 
-
-
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Death = false;
         _rigid = GetComponent<Rigidbody>();
         _velocity = new Vector2(0, 1);
@@ -60,8 +57,7 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         _rigid.velocity = _velocity * _moveSpeed;
         KeepInBounds();
         Reflect();
@@ -71,8 +67,7 @@ public class Movement : MonoBehaviour
         SwitchStates();
     }
 
-    public void KeepInBounds()
-    {
+    public void KeepInBounds() {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f))
         {
@@ -96,10 +91,10 @@ public class Movement : MonoBehaviour
     }
 
     public GameStates UpdateStates(GameStates newGameState)
-       {
+    {
         currentState = newGameState;
         return currentState;
-       }
+    }
 
     public void SwitchStates()
     {

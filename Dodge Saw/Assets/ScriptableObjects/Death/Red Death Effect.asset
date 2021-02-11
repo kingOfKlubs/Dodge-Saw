@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
   m_Name: Red Death Effect
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: f2904608addf24a7db4d51a23ae1ea69, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
   texture: {fileID: 8400000, guid: da560e5c6faf4430793999ad6f08dd28, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}

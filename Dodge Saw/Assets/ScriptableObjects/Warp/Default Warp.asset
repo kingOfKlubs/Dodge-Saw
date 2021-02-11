@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
   m_Name: Default Warp
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: f2904608addf24a7db4d51a23ae1ea69, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
   texture: {fileID: 8400000, guid: 7ddff5de918294f659520640d8633bbc, type: 2}
   color: {r: 0, g: 0.5137255, b: 0.8509804, a: 1}
   color2: {r: 1, g: 0.5019608, b: 0, a: 1}

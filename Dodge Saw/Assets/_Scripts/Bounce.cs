@@ -28,7 +28,6 @@ public class Bounce : EnemyMovement
             _rigid.velocity = Vector2.Reflect(_moveDirection, _hit.normal);
             _moveDirection = _rigid.velocity;
         }
-
     }
 
     public override void Initiate()

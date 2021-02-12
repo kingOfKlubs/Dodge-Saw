@@ -9,6 +9,7 @@ public class RoundManager : MonoBehaviour
     public RoundStates _currentRoundState;
 	int _round = 0;
 	int _previousRound = 0;
+    public int transitionTime = 0;
     Camera camera;
     int index = 0;
     bool shouldChange = false;
@@ -42,7 +43,7 @@ public class RoundManager : MonoBehaviour
                 RoundTransition();
 		    break;
 		}
-	UpdateRound();
+	StartCoroutine(UpdateRound());
 
         if (shouldChange)
         {
@@ -94,14 +95,22 @@ public class RoundManager : MonoBehaviour
 		
 	}
 
-	void UpdateRound()
+	IEnumerator UpdateRound()
 	{
-		if (Score._score >= 100 && Score._score < 199)
+
+        if (_round != _previousRound)
+        {
+            UpdateStates(RoundStates.RoundTransition);
+            FindObjectOfType<AudioManager>().Play("EndOfRound");
+        }
+
+        if (Score._score >= 100 && Score._score < 199)
 		{
    			_round = 2;
             index = 0;
             
             Particle1.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
             Particle2.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
 
@@ -112,8 +121,9 @@ public class RoundManager : MonoBehaviour
 			_round = 3;
             index = 1;
            
-            Particle1.SetActive(true);
             Particle2.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
+            Particle1.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
 
         }
@@ -124,6 +134,7 @@ public class RoundManager : MonoBehaviour
             index = 0;
             
             Particle1.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
             Particle2.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
         }
@@ -132,8 +143,9 @@ public class RoundManager : MonoBehaviour
 			_round = 5;
             index = 1;
            
-            Particle1.SetActive(true);
             Particle2.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
+            Particle1.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
         }
         else if (Score._score >= 650)
@@ -142,6 +154,7 @@ public class RoundManager : MonoBehaviour
             index = 0;
 
             Particle1.SetActive(false);
+            yield return new WaitForSeconds(transitionTime);
             Particle2.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
         }
@@ -151,11 +164,6 @@ public class RoundManager : MonoBehaviour
 			_previousRound = 1;
 		}
 
-        if (_round != _previousRound)
-        {
-            UpdateStates(RoundStates.RoundTransition);
-            FindObjectOfType<AudioManager>().Play("EndOfRound");
-        }
         
     }
 
@@ -166,7 +174,7 @@ public class RoundManager : MonoBehaviour
 		_previousRound = _round;
         shouldChange = true;
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(transitionTime);
 		Particle.SetActive(false);
         UpdateStates(RoundStates.Round);
         
@@ -174,7 +182,7 @@ public class RoundManager : MonoBehaviour
     IEnumerator LerpColor()
     {
         
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(transitionTime);
        
         SetColor(newColor);
     }

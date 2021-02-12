@@ -292,10 +292,7 @@ MonoBehaviour:
   m_Name: Portal Vfx (1)Timeline
   m_EditorClassIdentifier: 
   m_Version: 0
-  m_Tracks:
-  - {fileID: 2243300760773903651}
-  - {fileID: 8356072238167411545}
-  - {fileID: -4181995120774064175}
+  m_Tracks: []
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60

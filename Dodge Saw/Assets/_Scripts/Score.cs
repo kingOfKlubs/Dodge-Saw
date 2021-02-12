@@ -54,6 +54,7 @@ public class Score : MonoBehaviour
         {
             _scoreRecord = 0;
             _reward++;
+            Debug.Log(_reward);
         }
     }
 }

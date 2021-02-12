@@ -17,7 +17,7 @@ public class Collect : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Coin");
             if(FindObjectOfType<TutorialManager>() != null)
             FindObjectOfType<TutorialManager>()._hasCollectedCoin = true;
-            Destroy(clone, 3);
+            Destroy(this.gameObject, 3);
         }
     }
 }

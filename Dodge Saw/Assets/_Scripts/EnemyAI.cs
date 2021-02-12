@@ -99,7 +99,7 @@ public class EnemyAI : MonoBehaviour
             GameObject EnemyClone = Instantiate(enemies[1], _position, Quaternion.identity);
             Destroy(EnemyClone, 15f);
         }
-        Destroy(RingClone, 3);
+        Destroy(RingClone.gameObject, 3);
     }
 
     

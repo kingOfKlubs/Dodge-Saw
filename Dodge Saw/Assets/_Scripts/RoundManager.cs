@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoundManager : MonoBehaviour
-{
-	public GameObject Particle;
-    EnemyAI enemyAI;
+public class RoundManager : MonoBehaviour {
+
+    public GameObject Particle;
     public RoundStates _currentRoundState;
-	int _round = 0;
-	int _previousRound = 0;
-    public int transitionTime = 0;
-    Camera camera;
-    int index = 0;
-    bool shouldChange = false;
     public Color[] colors;
     public GameObject Particle1;
     public GameObject Particle2;
-    public GameObject Particle3;
+    public int transitionTime = 0;
+
+    EnemyAI enemyAI;
+    Camera camera;
     Color newColor;
     Color startColor;
     Color endColor;
+    int _round = 0;
+    int _previousRound = 0;
+    int index = 0;
+    bool shouldChange = false;
+
     private void Awake()
     {
         camera = Camera.main;
@@ -32,18 +33,18 @@ public class RoundManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-	{
+    {
 
-		switch(_currentRoundState)
-		{
-			case RoundStates.Round:
+        switch (_currentRoundState)
+        {
+            case RoundStates.Round:
                 Round();
-			break;
-			case RoundStates.RoundTransition:
+                break;
+            case RoundStates.RoundTransition:
                 RoundTransition();
-		    break;
-		}
-	StartCoroutine(UpdateRound());
+                break;
+        }
+        StartCoroutine(UpdateRound());
 
         if (shouldChange)
         {
@@ -57,7 +58,7 @@ public class RoundManager : MonoBehaviour
 
             newColor = Color.Lerp(startColor, endColor, Time.deltaTime * 5);
             StartCoroutine(LerpColor());
-            
+
             if (newColor == endColor)
             {
                 shouldChange = false;
@@ -71,11 +72,11 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-	public RoundStates UpdateStates(RoundStates newRoundState)
-	{
-		_currentRoundState = newRoundState;
-		return _currentRoundState;
-	}
+    public RoundStates UpdateStates(RoundStates newRoundState)
+    {
+        _currentRoundState = newRoundState;
+        return _currentRoundState;
+    }
 
     void Round()
     {
@@ -87,16 +88,14 @@ public class RoundManager : MonoBehaviour
     }
 
     void RoundTransition()
-	{
-       
+    {
         enemyAI.gameObject.SetActive(false);
-		Particle.SetActive(true);
-		StartCoroutine(NewRound());  
-		
-	}
+        Particle.SetActive(true);
+        StartCoroutine(NewRound());
+    }
 
-	IEnumerator UpdateRound()
-	{
+    IEnumerator UpdateRound()
+    {
 
         if (_round != _previousRound)
         {
@@ -105,44 +104,44 @@ public class RoundManager : MonoBehaviour
         }
 
         if (Score._score >= 100 && Score._score < 199)
-		{
-   			_round = 2;
+        {
+            _round = 2;
             index = 0;
-            
+
             Particle1.SetActive(false);
             yield return new WaitForSeconds(transitionTime);
             Particle2.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
 
         }
-		else if (Score._score >= 200 && Score._score < 349)
-		{
+        else if (Score._score >= 200 && Score._score < 349)
+        {
 
-			_round = 3;
+            _round = 3;
             index = 1;
-           
+
             Particle2.SetActive(false);
             yield return new WaitForSeconds(transitionTime);
             Particle1.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
 
         }
-		else if (Score._score >= 350 && Score._score < 499)
-		{
+        else if (Score._score >= 350 && Score._score < 499)
+        {
 
-			_round = 4;
+            _round = 4;
             index = 0;
-            
+
             Particle1.SetActive(false);
             yield return new WaitForSeconds(transitionTime);
             Particle2.SetActive(true);
             InitializePlayerCharacteristics.SetWarpColor();
         }
-		else if (Score._score >= 500 && Score._score < 649)
-        { 
-			_round = 5;
+        else if (Score._score >= 500 && Score._score < 649)
+        {
+            _round = 5;
             index = 1;
-           
+
             Particle2.SetActive(false);
             yield return new WaitForSeconds(transitionTime);
             Particle1.SetActive(true);
@@ -159,31 +158,31 @@ public class RoundManager : MonoBehaviour
             InitializePlayerCharacteristics.SetWarpColor();
         }
         else
-		{
-			_round = 1;
-			_previousRound = 1;
-		}
+        {
+            _round = 1;
+            _previousRound = 1;
+        }
 
-        
+
     }
 
-	public enum RoundStates{Round, RoundTransition};
+    public enum RoundStates { Round, RoundTransition };
 
-	IEnumerator NewRound()
-	{
-		_previousRound = _round;
+    IEnumerator NewRound()
+    {
+        _previousRound = _round;
         shouldChange = true;
-        
+
         yield return new WaitForSeconds(transitionTime);
-		Particle.SetActive(false);
+        Particle.SetActive(false);
         UpdateStates(RoundStates.Round);
-        
-	}
+
+    }
     IEnumerator LerpColor()
     {
-        
+
         yield return new WaitForSeconds(transitionTime);
-       
+
         SetColor(newColor);
     }
 

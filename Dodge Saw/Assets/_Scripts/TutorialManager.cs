@@ -96,7 +96,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (!oneTimeCall)
             {
-                _coinSpawning.SpawnCoins(_coinSpawning._coin);
+                _coinSpawning.PreventOverlapingSpawn(_coinSpawning._coin);
                 oneTimeCall = true;
             }
         }

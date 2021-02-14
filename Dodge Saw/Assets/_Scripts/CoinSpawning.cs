@@ -14,11 +14,16 @@ public class CoinSpawning : MonoBehaviour
     public float _startTimeBronze;
     public float _startTimeGold;
     public bool _canSpawn;
+    public float radius; // this is usually kept at 0.7
+    public float raycastDistance = 100f;
+    public float overlapTestBoxSize = 1f;
+    public LayerMask spawnedObjectLayer;
     #endregion
 
     float time;
     float bTime;
     float gTime;
+    int attempts = 0;
 
     private void Start()
     {
@@ -44,31 +49,60 @@ public class CoinSpawning : MonoBehaviour
 
         if (time <= 0)
         {
-            SpawnCoins(_coin);
+            PreventOverlapingSpawn(_coin);
             time = Random.Range(4,_startTime);
         }
         if (bTime <= 0)
         {
-            SpawnCoins(_bronzeCoin);
+            PreventOverlapingSpawn(_bronzeCoin);
             bTime = Random.Range(2.7f, _startTimeBronze);
         }
         if (gTime <= 0)
         {
-            SpawnCoins(_goldCoin);
+            PreventOverlapingSpawn(_goldCoin);
             gTime = Random.Range(10f, _startTimeGold);
         }
     }
 
     //Spawn Coins randomly on the screen
-    public void SpawnCoins(GameObject coinType)
+    public void SpawnCoins(Vector3 _position, GameObject coinType)
     {
-        
-            _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f,4.5f));
-            GameObject CoinClone = Instantiate(coinType, _position, Quaternion.identity);
-            Destroy(CoinClone, 15f);
-            
-        
+        GameObject CoinClone = Instantiate(coinType, _position, Quaternion.identity);
+        Destroy(CoinClone, 15f);
     }
+
+    public void PreventOverlapingSpawn(GameObject coinType) {
+        
+        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f,3.5f));    
+
+        //check around the position we want to spawn at
+        Collider[] collidersInsideOverlapSphere = new Collider[1];
+        int numberOfCollidersFound = Physics.OverlapSphereNonAlloc(_position, radius, collidersInsideOverlapSphere, spawnedObjectLayer);
+
+
+        if (numberOfCollidersFound == 0) {
+            SpawnCoins(_position, coinType);
+            attempts = 0;
+        }
+        else {
+            Debug.Log("found " + collidersInsideOverlapSphere[0].name + " collider attempting again");
+            attempts++;
+            if(attempts < 50) {
+                PreventOverlapingSpawn(coinType);
+            }
+            else {
+                Debug.Log("maxed attempts reached, spawning anyway");
+                SpawnCoins(_position, coinType);
+            }
+        }
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(_position, radius);
+    }
+}
+
 
     //Keep the coins from spawning outside of the screen
     //public void KeepInBounds()
@@ -83,4 +117,4 @@ public class CoinSpawning : MonoBehaviour
 
     //    }
     //}
-}
+

@@ -10,11 +10,14 @@ public class EnemyAI : MonoBehaviour
     public float _startTime;
     public ParticleSystem ring;
     public GameObject[] enemies = new GameObject[3];
+    public float radius; // this is usually kept at 0.7
+    public LayerMask spawnedObjectLayer;
     #endregion
 
     Vector2 _2ndPosition;
     Vector2 _3rdPosition;
     float time;
+    int attempts = 0;
     
     private void Start()
     {
@@ -41,9 +44,12 @@ public class EnemyAI : MonoBehaviour
     //Spawn Coins randomly on the screen
     public void SpawnEnemies()
     {
-        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
-        _2ndPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
-        _3rdPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
+        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        //PreventOverlapingSpawn(_position);
+        _2ndPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        //PreventOverlapingSpawn(_2ndPosition);
+        _3rdPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        //PreventOverlapingSpawn(_3rdPosition);
         StartCoroutine("WaitForRing");
     }
 
@@ -102,6 +108,33 @@ public class EnemyAI : MonoBehaviour
         Destroy(RingClone.gameObject, 3);
     }
 
-    
-        
+    //public void PreventOverlapingSpawn(Vector2 _position) {
+
+    //    //_position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+
+    //    //check around the position we want to spawn at
+    //    Collider[] collidersInsideOverlapSphere = new Collider[1];
+    //    int numberOfCollidersFound = Physics.OverlapSphereNonAlloc(_position, radius, collidersInsideOverlapSphere, spawnedObjectLayer);
+
+    //    if (numberOfCollidersFound == 0) {
+    //        StartCoroutine("WaitForRing");
+    //        attempts = 0;
+    //    }
+    //    else {
+    //        Debug.Log("found " + collidersInsideOverlapSphere[0].name + " collider attempting again");
+    //        attempts++;
+    //        if (attempts < 50) {
+    //            SpawnEnemies();
+    //        }
+    //        else {
+    //            Debug.Log("maxed attempts reached, spawning anyway");
+    //            StartCoroutine("WaitForRing");
+    //        }
+    //    }
+    //}
+
+    //private void OnDrawGizmos() {
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(_position, radius);
+    //}
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5580413315891936213}
   - component: {fileID: 3734696184406487582}
   - component: {fileID: 1541983442759712241}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pentagonStump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,6 +71,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -113,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411611a41f8df4e46ba4c39ff765035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Player: {fileID: 0}
   _deathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
     type: 3}
   _moveDirection: {x: 0, y: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6843477983017839875}
   - component: {fileID: 3642184711889592723}
   - component: {fileID: 5877537300105307121}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PentagonSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,6 +71,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -118,6 +120,10 @@ MonoBehaviour:
   _moveDirection: {x: 0, y: 0}
   movement: {fileID: 0}
   _ring: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  _dst: 0
 --- !u!54 &3642184711889592723
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1993,8 +1993,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topRightBoundary: {fileID: 280119526}
   bottomLeftBoundary: {fileID: 1931846973}
-  bottomLeftPoint: {x: 0, y: 0}
-  topRightPoint: {x: 0, y: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

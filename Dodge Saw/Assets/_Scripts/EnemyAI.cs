@@ -12,17 +12,21 @@ public class EnemyAI : MonoBehaviour
     public GameObject[] enemies = new GameObject[3];
     public float radius; // this is usually kept at 0.7
     public LayerMask spawnedObjectLayer;
+    public FindingDimensions findingDimensions = new FindingDimensions();
     #endregion
 
     Vector2 _2ndPosition;
     Vector2 _3rdPosition;
     float time;
     int attempts = 0;
-    
+    Vector2 topRange;
+    Vector2 bottomRange;
+
     private void Start()
     {
         time = _startTime;
-        
+        topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
+        bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
     }
 
     // Update is called once per frame
@@ -44,11 +48,11 @@ public class EnemyAI : MonoBehaviour
     //Spawn Coins randomly on the screen
     public void SpawnEnemies()
     {
-        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
         //PreventOverlapingSpawn(_position);
-        _2ndPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        _2ndPosition = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
         //PreventOverlapingSpawn(_2ndPosition);
-        _3rdPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 3.5f));
+        _3rdPosition = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
         //PreventOverlapingSpawn(_3rdPosition);
         StartCoroutine("WaitForRing");
     }

@@ -18,15 +18,21 @@ public class CoinSpawning : MonoBehaviour
     public float raycastDistance = 100f;
     public float overlapTestBoxSize = 1f;
     public LayerMask spawnedObjectLayer;
+    public FindingDimensions findingDimensions = new FindingDimensions();
     #endregion
 
     float time;
     float bTime;
     float gTime;
     int attempts = 0;
-
+    Vector2 topRange ;
+    Vector2 bottomRange;
+    
     private void Start()
     {
+        topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
+        bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
+
         time = _startTime;
         bTime = _startTimeBronze;
         gTime = _startTimeGold;
@@ -73,7 +79,7 @@ public class CoinSpawning : MonoBehaviour
 
     public void PreventOverlapingSpawn(GameObject coinType) {
         
-        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f,3.5f));    
+        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding,topRange.y - findingDimensions.padding));    
 
         //check around the position we want to spawn at
         Collider[] collidersInsideOverlapSphere = new Collider[1];

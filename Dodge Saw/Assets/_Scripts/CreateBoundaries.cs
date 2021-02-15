@@ -7,6 +7,7 @@ public class CreateBoundaries : MonoBehaviour
 
     public GameObject topRightBoundary;
     public GameObject bottomLeftBoundary;
+    public FindingDimensions findingDimensions = new FindingDimensions();
 
     Camera camera;
 
@@ -25,13 +26,17 @@ public class CreateBoundaries : MonoBehaviour
 
     void SetUpBounds()
     {
-        topRightBoundary.transform.position = GetWorldPosition(0, new Vector2(Screen.width, Screen.width));
-        bottomLeftBoundary.transform.position = GetWorldPosition(0, new Vector2(0, 0));
+        topRightBoundary.transform.position = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
+        bottomLeftBoundary.transform.position = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
     }
+}
 
-    private Vector3 GetWorldPosition(float z, Vector2 screenPoint)
-    {
-        Ray Point = camera.ScreenPointToRay(screenPoint);
+public class FindingDimensions {
+
+    public float padding = 1;
+
+    public Vector3 GetWorldPosition(float z, Vector2 screenPoint) {
+        Ray Point = Camera.main.ScreenPointToRay(screenPoint);
         Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
         float distance;
         ground.Raycast(Point, out distance);

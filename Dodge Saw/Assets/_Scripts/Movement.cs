@@ -62,7 +62,7 @@ public class Movement : MonoBehaviour
         //KeepInBounds();
         Reflect();
         Move();
-        PcMovement();
+        //PcMovement();
         CoolDown();
         SwitchStates();
     }
@@ -249,19 +249,7 @@ public class Movement : MonoBehaviour
                 }
             }
         }
-        else if (canSlowTime == false)
-        {
-            UpdateStates(GameStates.CoolTime);
-        }
-        else
-        {
-            UpdateStates(GameStates.NormalTime);
-        }
-    }
-
-    void PcMovement()
-    {
-        if (Input.GetKey("space"))
+        else if (Input.GetKey("space"))
         {
             _timeStopped -= Time.deltaTime;
 
@@ -322,6 +310,70 @@ public class Movement : MonoBehaviour
             UpdateStates(GameStates.NormalTime);
         }
     }
+
+    //void PcMovement()
+    //{
+    //    if (Input.GetKey("space"))
+    //    {
+    //        _timeStopped -= Time.deltaTime;
+
+    //        if (_needCoolDown == false && _timeStopped > 0 && canSlowTime)
+    //            UpdateStates(GameStates.SlowTime);
+    //        else if (_needCoolDown == false && _timeStopped <= 0)
+    //        {
+    //            UpdateStates(GameStates.CoolTime);
+    //            _needCoolDown = true;
+    //        }
+    //        if (Input.GetKeyDown("a"))//move left
+    //        {
+    //            _velocity = new Vector2(-1, 0);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("q"))//move left and up  
+    //        {
+    //            _velocity = new Vector2(-1, 1);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("w"))//move up
+    //        {
+    //            _velocity = new Vector2(0, 1);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("e"))//move right and up  
+    //        {
+    //            _velocity = new Vector2(1, 1);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("d"))//move right
+    //        {
+    //            _velocity = new Vector2(1, 0);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("x"))//move right and down 
+    //        {
+    //            _velocity = new Vector2(1, -1);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("s"))//move down
+    //        {
+    //            _velocity = new Vector2(0, -1);
+    //            _direction = _velocity;
+    //        }
+    //        else if (Input.GetKeyDown("z"))//move left and down 
+    //        {
+    //            _velocity = new Vector2(-1, -1);
+    //            _direction = _velocity;
+    //        }
+    //    }
+    //    else if (canSlowTime == false)
+    //    {
+    //        UpdateStates(GameStates.CoolTime);
+    //    }
+    //    else
+    //    {
+    //        UpdateStates(GameStates.NormalTime);
+    //    }
+    //}
 
     void CoolDown()
     {

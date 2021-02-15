@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cost: 15
-  collect: {fileID: 773577609059814020, guid: 9fec7ee2c45d54287a3da9731fb430ec, type: 3}
+  collectEffect: {fileID: 773577609059814020, guid: 9fec7ee2c45d54287a3da9731fb430ec,
+    type: 3}
 --- !u!1001 &6435639912950793531
 PrefabInstance:
   m_ObjectHideFlags: 0

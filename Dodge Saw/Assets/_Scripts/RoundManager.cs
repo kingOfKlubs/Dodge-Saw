@@ -9,7 +9,7 @@ public class RoundManager : MonoBehaviour {
     public Color[] colors;
     public GameObject Particle1;
     public GameObject Particle2;
-    public int transitionTime = 0;
+    public float transitionTime = 0;
 
     EnemyAI enemyAI;
     Camera camera;
@@ -24,17 +24,16 @@ public class RoundManager : MonoBehaviour {
     private void Awake()
     {
         camera = Camera.main;
-
     }
 
     private void Start()
     {
         enemyAI = FindObjectOfType<EnemyAI>();
     }
+
     // Update is called once per frame
     void Update()
     {
-
         switch (_currentRoundState)
         {
             case RoundStates.Round:
@@ -96,7 +95,6 @@ public class RoundManager : MonoBehaviour {
 
     IEnumerator UpdateRound()
     {
-
         if (_round != _previousRound)
         {
             UpdateStates(RoundStates.RoundTransition);
@@ -162,8 +160,6 @@ public class RoundManager : MonoBehaviour {
             _round = 1;
             _previousRound = 1;
         }
-
-
     }
 
     public enum RoundStates { Round, RoundTransition };
@@ -174,15 +170,14 @@ public class RoundManager : MonoBehaviour {
         shouldChange = true;
 
         yield return new WaitForSeconds(transitionTime);
+
         Particle.SetActive(false);
         UpdateStates(RoundStates.Round);
-
     }
     IEnumerator LerpColor()
     {
-
         yield return new WaitForSeconds(transitionTime);
-
+    
         SetColor(newColor);
     }
 

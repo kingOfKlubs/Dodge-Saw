@@ -59,7 +59,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update() {
         _rigid.velocity = _velocity * _moveSpeed;
-        KeepInBounds();
+        //KeepInBounds();
         Reflect();
         Move();
         PcMovement();
@@ -67,16 +67,16 @@ public class Movement : MonoBehaviour
         SwitchStates();
     }
 
-    public void KeepInBounds() {
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
-        if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f))
-        {
-            screenPosition.x = Mathf.Clamp(screenPosition.x, 0f, Screen.width);
-            screenPosition.y = Mathf.Clamp(screenPosition.y, 0f, Screen.height);
-            Vector3 newWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-            this.transform.position = new Vector2(newWorldPosition.x, newWorldPosition.y);
-        }
-    }
+    //public void KeepInBounds() {
+    //    Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+    //    if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f))
+    //    {
+    //        screenPosition.x = Mathf.Clamp(screenPosition.x, 0f, Screen.width);
+    //        screenPosition.y = Mathf.Clamp(screenPosition.y, 0f, Screen.height);
+    //        Vector3 newWorldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+    //        this.transform.position = new Vector2(newWorldPosition.x, newWorldPosition.y);
+    //    }
+    //}
 
     private void Reflect()
     {

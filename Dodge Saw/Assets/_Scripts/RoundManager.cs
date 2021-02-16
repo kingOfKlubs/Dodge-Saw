@@ -130,6 +130,16 @@ public class RoundManager : MonoBehaviour {
             _round = 1;
             _previousRound = 1;
         }
+
+        if(_currentRoundState == RoundStates.RoundTransition)
+        {
+            GameObject[] objInScene = GameObject.FindGameObjectsWithTag("Coin");
+            for (int i = 0; i < objInScene.Length; i++)
+            {
+                objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), .3f * Time.fixedDeltaTime);
+                Destroy(objInScene[i], 3);
+            }
+        }
     }
 
     // reactivates EnemyAI 
@@ -150,12 +160,6 @@ public class RoundManager : MonoBehaviour {
     {
         enemyAI.gameObject.SetActive(false);
         coinSpawning.gameObject.SetActive(false);
-        GameObject[] objInScene = GameObject.FindGameObjectsWithTag("Coin");
-        for (int i = 0; i < objInScene.Length; i++)
-        {
-            objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), 1) * Time.deltaTime;
-            Destroy(objInScene[i], 3);
-        }
         StartCoroutine(NewRound());
     }
 

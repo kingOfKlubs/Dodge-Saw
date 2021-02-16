@@ -1943,7 +1943,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1591
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6233,7 +6233,7 @@ MonoBehaviour:
   Particle: {fileID: 821601821}
   warp: {fileID: 424431501}
   altwarp: {fileID: 1206840414}
-  animClip: {fileID: 7400000, guid: 184983631ebf41c4198f9adb932d6e3b, type: 2}
+  animClip: {fileID: 0}
   PortalAnimDuration: 5.15
   delay: 3
   _speed: 13.6

@@ -64,12 +64,10 @@ public class EnemyAI : MonoBehaviour
     IEnumerator WaitForRing()
     {
         ParticleSystem RingClone = Instantiate(ring, _position, Quaternion.identity);
-        if(Score._score >= 500 && Score._score < 649)
+        if (Score._score >= 500 && Score._score < 649)
         {
             
             ParticleSystem RingClone1 = Instantiate(ring, _2ndPosition, Quaternion.identity);
-            ParticleSystem.ShapeModule shape = ring.shape;
-            shape.radius = .1f;
         }
         else if(Score._score >= 650)
         {

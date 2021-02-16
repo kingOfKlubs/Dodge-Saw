@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class RoundManager : MonoBehaviour {
 
     public GameObject Particle;
     public RoundStates _currentRoundState;
     public Color[] colors;
-    public GameObject Particle1;
-    public GameObject Particle2;
-    public float transitionTime = 0;
+    public VisualEffect warp;
+    public VisualEffect altwarp;
+    public float PortalAnimDuration = 5.15f;
+    public float delay = 3;
+    public float _speed = 13.6f;
 
     EnemyAI enemyAI;
     Camera camera;
     Color newColor;
     Color startColor;
     Color endColor;
+    float transitionTime = 0;
     int _round = 0;
     int _previousRound = 0;
     int index = 0;
@@ -28,22 +32,73 @@ public class RoundManager : MonoBehaviour {
 
     private void Start()
     {
+        transitionTime = delay + PortalAnimDuration;
         enemyAI = FindObjectOfType<EnemyAI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (_currentRoundState)
+
+        if (_round != _previousRound)
         {
-            case RoundStates.Round:
-                Round();
-                break;
-            case RoundStates.RoundTransition:
-                RoundTransition();
-                break;
+            UpdateStates(RoundStates.RoundTransition);
+            FindObjectOfType<AudioManager>().Play("EndOfRound");
         }
-        StartCoroutine(UpdateRound());
+
+
+        if (Score._score >= 100 && Score._score < 199)
+        {
+            _round = 2;
+            index = 0;
+            if(_currentRoundState != RoundStates.Round)
+            {
+                StartCoroutine(UpdateEffects(warp, altwarp));
+            }
+        }
+        else if (Score._score >= 200 && Score._score < 349)
+        {
+
+            _round = 3;
+            index = 1;
+            if (_currentRoundState != RoundStates.Round)
+            {
+                StartCoroutine(UpdateEffects(altwarp, warp));
+            }
+        }
+        else if (Score._score >= 350 && Score._score < 499)
+        {
+
+            _round = 4;
+            index = 0;
+            if (_currentRoundState != RoundStates.Round)
+            {
+                StartCoroutine(UpdateEffects(warp, altwarp));
+            }
+        }
+        else if (Score._score >= 500 && Score._score < 649)
+        {
+            _round = 5;
+            index = 1;
+            if (_currentRoundState != RoundStates.Round)
+            {
+                StartCoroutine(UpdateEffects(altwarp, warp));
+            }
+        }
+        else if (Score._score >= 650)
+        {
+            _round = 6;
+            index = 0;
+            if (_currentRoundState != RoundStates.Round)
+            {
+                StartCoroutine(UpdateEffects(warp, altwarp));
+            }
+        }
+        else
+        {
+            _round = 1;
+            _previousRound = 1;
+        }
 
         if (shouldChange)
         {
@@ -71,10 +126,18 @@ public class RoundManager : MonoBehaviour {
         }
     }
 
-    public RoundStates UpdateStates(RoundStates newRoundState)
+    public void UpdateStates(RoundStates newRoundState)
     {
         _currentRoundState = newRoundState;
-        return _currentRoundState;
+        switch (_currentRoundState)
+        {
+            case RoundStates.Round:
+                Round();
+                break;
+            case RoundStates.RoundTransition:
+                RoundTransition();
+                break;
+        }
     }
 
     void Round()
@@ -89,77 +152,14 @@ public class RoundManager : MonoBehaviour {
     void RoundTransition()
     {
         enemyAI.gameObject.SetActive(false);
-        Particle.SetActive(true);
         StartCoroutine(NewRound());
     }
 
-    IEnumerator UpdateRound()
+    IEnumerator UpdateEffects(VisualEffect turnSpeedZero, VisualEffect turnSpeedUp)
     {
-        if (_round != _previousRound)
-        {
-            UpdateStates(RoundStates.RoundTransition);
-            FindObjectOfType<AudioManager>().Play("EndOfRound");
-        }
-
-        if (Score._score >= 100 && Score._score < 199)
-        {
-            _round = 2;
-            index = 0;
-
-            Particle1.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-            Particle2.SetActive(true);
-            InitializePlayerCharacteristics.SetWarpColor();
-
-        }
-        else if (Score._score >= 200 && Score._score < 349)
-        {
-
-            _round = 3;
-            index = 1;
-
-            Particle2.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-            Particle1.SetActive(true);
-            InitializePlayerCharacteristics.SetWarpColor();
-
-        }
-        else if (Score._score >= 350 && Score._score < 499)
-        {
-
-            _round = 4;
-            index = 0;
-
-            Particle1.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-            Particle2.SetActive(true);
-            InitializePlayerCharacteristics.SetWarpColor();
-        }
-        else if (Score._score >= 500 && Score._score < 649)
-        {
-            _round = 5;
-            index = 1;
-
-            Particle2.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-            Particle1.SetActive(true);
-            InitializePlayerCharacteristics.SetWarpColor();
-        }
-        else if (Score._score >= 650)
-        {
-            _round = 6;
-            index = 0;
-
-            Particle1.SetActive(false);
-            yield return new WaitForSeconds(transitionTime);
-            Particle2.SetActive(true);
-            InitializePlayerCharacteristics.SetWarpColor();
-        }
-        else
-        {
-            _round = 1;
-            _previousRound = 1;
-        }
+        turnSpeedZero.SetFloat("speed", 0);
+        yield return new WaitForSeconds(transitionTime);
+        turnSpeedUp.SetFloat("speed", _speed);
     }
 
     public enum RoundStates { Round, RoundTransition };
@@ -169,8 +169,10 @@ public class RoundManager : MonoBehaviour {
         _previousRound = _round;
         shouldChange = true;
 
-        yield return new WaitForSeconds(transitionTime);
+        yield return new WaitForSeconds(delay);
+        Particle.SetActive(true);
 
+        yield return new WaitForSeconds(PortalAnimDuration);
         Particle.SetActive(false);
         UpdateStates(RoundStates.Round);
     }

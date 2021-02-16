@@ -7,6 +7,8 @@ public class EnemyAI : MonoBehaviour
     #region Public Variables
     public Vector2 _position = new Vector2(1, 1);
     public Transform _Player;
+    public ParticleSystem.ShapeModule shape;
+    
     public float _startTime;
     public ParticleSystem ring;
     public GameObject[] enemies = new GameObject[3];
@@ -27,6 +29,8 @@ public class EnemyAI : MonoBehaviour
         time = _startTime;
         topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
+
+        shape = ring.shape;
     }
 
     // Update is called once per frame
@@ -64,6 +68,8 @@ public class EnemyAI : MonoBehaviour
         {
             
             ParticleSystem RingClone1 = Instantiate(ring, _2ndPosition, Quaternion.identity);
+            ParticleSystem.ShapeModule shape = ring.shape;
+            shape.radius = .1f;
         }
         else if(Score._score >= 650)
         {

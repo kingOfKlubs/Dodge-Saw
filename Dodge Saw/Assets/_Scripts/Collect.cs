@@ -6,6 +6,12 @@ public class Collect : MonoBehaviour
 {
     public int _cost;
     public ParticleSystem collectEffect;
+    public Movement player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<Movement>();
+    }
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.tag == "Player")
@@ -20,5 +26,23 @@ public class Collect : MonoBehaviour
             Destroy(this.gameObject, 3);
             Destroy(clone.gameObject, 3);
         }
+    }
+
+    public void Update()
+    {
+        if(player != null)
+        {
+            if(player.currentState == Movement.GameStates.SlowTime)
+            {
+                Animator anim = GetComponent<Animator>();
+                anim.speed = .2f;
+            }
+            else
+            {
+                Animator anim = GetComponent<Animator>();
+                anim.speed = 1f;
+            }
+        }
+            
     }
 }

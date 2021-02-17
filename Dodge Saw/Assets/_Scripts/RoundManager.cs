@@ -11,12 +11,21 @@ public class RoundManager : MonoBehaviour {
         public GameObject[] enemies;
         public int count;
         public float rate;
+
+        public Round(string _name, GameObject[] _enemies, int _count, float _rate)
+        {
+            name = _name;
+            enemies = _enemies;
+            count = _count;
+            rate = _rate;
+        }
     }
 
     #region Public Variables
     public RoundStates _currentRoundState;
-    public Round[] rounds;
+    public List<Round> rounds;
     public Color[] colors;
+    public GameObject[] enemyTypes;
     public GameObject Particle;
     public ParticleSystem ring;
     public VisualEffect warp;
@@ -63,7 +72,7 @@ public class RoundManager : MonoBehaviour {
         transitionTime = delay + PortalAnimDuration;
         topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
-        enemyAI = FindObjectOfType<EnemyAI>();
+        //enemyAI = FindObjectOfType<EnemyAI>();
         coinSpawning = FindObjectOfType<CoinSpawning>();
         UpdateStates(RoundStates.RoundStart);
     }
@@ -254,12 +263,12 @@ public class RoundManager : MonoBehaviour {
 
         for (int i = 0; i < round.enemies.Length; i++)
         {
+            yield return new WaitForSeconds(round.rate); 
             // the number of counts should dictate how many times you runt spawn enemies
             for (int j = 0; j < round.count; j++)
             {
                 StartCoroutine(SpawnEnemy(round.enemies[i]));
             }
-            yield return new WaitForSeconds(round.rate); 
         }
 
         //change the state
@@ -284,13 +293,23 @@ public class RoundManager : MonoBehaviour {
     void RoundCompleted()
     {
         Debug.Log("Round Completed!");
+        Debug.Log("Next Round " + _nextRound);
+
 
         roundCountDown = transitionTime;
 
-        if (_nextRound + 1 > rounds.Length - 1)
+        if (_nextRound + 1 > rounds.Count - 1)
         {
-            _nextRound = 0;
-            Debug.Log("ALL ROUNDS COMPLETE! Looping...");
+            _nextRound++;// = 0
+            Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
+           
+            // instead make a new round dynamically
+            GameObject[] newEnemyList = new GameObject[1] { enemyTypes[Random.Range(-1, enemyTypes.Length)] };
+            int randomCount = 1;
+            float randomRate = Random.Range(5, 7);
+            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate));
+
+
         }
         else
         {
@@ -310,7 +329,6 @@ public class RoundManager : MonoBehaviour {
             Debug.Log(Enemies.Length);
             if (Enemies.Length == 0)
             {
-                
                 return false;
             }
         }

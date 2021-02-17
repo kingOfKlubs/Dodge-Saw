@@ -6249,6 +6249,10 @@ MonoBehaviour:
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 0}
+  enemyTypes:
+  - {fileID: 6864588792444539405, guid: 8cdc8f4417617495ab8e346687bf49fc, type: 3}
+  - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
+  - {fileID: 3005788343321944071, guid: f936a6e6c02d2418f91219e42ca294fe, type: 3}
   Particle: {fileID: 821601821}
   ring: {fileID: 8824401991475551633, guid: 153eeb2f3bf07410fb4665ba5e7c9ad8, type: 3}
   warp: {fileID: 424431501}

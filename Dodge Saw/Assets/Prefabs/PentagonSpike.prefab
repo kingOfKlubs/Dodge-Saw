@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 6843477983017839875}
   - component: {fileID: 3642184711889592723}
   - component: {fileID: 5877537300105307121}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: PentagonSpike
-  m_TagString: Coin
+  m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

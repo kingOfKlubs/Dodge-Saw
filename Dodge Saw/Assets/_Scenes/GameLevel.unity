@@ -1595,7 +1595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &437377541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1943,7 +1943,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1591
+    m_Bits: 3639
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6227,16 +6227,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentRoundState: 0
+  rounds:
+  - name: Round 1
+    enemies:
+    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
+    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
+    count: 1
+    rate: 5
+  - name: Round 2
+    enemies:
+    - {fileID: 6864588792444539405, guid: 8cdc8f4417617495ab8e346687bf49fc, type: 3}
+    - {fileID: 6864588792444539405, guid: 8cdc8f4417617495ab8e346687bf49fc, type: 3}
+    count: 3
+    rate: 10
+  - name: Round 3
+    enemies:
+    - {fileID: 3005788343321944071, guid: f936a6e6c02d2418f91219e42ca294fe, type: 3}
+    - {fileID: 3005788343321944071, guid: f936a6e6c02d2418f91219e42ca294fe, type: 3}
+    count: 1
+    rate: 6
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 0}
   Particle: {fileID: 821601821}
+  ring: {fileID: 8824401991475551633, guid: 153eeb2f3bf07410fb4665ba5e7c9ad8, type: 3}
   warp: {fileID: 424431501}
   altwarp: {fileID: 1206840414}
-  animClip: {fileID: 0}
   PortalAnimDuration: 5.15
   delay: 3
   _speed: 13.6
+  lifetime: 5
+  roundCountDown: 5
 --- !u!4 &1788130329
 Transform:
   m_ObjectHideFlags: 0

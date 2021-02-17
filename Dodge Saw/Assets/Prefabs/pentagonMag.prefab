@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8006690757360602524}
   - component: {fileID: 9023904428158391017}
   - component: {fileID: 4844671705021023209}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4769,9 +4769,9 @@ GameObject:
   - component: {fileID: 4850823928343958026}
   - component: {fileID: 8919407329509624674}
   - component: {fileID: 7794468207655621878}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: pentagonMag
-  m_TagString: Coin
+  m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

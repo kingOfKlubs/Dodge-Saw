@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 5580413315891936213}
   - component: {fileID: 3734696184406487582}
   - component: {fileID: 1541983442759712241}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: pentagonStump
-  m_TagString: Coin
+  m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   _ring: {fileID: 0}
   layer:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 2304
   _dst: 0.5
 --- !u!136 &3734696184406487582
 CapsuleCollider:

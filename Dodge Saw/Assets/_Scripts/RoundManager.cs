@@ -22,7 +22,6 @@ public class RoundManager : MonoBehaviour {
     }
 
     #region Public Variables
-    public RoundStates _currentRoundState;
     public List<Round> rounds;
     public Color[] colors;
     public GameObject[] enemyTypes;
@@ -35,6 +34,9 @@ public class RoundManager : MonoBehaviour {
     public float _speed = 13.6f;
     public float lifetime = 10;
     public float roundCountDown = 5;
+    public float radius = .7f;
+    public RoundStates _currentRoundState;
+    public LayerMask spawnedObjectLayer;
     public FindingDimensions findingDimensions = new FindingDimensions();
     #endregion
 
@@ -47,12 +49,14 @@ public class RoundManager : MonoBehaviour {
     Color endColor;
     Vector2 topRange;
     Vector2 bottomRange;
+    //Vector2 _position;
     float searchCountdown = 3;
     float transitionTime = 0;
     int _round = 0;
     int _nextRound = 0;
     int _previousRound = 0;
     int index = 1;
+    int attempts = 0;
     bool shouldChange = false;
     #endregion
 
@@ -267,7 +271,12 @@ public class RoundManager : MonoBehaviour {
             // the number of counts should dictate how many times you runt spawn enemies
             for (int j = 0; j < round.count; j++)
             {
-                StartCoroutine(SpawnEnemy(round.enemies[i]));
+                if(j > 0)
+                {
+                    PreventOverlapingSpawn(round.enemies[Random.Range(0, round.enemies.Length)]);
+                }
+                else
+                    PreventOverlapingSpawn(round.enemies[i]);
             }
         }
 
@@ -277,12 +286,11 @@ public class RoundManager : MonoBehaviour {
         yield break;
     }
 
-    IEnumerator SpawnEnemy(GameObject _enemy)
+    IEnumerator SpawnEnemy(GameObject _enemy, Vector2 _position)
     {
         Debug.Log("Spawning Enemy: " + _enemy.name);
 
-        // This is where we will find position and spawn enemies
-        Vector2 _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
+        // This is where we will spawn enemies
         ParticleSystem RingClone = Instantiate(ring, _position, Quaternion.identity);
         Destroy(RingClone.gameObject, 3);
         yield return new WaitForSeconds(2);
@@ -300,16 +308,20 @@ public class RoundManager : MonoBehaviour {
 
         if (_nextRound + 1 > rounds.Count - 1)
         {
+            int randomCount = _nextRound;
             _nextRound++;// = 0
             Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
-           
+
             // instead make a new round dynamically
-            GameObject[] newEnemyList = new GameObject[1] { enemyTypes[Random.Range(-1, enemyTypes.Length)] };
-            int randomCount = 1;
+            int amountOfEnemies = Random.Range(_nextRound, _nextRound + 6);
+            GameObject[] newEnemyList = new GameObject[amountOfEnemies];
+            for (int i = 0; i < newEnemyList.Length; i++)
+            {
+                newEnemyList[i] = enemyTypes[Random.Range(0, enemyTypes.Length)];
+            }
+            
             float randomRate = Random.Range(5, 7);
             rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate));
-
-
         }
         else
         {
@@ -333,5 +345,35 @@ public class RoundManager : MonoBehaviour {
             }
         }
         return true;
+    }
+
+    public void PreventOverlapingSpawn(GameObject _enemy)
+    {
+        //check around the position we want to spawn at
+        Vector2 _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
+
+        Collider[] collidersInsideOverlapSphere = new Collider[1];
+        int numberOfCollidersFound = Physics.OverlapSphereNonAlloc(_position, radius, collidersInsideOverlapSphere, spawnedObjectLayer);
+
+
+        if (numberOfCollidersFound == 0)
+        {
+            StartCoroutine(SpawnEnemy(_enemy, _position));
+            attempts = 0;
+        }
+        else
+        {
+            Debug.Log("found " + collidersInsideOverlapSphere[0].name + " collider attempting again");
+            attempts++;
+            if (attempts < 10)
+            {
+                Debug.Log("maxed attempts reached, spawning anyway");
+                PreventOverlapingSpawn(_enemy);
+            }
+            else
+            {
+                StartCoroutine(SpawnEnemy(_enemy, _position));
+            }
+        }
     }
 }

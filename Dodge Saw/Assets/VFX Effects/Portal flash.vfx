@@ -1503,7 +1503,7 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t   
       Orient_630( /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout
       */attributes.axisZ, float3(0, 0, 1), float3(0, 1, 0));\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t   
-      SetAttribute_3278B22F( /*inout */attributes.size, (float)10);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FDD06EC7(
+      SetAttribute_3278B22F( /*inout */attributes.size, (float)15);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FDD06EC7(
       /*inout */attributes.color, Color_c);\n\t\t\t\tAttributeFromCurve_7DF18695(
       /*inout */attributes.size, attributes.age, attributes.lifetime, Size_d);\n\t\t\t\tAttributeFromCurve_EFB359F9(
       /*inout */attributes.color,  /*inout */attributes.alpha, attributes.age, attributes.lifetime,
@@ -1900,7 +1900,7 @@ VisualEffectResource:
       attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t{\n\t\t\t\t   
       Orient_630( /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout
       */attributes.axisZ, float3(0, 0, 1), float3(0, 1, 0));\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t   
-      SetAttribute_3278B22F( /*inout */attributes.size, (float)7);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FDD06EC7(
+      SetAttribute_3278B22F( /*inout */attributes.size, (float)20);\n\t\t\t\t}\n\t\t\t\tSetAttribute_FDD06EC7(
       /*inout */attributes.color, Color_c);\n\t\t\t\tAttributeFromCurve_7DF18695(
       /*inout */attributes.size, attributes.age, attributes.lifetime, Size_d);\n\t\t\t\tAttributeFromCurve_EFB359F9(
       /*inout */attributes.color,  /*inout */attributes.alpha, attributes.age, attributes.lifetime,
@@ -2180,13 +2180,13 @@ VisualEffectResource:
       m_Float:
         m_Array:
         - m_ExpressionIndex: 11
-          m_Value: 7
+          m_Value: 20
         - m_ExpressionIndex: 12
           m_Value: 0.9
         - m_ExpressionIndex: 20
           m_Value: 0.2
         - m_ExpressionIndex: 22
-          m_Value: 10
+          m_Value: 15
       m_Vector2f:
         m_Array:
         - m_ExpressionIndex: 23
@@ -7214,7 +7214,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 10
+      m_SerializableObject: 15
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -16388,7 +16388,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 7
+      m_SerializableObject: 20
     m_Space: 2147483647
   m_Property:
     name: Size

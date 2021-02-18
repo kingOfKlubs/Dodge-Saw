@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CoinSpawning : MonoBehaviour
 {
 
     #region Public Variables
-    public Vector2 _position = new Vector2(1,1);
-    public GameObject _coin;
-    public GameObject _bronzeCoin;
-    public GameObject _goldCoin;
     public float _startTime;
     public float _startTimeBronze;
     public float _startTimeGold;
-    public bool _canSpawn;
     public float radius; // this is usually kept at 0.7
     public float raycastDistance = 100f;
     public float overlapTestBoxSize = 1f;
+    public float animDuration = 1f;
+    public bool _canSpawn;
+    public Vector2 _position = new Vector2(1,1);
+    public VisualEffect entryAnim;
+    public GameObject _coin;
+    public GameObject _bronzeCoin;
+    public GameObject _goldCoin;
     public LayerMask spawnedObjectLayer;
     public FindingDimensions findingDimensions = new FindingDimensions();
     #endregion
@@ -71,8 +74,14 @@ public class CoinSpawning : MonoBehaviour
     }
 
     //Spawn Coins randomly on the screen
-    public void SpawnCoins(Vector3 _position, GameObject coinType)
+    IEnumerator SpawnCoins(Vector3 _position, GameObject coinType)
     {
+        Vector4 coinColor = coinType.GetComponent<MeshRenderer>().sharedMaterial.GetVector("_EmissionColor");
+        entryAnim.SetVector4("Flash Color", coinColor);
+        VisualEffect leadIn = Instantiate(entryAnim, _position, Quaternion.identity);
+
+        Destroy(leadIn.gameObject, 2);
+        yield return new WaitForSeconds(animDuration);
         GameObject CoinClone = Instantiate(coinType, _position, Quaternion.identity);
         Destroy(CoinClone, 15f);
     }
@@ -87,7 +96,7 @@ public class CoinSpawning : MonoBehaviour
 
 
         if (numberOfCollidersFound == 0) {
-            SpawnCoins(_position, coinType);
+            StartCoroutine(SpawnCoins(_position, coinType));
             attempts = 0;
         }
         else {
@@ -98,7 +107,7 @@ public class CoinSpawning : MonoBehaviour
             }
             else {
                 Debug.Log("maxed attempts reached, spawning anyway");
-                SpawnCoins(_position, coinType);
+                StartCoroutine(SpawnCoins(_position, coinType));
             }
         }
     }

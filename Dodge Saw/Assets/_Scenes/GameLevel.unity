@@ -1430,19 +1430,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8964cea3a545459d9f93903fbd01917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startTime: 10
+  _startTimeBronze: 7
+  _startTimeGold: 20
+  radius: 0.7
+  raycastDistance: 50
+  overlapTestBoxSize: 2.05
+  animDuration: 1
+  _canSpawn: 0
   _position: {x: 1, y: 1}
+  entryAnim: {fileID: 4153283885170204592, guid: 297de9960f6f77f4381d017952844497,
+    type: 3}
   _coin: {fileID: 6435639912950891419, guid: f96d306f7dc804f6491da13d9bb66d08, type: 3}
   _bronzeCoin: {fileID: 6435639912950891419, guid: 80690ac8e48c94f87842d1d4a944f22d,
     type: 3}
   _goldCoin: {fileID: 6435639912950891419, guid: 2ac0502e3d29a40f1882fe53bd3c615b,
     type: 3}
-  _startTime: 10
-  _startTimeBronze: 7
-  _startTimeGold: 20
-  _canSpawn: 0
-  radius: 0.7
-  raycastDistance: 50
-  overlapTestBoxSize: 2.05
   spawnedObjectLayer:
     serializedVersion: 2
     m_Bits: 3072
@@ -6379,7 +6382,10 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 19.698313, y: 1.9698315, z: 0, w: 1}
+        m_Name: New Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:

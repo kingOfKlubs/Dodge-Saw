@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
     public GameObject _deathEffect;
     public Vector2 _moveDirection;
     public Movement movement;
-    public ParticleSystem _ring;
     public LayerMask layer;
     public float _dst;
 

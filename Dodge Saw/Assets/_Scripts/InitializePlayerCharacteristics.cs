@@ -38,9 +38,9 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
         SetWarpColor();
-        SetEnemiesColor();
-        enemyAi = FindObjectOfType<EnemyAI>();
-        enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
+        //SetEnemiesColor();
+        //enemyAi = FindObjectOfType<EnemyAI>();
+        //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
         SetDeathColor();
         SetUIColor();
     }

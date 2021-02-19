@@ -11,28 +11,29 @@ public class RoundManager : MonoBehaviour {
         public GameObject[] enemies;
         public int count;
         public float rate;
+        public float lifetime;
 
-        public Round(string _name, GameObject[] _enemies, int _count, float _rate)
+        public Round(string _name, GameObject[] _enemies, int _count, float _rate, float _lifetime)
         {
             name = _name;
             enemies = _enemies;
             count = _count;
             rate = _rate;
+            lifetime = _lifetime;
         }
     }
 
     #region Public Variables
     public List<Round> rounds;
-    public Color[] colors;
     public GameObject[] enemyTypes;
-    public GameObject Particle;
+    public Color[] colors;
+    public GameObject Portal;
     public ParticleSystem ring;
     public VisualEffect warp;
     public VisualEffect altwarp;
     public float PortalAnimDuration = 5.15f;
     public float delay = 3;
     public float _speed = 13.6f;
-    public float lifetime = 10;
     public float roundCountDown = 5;
     public float radius = .7f;
     public RoundStates _currentRoundState;
@@ -183,26 +184,26 @@ public class RoundManager : MonoBehaviour {
         shouldChange = true;
 
         yield return new WaitForSeconds(delay);
-        Particle.SetActive(true);
+        Portal.SetActive(true);
 
         yield return new WaitForSeconds(PortalAnimDuration);
-        Particle.SetActive(false);
+        Portal.SetActive(false);
         UpdateStates(RoundStates.RoundStart);
     }
 
-    IEnumerator UpdateEffects(VisualEffect turnSpeedZero, VisualEffect turnSpeedUp)
+    IEnumerator UpdateEffects(VisualEffect warp, VisualEffect altWarp)
     {
         if (_nextRound % 2 == 0)
         {
-            turnSpeedUp.SetFloat("speed", 0);
+            altWarp.SetFloat("speed", 0);
             yield return new WaitForSeconds(transitionTime);
-            turnSpeedZero.SetFloat("speed", _speed);
+            warp.SetFloat("speed", _speed);
         }
         else if(_nextRound%2==1)
         {
-            turnSpeedZero.SetFloat("speed", 0);
+            warp.SetFloat("speed", 0);
             yield return new WaitForSeconds(transitionTime);
-            turnSpeedUp.SetFloat("speed", _speed);
+            altWarp.SetFloat("speed", _speed);
         }
     }
 
@@ -226,26 +227,6 @@ public class RoundManager : MonoBehaviour {
                 else
                     index++;
             }
-            //startColor = camera.backgroundColor;
-            //endColor = colors[0];
-            //if (index + 1 < colors.Length)
-            //{
-            //    endColor = colors[index + 1];
-            //}
-
-            //newColor = Color.Lerp(startColor, endColor, Time.deltaTime * 5);
-            //StartCoroutine(LerpColor());
-
-            //if (newColor == endColor)
-            //{
-            //    shouldChange = false;
-            //    if (index + 1 < colors.Length)
-            //    {
-            //        index++;
-            //    }
-            //    else
-            //        index = 0;
-            //}
         }
     }
 
@@ -273,10 +254,10 @@ public class RoundManager : MonoBehaviour {
             {
                 if(j > 0)
                 {
-                    PreventOverlapingSpawn(round.enemies[Random.Range(0, round.enemies.Length)]);
+                    PreventOverlapingSpawn(round.enemies[Random.Range(0, round.enemies.Length)], round.lifetime);
                 }
                 else
-                    PreventOverlapingSpawn(round.enemies[i]);
+                    PreventOverlapingSpawn(round.enemies[i], round.lifetime);
             }
         }
 
@@ -286,7 +267,7 @@ public class RoundManager : MonoBehaviour {
         yield break;
     }
 
-    IEnumerator SpawnEnemy(GameObject _enemy, Vector2 _position)
+    IEnumerator SpawnEnemy(GameObject _enemy, Vector2 _position, float _lifetime)
     {
         Debug.Log("Spawning Enemy: " + _enemy.name);
 
@@ -295,7 +276,7 @@ public class RoundManager : MonoBehaviour {
         Destroy(RingClone.gameObject, 3);
         yield return new WaitForSeconds(2);
         GameObject EnemyClone = Instantiate(_enemy, _position, Quaternion.identity);
-        Destroy(EnemyClone, lifetime);
+        Destroy(EnemyClone, _lifetime);
     }
 
     void RoundCompleted()
@@ -303,25 +284,26 @@ public class RoundManager : MonoBehaviour {
         Debug.Log("Round Completed!");
         Debug.Log("Next Round " + _nextRound);
 
-
-        roundCountDown = transitionTime;
-
+        //if we have reached the end of our presets start making rounds dynamically
         if (_nextRound + 1 > rounds.Count - 1)
         {
-            int randomCount = _nextRound;
-            _nextRound++;// = 0
             Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
-
             // instead make a new round dynamically
-            int amountOfEnemies = Random.Range(_nextRound, _nextRound + 6);
-            GameObject[] newEnemyList = new GameObject[amountOfEnemies];
+            int randomCount = _nextRound; // this will probably need to be chaged if we have more than 3 presets
+            _nextRound++;
+
+
+            int amountOfEnemies = Random.Range(_nextRound, _nextRound + 6); //random number of enemies base on round number
+            GameObject[] newEnemyList = new GameObject[amountOfEnemies]; //array of enemies 
             for (int i = 0; i < newEnemyList.Length; i++)
             {
                 newEnemyList[i] = enemyTypes[Random.Range(0, enemyTypes.Length)];
             }
             
-            float randomRate = Random.Range(5, 7);
-            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate));
+            float randomRate = Random.Range(5, 8);// rate between spawns
+            float lifetime = Random.Range(5, 11);// the amount of time an enemy will be alive 
+
+            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate, lifetime));
         }
         else
         {
@@ -347,7 +329,7 @@ public class RoundManager : MonoBehaviour {
         return true;
     }
 
-    public void PreventOverlapingSpawn(GameObject _enemy)
+    public void PreventOverlapingSpawn(GameObject _enemy, float _lifetime)
     {
         //check around the position we want to spawn at
         Vector2 _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
@@ -358,7 +340,7 @@ public class RoundManager : MonoBehaviour {
 
         if (numberOfCollidersFound == 0)
         {
-            StartCoroutine(SpawnEnemy(_enemy, _position));
+            StartCoroutine(SpawnEnemy(_enemy, _position, _lifetime));
             attempts = 0;
         }
         else
@@ -368,11 +350,11 @@ public class RoundManager : MonoBehaviour {
             if (attempts < 10)
             {
                 Debug.Log("maxed attempts reached, spawning anyway");
-                PreventOverlapingSpawn(_enemy);
+                PreventOverlapingSpawn(_enemy, _lifetime);
             }
             else
             {
-                StartCoroutine(SpawnEnemy(_enemy, _position));
+                StartCoroutine(SpawnEnemy(_enemy, _position, _lifetime));
             }
         }
     }

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2541912284015919452}
   - component: {fileID: 6568644143412303889}
   - component: {fileID: 6414946106447980092}
-  m_Layer: 11
+  - component: {fileID: 1389598172122017935}
+  m_Layer: 9
   m_Name: RIng Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4793,3 +4794,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &1389598172122017935
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853470732061006695}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3
+  m_Center: {x: 0, y: 0, z: 0}

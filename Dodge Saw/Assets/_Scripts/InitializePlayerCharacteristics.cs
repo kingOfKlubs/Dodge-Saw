@@ -37,12 +37,12 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
-        SetWarpColor();
+        SetUIColor();
+        //SetWarpColor();
         //SetEnemiesColor();
         //enemyAi = FindObjectOfType<EnemyAI>();
         //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
-        SetDeathColor();
-        SetUIColor();
+        //SetDeathColor();
     }
 
     //public Color SetPlayerColor { set { value = _playerColor; } get { return _playerColor; } }
@@ -139,21 +139,21 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
         gradient.SetKeys(colorKey, alphaKey);
 
-        ParticleSystem[] deathGradient = enemyAi.enemies[0].GetComponent<Static>()._deathEffect.GetComponentsInChildren<ParticleSystem>();
+        ParticleSystem[] deathGradient = enemyAi.enemies[0].GetComponent<Static>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < deathGradient.Length; i++)
         {
             ParticleSystem.ColorOverLifetimeModule deathColor;
             deathColor = deathGradient[i].colorOverLifetime;
             deathColor.color = gradient;
         }
-        ParticleSystem[] deathGradient1 = enemyAi.enemies[1].GetComponent<Attack>()._deathEffect.GetComponentsInChildren<ParticleSystem>();
+        ParticleSystem[] deathGradient1 = enemyAi.enemies[1].GetComponent<Attack>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < deathGradient1.Length; i++)
         {
             ParticleSystem.ColorOverLifetimeModule deathColor;
             deathColor = deathGradient1[i].colorOverLifetime;
             deathColor.color = gradient;
         }
-        ParticleSystem[] deathGradient2 = enemyAi.enemies[2].GetComponent<Bounce>()._deathEffect.GetComponentsInChildren<ParticleSystem>();
+        ParticleSystem[] deathGradient2 = enemyAi.enemies[2].GetComponent<Bounce>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < deathGradient2.Length; i++)
         {
             ParticleSystem.ColorOverLifetimeModule deathColor;

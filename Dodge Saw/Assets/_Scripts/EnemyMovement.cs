@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public GameObject _deathEffect;
+    public GameObject _playerDeathEffect;
+    public GameObject _destroyEffect;
     public Vector2 _moveDirection;
     public Movement movement;
     public LayerMask layer;
     public float _dst;
+    public float _lifeTime;
 
     protected Rigidbody _rigid;
 
@@ -21,13 +23,15 @@ public class EnemyMovement : MonoBehaviour
     Vector2 _direction;
     Ray _ray;
     float _moveSpeed;
+    float time;
 
     public virtual void Initiate()
     {
+        time = _lifeTime;
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        if (_deathEffect != null)
+        if (_playerDeathEffect != null)
         {
             if (_player != null)
             {
@@ -47,6 +51,12 @@ public class EnemyMovement : MonoBehaviour
 
     public virtual void Move()
     {
+        time -= Time.deltaTime;
+        if(time <= 0) {
+            Death();
+        }
+
+
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
@@ -75,9 +85,15 @@ public class EnemyMovement : MonoBehaviour
         {
             Movement.Death = true;
             Destroy(collision.gameObject);
-            GameObject clone = Instantiate(_deathEffect, collision.transform.position, collision.transform.rotation);
+            GameObject clone = Instantiate(_playerDeathEffect, collision.transform.position, collision.transform.rotation);
             FindObjectOfType<AudioManager>().Play("PlayerCrash");
-            Destroy(clone, 7);
+            Destroy(clone, 3);
         }
+    }
+
+    public void Death() {
+        GameObject deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
+        Destroy(deathClone.gameObject, 2);
+        Destroy(this.gameObject);
     }
 }

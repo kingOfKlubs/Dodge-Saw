@@ -76,40 +76,43 @@ public class CoinSpawning : MonoBehaviour
     //Spawn Coins randomly on the screen
     IEnumerator SpawnCoins(Vector3 _position, GameObject coinType)
     {
-        Vector4 coinColor = coinType.GetComponent<MeshRenderer>().sharedMaterial.GetVector("_EmissionColor");
+        Vector4 coinColor = coinType.GetComponent<MeshRenderer>().sharedMaterial.GetVector("_EmissionColor") * 3;
         entryAnim.SetVector4("Flash Color", coinColor);
         VisualEffect leadIn = Instantiate(entryAnim, _position, Quaternion.identity);
 
         Destroy(leadIn.gameObject, 2);
         yield return new WaitForSeconds(animDuration);
         GameObject CoinClone = Instantiate(coinType, _position, Quaternion.identity);
-        Destroy(CoinClone, 15f);
+
     }
 
     public void PreventOverlapingSpawn(GameObject coinType) {
-        
-        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding,topRange.y - findingDimensions.padding));    
 
-        //check around the position we want to spawn at
-        Collider[] collidersInsideOverlapSphere = new Collider[1];
-        int numberOfCollidersFound = Physics.OverlapSphereNonAlloc(_position, radius, collidersInsideOverlapSphere, spawnedObjectLayer);
+        bool canSpawnHere = false;
+        attempts = 0;
+
+        while (!canSpawnHere) {
+
+            _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
+
+            //check around the position we want to spawn at
+            Collider[] collidersInsideOverlapSphere = new Collider[1];
+            int numberOfCollidersFound = Physics.OverlapSphereNonAlloc(_position, radius, collidersInsideOverlapSphere, spawnedObjectLayer);
 
 
-        if (numberOfCollidersFound == 0) {
-            StartCoroutine(SpawnCoins(_position, coinType));
-            attempts = 0;
-        }
-        else {
-            Debug.Log("found " + collidersInsideOverlapSphere[0].name + " collider attempting again");
-            attempts++;
-            if(attempts < 50) {
-                PreventOverlapingSpawn(coinType);
+            if (numberOfCollidersFound == 0) {
+                break;
             }
             else {
-                Debug.Log("maxed attempts reached, spawning anyway");
-                StartCoroutine(SpawnCoins(_position, coinType));
+                Debug.Log("found " + collidersInsideOverlapSphere[0].name + " collider attempting again");
+                attempts++;
+                if (attempts > 50) {
+                    Debug.Log("maxed attempts reached, spawning anyway");
+                    break;
+                }
             }
         }
+        StartCoroutine(SpawnCoins(_position, coinType));
     }
 
     private void OnDrawGizmos() {

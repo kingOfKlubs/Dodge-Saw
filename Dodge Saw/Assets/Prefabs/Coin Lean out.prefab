@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1852881595377938194}
   - component: {fileID: -5446423383962337080}
   m_Layer: 0
-  m_Name: Coin Lean In
+  m_Name: Coin Lean out
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3126668958078302565}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: dfeff186fa402a64db3caa1227f0dd91, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: e772b782c512d41f892925fcb6628bcd, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0

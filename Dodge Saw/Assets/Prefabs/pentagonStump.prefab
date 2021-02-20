@@ -115,15 +115,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411611a41f8df4e46ba4c39ff765035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
+  _playerDeathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
+    type: 3}
+  _destroyEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
     type: 3}
   _moveDirection: {x: 0, y: 0}
   movement: {fileID: 0}
-  _ring: {fileID: 0}
   layer:
     serializedVersion: 2
     m_Bits: 2304
   _dst: 0.5
+  _lifeTime: 7
 --- !u!136 &3734696184406487582
 CapsuleCollider:
   m_ObjectHideFlags: 0

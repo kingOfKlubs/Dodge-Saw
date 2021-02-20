@@ -6,11 +6,16 @@ public class Collect : MonoBehaviour
 {
     public int _cost;
     public ParticleSystem collectEffect;
+    public GameObject _destroyEffect;
     public Movement player;
+    public float _lifeTime;
+    public float time;
 
     private void Start()
     {
         player = FindObjectOfType<Movement>();
+        time = _lifeTime;
+
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -30,6 +35,11 @@ public class Collect : MonoBehaviour
 
     public void Update()
     {
+
+        time -= Time.deltaTime;
+        if(time <= 0) {
+            Death();
+        }
         if(player != null)
         {
             if(player.currentState == Movement.GameStates.SlowTime)
@@ -44,5 +54,10 @@ public class Collect : MonoBehaviour
             }
         }
             
+    }
+    public void Death() {
+        GameObject deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
+        Destroy(deathClone.gameObject, 2);
+        Destroy(this.gameObject);
     }
 }

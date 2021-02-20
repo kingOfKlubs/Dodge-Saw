@@ -48,7 +48,11 @@ MonoBehaviour:
   _cost: 10
   collectEffect: {fileID: 773577609059814020, guid: 0573ab9edbf7145858c0b439b1ef91a9,
     type: 3}
+  _destroyEffect: {fileID: 3126668958078302565, guid: 305d2481871d944d0979f60f9a2d2cca,
+    type: 3}
   player: {fileID: 0}
+  _lifeTime: 15
+  time: 0
 --- !u!1001 &6435639912950793531
 PrefabInstance:
   m_ObjectHideFlags: 0

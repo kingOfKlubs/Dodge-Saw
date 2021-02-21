@@ -900,7 +900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 4.900078}
+  m_AnchoredPosition: {x: -13.9999695, y: 4.900078}
   m_SizeDelta: {x: -350.09998, y: 135.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329837684
@@ -2393,7 +2393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: -188.09998}
+  m_AnchoredPosition: {x: -13.9999695, y: -188.09998}
   m_SizeDelta: {x: -302.8, y: 143.09998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733406192
@@ -3097,7 +3097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: -365}
+  m_AnchoredPosition: {x: -13.9999695, y: -365}
   m_SizeDelta: {x: -610.1, y: 135.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1021939048
@@ -4721,7 +4721,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 0}
+        m_Name: New Texture2D
+        m_Overridden: 0
     m_Bool:
       m_Array: []
 --- !u!4 &1521118898
@@ -6269,9 +6272,9 @@ MonoBehaviour:
   rounds:
   - name: Round 0
     enemies:
-    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
-    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
-    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
+    - {fileID: 6864588792444539405, guid: 59f29213c0cf8ee4e8166fb31d90fdfb, type: 3}
+    - {fileID: 6864588792444539405, guid: 59f29213c0cf8ee4e8166fb31d90fdfb, type: 3}
+    - {fileID: 6864588792444539405, guid: 59f29213c0cf8ee4e8166fb31d90fdfb, type: 3}
     count: 1
     rate: 3
   - name: Round 1

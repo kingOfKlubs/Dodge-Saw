@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerDeathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
     type: 3}
-  _destroyEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
+  _destroyEffect: {fileID: 56193393657161903, guid: ee5c2ed29daa5404eb58693cb027f2c0,
     type: 3}
   _moveDirection: {x: 0, y: 0}
   movement: {fileID: 0}

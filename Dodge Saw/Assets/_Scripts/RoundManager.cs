@@ -129,7 +129,7 @@ public class RoundManager : MonoBehaviour {
             GameObject[] objInScene = GameObject.FindGameObjectsWithTag("GameObject");
             for (int i = 0; i < objInScene.Length; i++)
             {
-                objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), .3f * Time.fixedDeltaTime);
+                objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), .5f * Time.fixedDeltaTime);
                 Destroy(objInScene[i], 3);
             }
         }

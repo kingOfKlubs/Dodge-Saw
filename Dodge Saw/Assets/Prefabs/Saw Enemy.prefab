@@ -4769,8 +4769,9 @@ GameObject:
   - component: {fileID: 4850823928343958026}
   - component: {fileID: 8919407329509624674}
   - component: {fileID: 7794468207655621878}
+  - component: {fileID: 985317799707875891}
   m_Layer: 11
-  m_Name: pentagonMag
+  m_Name: Saw Enemy
   m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4878,8 +4879,8 @@ MonoBehaviour:
   movement: {fileID: 0}
   layer:
     serializedVersion: 2
-    m_Bits: 0
-  _dst: 0
+    m_Bits: 256
+  _dst: 0.5
   _lifeTime: 10
 --- !u!136 &8919407329509624674
 CapsuleCollider:
@@ -4911,3 +4912,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &985317799707875891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6864588792444539405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b656ab67bbbea469466bd51c5eb516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerDeathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
+    type: 3}
+  _destroyEffect: {fileID: 56193393657161903, guid: ee5c2ed29daa5404eb58693cb027f2c0,
+    type: 3}
+  _moveDirection: {x: 0, y: 0}
+  movement: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  _dst: 0.5
+  _lifeTime: 9

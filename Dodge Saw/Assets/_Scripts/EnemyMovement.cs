@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EnemyMovement : MonoBehaviour
 {
 
     public GameObject _playerDeathEffect;
-    public GameObject _destroyEffect;
+    public VisualEffect _destroyEffect;
     public Vector2 _moveDirection;
     public Movement movement;
     public LayerMask layer;
@@ -27,6 +28,11 @@ public class EnemyMovement : MonoBehaviour
 
     public virtual void Initiate()
     {
+        Vector4 BaseColor = GetComponent<MeshRenderer>().sharedMaterials[0].GetVector("_EmissionColor");
+        Vector4 Sparks = GetComponent<MeshRenderer>().sharedMaterials[1].GetVector("_EmissionColor");
+
+        _destroyEffect.SetVector4("Base Color", BaseColor);
+        _destroyEffect.SetVector4("Sparks", Sparks);
         time = _lifeTime;
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
@@ -92,7 +98,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public void Death() {
-        GameObject deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
+        VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);
     }

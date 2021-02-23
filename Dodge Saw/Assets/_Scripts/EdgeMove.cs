@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EdgeMove : EnemyMovement
 {
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         Initiate();
     }
 
@@ -60,5 +61,11 @@ public class EdgeMove : EnemyMovement
         Vector3 newVector = -Vector3.Cross(normal, tangent);
         vector = newVector.normalized * vector.magnitude;
         return vector;
+    }
+
+    public override void Death()
+    {
+
+        base.Death();
     }
 }

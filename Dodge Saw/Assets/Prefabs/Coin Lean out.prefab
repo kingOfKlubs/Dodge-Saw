@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4153283885170204592}
   - component: {fileID: 1852881595377938194}
   - component: {fileID: -5446423383962337080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Coin Lean out
   m_TagString: Untagged
   m_Icon: {fileID: 0}

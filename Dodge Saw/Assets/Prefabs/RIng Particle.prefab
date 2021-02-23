@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6568644143412303889}
   - component: {fileID: 6414946106447980092}
   - component: {fileID: 1389598172122017935}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: RIng Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4153283885170204592}
   - component: {fileID: 1852881595377938194}
   - component: {fileID: -5446423383962337080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Coin Lean In
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ VisualEffect:
       - m_Value: {x: 12.528302, y: 12.528302, z: 12.528302, w: 1}
         m_Name: New Color
         m_Overridden: 1
-      - m_Value: {x: 2.2470589, y: 1.9176471, z: 0, w: 3}
+      - m_Value: {x: 2.2641506, y: 2.2641506, z: 2.2641506, w: 3}
         m_Name: Flash Color
         m_Overridden: 1
     m_Uint:

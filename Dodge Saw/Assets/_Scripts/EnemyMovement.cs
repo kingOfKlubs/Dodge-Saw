@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     public float _lifeTime;
 
     protected Rigidbody _rigid;
-
+    protected bool dead = false;
     GameObject _player;
     Animator anim;
     Touch touch;
@@ -27,12 +27,7 @@ public class EnemyMovement : MonoBehaviour
     float time;
 
     public virtual void Initiate()
-    {
-        Vector4 BaseColor = GetComponent<MeshRenderer>().sharedMaterials[0].GetVector("_EmissionColor");
-        Vector4 Sparks = GetComponent<MeshRenderer>().sharedMaterials[1].GetVector("_EmissionColor");
-
-        _destroyEffect.SetVector4("Base Color", BaseColor);
-        _destroyEffect.SetVector4("Sparks", Sparks);
+    {      
         time = _lifeTime;
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
@@ -97,7 +92,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Death() {
+    public virtual void Death() {
         VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);

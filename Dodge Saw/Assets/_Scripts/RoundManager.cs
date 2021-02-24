@@ -11,13 +11,15 @@ public class RoundManager : MonoBehaviour {
         public GameObject[] enemies;
         public int count;
         public float rate;
+        public float spawnRate;
 
-        public Round(string _name, GameObject[] _enemies, int _count, float _rate)
+        public Round(string _name, GameObject[] _enemies, int _count, float _rate, float _spawnRate)
         {
             name = _name;
             enemies = _enemies;
             count = _count;
             rate = _rate;
+            spawnRate = _spawnRate;
         }
     }
 
@@ -257,7 +259,7 @@ public class RoundManager : MonoBehaviour {
                 }
                 else
                     PreventOverlapingSpawn(round.enemies[i], round.enemies[i].GetComponent<EnemyMovement>()._lifeTime);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(round.spawnRate);
             }
         }
 
@@ -303,8 +305,9 @@ public class RoundManager : MonoBehaviour {
             }
             
             float randomRate = Random.Range(5, 8);// rate between spawns
+            float randomSpawnRate = Random.Range(1, 3);// rate between spawns
 
-            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate));
+            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate, randomSpawnRate));
         }
         else
         {

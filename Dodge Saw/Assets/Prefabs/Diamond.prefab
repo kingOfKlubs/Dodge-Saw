@@ -24,7 +24,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004268094334872393}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.0042153923
   m_Height: 0.007749796
@@ -64,7 +64,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ab0de6c0d49f6374a940bc89900a5b65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab0de6c0d49f6374a940bc89900a5b65,
         type: 3}

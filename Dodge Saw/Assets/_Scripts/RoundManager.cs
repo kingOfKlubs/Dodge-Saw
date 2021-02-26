@@ -61,7 +61,7 @@ public class RoundManager : MonoBehaviour {
     bool shouldChange = false;
     #endregion
 
-    public enum RoundStates { RoundStart, RoundTransition, NewRound, RoundSpawn, RoundWaiting };
+    public enum RoundStates { RoundStart, RoundTransition, NewRound, RoundSpawn, RoundWaiting, RoundTutorial };
 
     //TODO fill rounds dynamically after presets end and bring in preventspawnoverlap method
 
@@ -79,7 +79,7 @@ public class RoundManager : MonoBehaviour {
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
         //enemyAI = FindObjectOfType<EnemyAI>();
         coinSpawning = FindObjectOfType<CoinSpawning>();
-        UpdateStates(RoundStates.RoundStart);
+        
     }
 
     // Update is called once per frame
@@ -108,6 +108,8 @@ public class RoundManager : MonoBehaviour {
                 StartCoroutine(RoundSpawn(rounds[_nextRound]));
                 break;
             case RoundStates.RoundWaiting:
+                break;
+            case RoundStates.RoundTutorial:
                 break;
         }
     }
@@ -196,13 +198,13 @@ public class RoundManager : MonoBehaviour {
         if (_nextRound % 2 == 0)
         {
             altWarp.SetFloat("speed", 0);
-            yield return new WaitForSeconds(transitionTime);
+            yield return new WaitForSeconds(transitionTime - .3f);
             warp.SetFloat("speed", _speed);
         }
         else if(_nextRound%2==1)
         {
             warp.SetFloat("speed", 0);
-            yield return new WaitForSeconds(transitionTime);
+            yield return new WaitForSeconds(transitionTime - .3f);
             altWarp.SetFloat("speed", _speed);
         }
     }

@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private EnemyAI _enemyAI;
+    private RoundManager _roundManager;
     [SerializeField]
     private CoinSpawning _coinSpawning;
     private Movement _movement;
@@ -33,8 +33,9 @@ public class TutorialManager : MonoBehaviour
     {
         if (PlayerPrefsX.GetBool("hasCompletedTutorial") == false)
         {
-            _enemyAI = FindObjectOfType<EnemyAI>();
-            _enemyAI.gameObject.SetActive(false);       //this needs to be reactivated after tutorial is over
+            
+            _roundManager = FindObjectOfType<RoundManager>(); //this needs to be reactivated after tutorial is over
+            if(_roundManager != null) _roundManager._currentRoundState = RoundManager.RoundStates.RoundTutorial;
             _movement = FindObjectOfType<Movement>();
             _coinSpawning = FindObjectOfType<CoinSpawning>();
             _coinSpawning._canSpawn = false;  //this needs to be reactivated after tutorial is over
@@ -43,7 +44,7 @@ public class TutorialManager : MonoBehaviour
         else
         {
             _runTutorial = false;
-            Destroy(this);
+            //Destroy(this);
         }
     }
 
@@ -53,13 +54,11 @@ public class TutorialManager : MonoBehaviour
         if(_runTutorial)
         {
             Tutorial();
-
         }
     }
 
     public void Tutorial()
     {
-
         for (int i = 0; i < _popups.Length; i++)
         {
             if (i == _popUpIndex)
@@ -83,7 +82,7 @@ public class TutorialManager : MonoBehaviour
             TouchPhase phase = _touch.phase;
         }
 
-        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150)
+        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || Input.GetKeyDown("space"))
         {
             _hasTouched = true;
             _popUpIndex++;
@@ -122,7 +121,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if(_popUpIndex == 5)
         {
-            _enemyAI.gameObject.SetActive(true);
+            _roundManager.UpdateStates(RoundManager.RoundStates.RoundStart);
             _coinSpawning._canSpawn = PlayerPrefsX.GetBool("");
             PlayerPrefsX.SetBool("hasCompletedTutorial", true);
             
@@ -139,20 +138,22 @@ public class TutorialManager : MonoBehaviour
     public void ResetTutorial()
     {
         PlayerPrefsX.SetBool("hasCompletedTutorial", false);
+        Debug.Log(PlayerPrefsX.GetBool("hasCompletedTutorial"));
     }
 
     public void CompleteTutorial()
     {
         PlayerPrefsX.SetBool("hasCompletedTutorial", true);
+        Debug.Log(PlayerPrefsX.GetBool("hasCompletedTutorial"));
     }
 
     IEnumerator WaitForRing()
     {
-        ParticleSystem RingClone = Instantiate(_enemyAI.ring, _position, Quaternion.identity);
+        ParticleSystem RingClone = Instantiate(_roundManager.ring, _position, Quaternion.identity);
     
         yield return new WaitForSeconds(2);
 
-        GameObject EnemyClone = Instantiate(_enemyAI.enemies[1], _position, Quaternion.identity);
+        GameObject EnemyClone = Instantiate(_roundManager.enemyTypes[0], _position, Quaternion.identity);
         Destroy(EnemyClone, 15f);
         Destroy(RingClone, 3);
         

@@ -10,6 +10,8 @@ public class TutorialManager : MonoBehaviour
     public float _timeToWait = 0;
     public GameObject[] _popups;
     public bool _hasCollectedCoin;
+    public ParticleSystem ring;
+    public GameObject enemy;
     #endregion
 
     #region Private Variables
@@ -25,6 +27,9 @@ public class TutorialManager : MonoBehaviour
     private Vector2 _position = new Vector2(1, 1);
     private bool _runTutorial;
     private IEnumerator coroutine;
+    Vector2 topRange;
+    Vector2 bottomRange;
+    private FindingDimensions findingDimensions = new FindingDimensions();
     #endregion
 
 
@@ -35,7 +40,6 @@ public class TutorialManager : MonoBehaviour
         {
             
             _roundManager = FindObjectOfType<RoundManager>(); //this needs to be reactivated after tutorial is over
-            if(_roundManager != null) _roundManager._currentRoundState = RoundManager.RoundStates.RoundTutorial;
             _movement = FindObjectOfType<Movement>();
             _coinSpawning = FindObjectOfType<CoinSpawning>();
             _coinSpawning._canSpawn = false;  //this needs to be reactivated after tutorial is over
@@ -52,7 +56,7 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if(_runTutorial)
-        {
+        { 
             Tutorial();
         }
     }
@@ -82,12 +86,11 @@ public class TutorialManager : MonoBehaviour
             TouchPhase phase = _touch.phase;
         }
 
-        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || Input.GetKeyDown("space"))
-        {
+        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || _popUpIndex == 0 && Input.GetKeyDown("space")) {
             _hasTouched = true;
             _popUpIndex++;
         }
-        else if (_popUpIndex == 1 && _movement._distance >= 150)
+        else if (_popUpIndex == 1 && _movement._distance >= 150 || _popUpIndex == 1 && Input.GetKeyDown(KeyCode.E))
         {
             _popUpIndex++;
         }
@@ -118,20 +121,23 @@ public class TutorialManager : MonoBehaviour
         {
             coroutine = WaitForTime(5);
             StartCoroutine(coroutine);
+            oneTimeCall = false;
         }
         else if(_popUpIndex == 5)
         {
-            _roundManager.UpdateStates(RoundManager.RoundStates.RoundStart);
-            _coinSpawning._canSpawn = PlayerPrefsX.GetBool("");
-            PlayerPrefsX.SetBool("hasCompletedTutorial", true);
-            
+            if (!oneTimeCall) {
+                PlayerPrefsX.SetBool("hasCompletedTutorial", true);
+                _roundManager.UpdateStates(RoundManager.RoundStates.RoundStart);
+                _runTutorial = false;
+                oneTimeCall = true;
+            }
         }
     }
 
 
     public void SpawnEnemies()
     {
-        _position = new Vector2(Random.Range(-2f, 2f), Random.Range(-4.5f, 4.5f));
+        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
         StartCoroutine("WaitForRing");
     }
 
@@ -149,12 +155,12 @@ public class TutorialManager : MonoBehaviour
 
     IEnumerator WaitForRing()
     {
-        ParticleSystem RingClone = Instantiate(_roundManager.ring, _position, Quaternion.identity);
+        ParticleSystem RingClone = Instantiate(ring, _position, Quaternion.identity);
     
         yield return new WaitForSeconds(2);
 
-        GameObject EnemyClone = Instantiate(_roundManager.enemyTypes[0], _position, Quaternion.identity);
-        Destroy(EnemyClone, 15f);
+        GameObject EnemyClone = Instantiate(enemy, _position, Quaternion.identity);
+        Destroy(EnemyClone, 5f);
         Destroy(RingClone, 3);
         
     }
@@ -162,6 +168,7 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         _popUpIndex++;
+        
     }
 }
 

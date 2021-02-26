@@ -3799,7 +3799,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 37.9, y: -79.8}
+  m_AnchoredPosition: {x: 37.9, y: -79.799805}
   m_SizeDelta: {x: 662.2, y: 88.19995}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1243325009
@@ -4560,6 +4560,8 @@ MonoBehaviour:
   - {fileID: 822707920}
   - {fileID: 94523736}
   _hasCollectedCoin: 0
+  ring: {fileID: 8824401991475551633, guid: 153eeb2f3bf07410fb4665ba5e7c9ad8, type: 3}
+  enemy: {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
   _coinSpawning: {fileID: 423090870}
   _popUpIndex: 0
 --- !u!114 &1494035865
@@ -6252,7 +6254,7 @@ MonoBehaviour:
   rounds:
   - name: Round 0
     enemies:
-    - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
+    - {fileID: 2839828342001713647, guid: 04326f01724374bfaa495eceea431e86, type: 3}
     - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
     - {fileID: 3613067136226459466, guid: 875b856ad6c2d443b899a488386a002c, type: 3}
     count: 1

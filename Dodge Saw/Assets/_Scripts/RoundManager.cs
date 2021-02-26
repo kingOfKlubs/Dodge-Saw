@@ -79,7 +79,11 @@ public class RoundManager : MonoBehaviour {
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
         //enemyAI = FindObjectOfType<EnemyAI>();
         coinSpawning = FindObjectOfType<CoinSpawning>();
-        
+        if(PlayerPrefsX.GetBool("hasCompletedTutorial") == false) {
+            UpdateStates(RoundStates.RoundTutorial);    
+        }else
+            UpdateStates(RoundStates.RoundStart);
+
     }
 
     // Update is called once per frame

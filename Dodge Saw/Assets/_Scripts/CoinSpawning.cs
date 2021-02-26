@@ -30,7 +30,7 @@ public class CoinSpawning : MonoBehaviour
     int attempts = 0;
     Vector2 topRange ;
     Vector2 bottomRange;
-    
+
     private void Start()
     {
         topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
@@ -39,14 +39,14 @@ public class CoinSpawning : MonoBehaviour
         time = _startTime;
         bTime = _startTimeBronze;
         gTime = _startTimeGold;
-        _canSpawn = PlayerPrefsX.GetBool("hasCompletedTutorial");
     }
 
     // Update is called once per frame
     void Update()
     {
+        _canSpawn = PlayerPrefsX.GetBool("hasCompletedTutorial");
         //KeepInBounds();
-        if(_canSpawn)
+        if (_canSpawn)
             Timer();
     }
 

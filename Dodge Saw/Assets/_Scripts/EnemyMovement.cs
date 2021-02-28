@@ -16,18 +16,18 @@ public class EnemyMovement : MonoBehaviour
 
     protected Rigidbody _rigid;
     protected bool dead = false;
-    GameObject _player;
-    Animator anim;
-    Touch touch;
-    Transform playerPos;
+    protected GameObject _player;
+    protected Animator anim;
+    protected Touch touch;
+    protected Transform playerPos;
     Vector2 _velocity;
     Vector2 _direction;
     Ray _ray;
-    float _moveSpeed;
+    protected float _moveSpeed;
     float time;
 
     public virtual void Initiate()
-    {      
+    {
         time = _lifeTime;
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();

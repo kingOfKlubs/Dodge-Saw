@@ -202,13 +202,13 @@ public class RoundManager : MonoBehaviour {
         if (_nextRound % 2 == 0)
         {
             altWarp.SetFloat("speed", 0);
-            yield return new WaitForSeconds(transitionTime - .3f);
+            yield return new WaitForSeconds(transitionTime - .5f);
             warp.SetFloat("speed", _speed);
         }
         else if(_nextRound%2==1)
         {
             warp.SetFloat("speed", 0);
-            yield return new WaitForSeconds(transitionTime - .3f);
+            yield return new WaitForSeconds(transitionTime - .5f);
             altWarp.SetFloat("speed", _speed);
         }
     }

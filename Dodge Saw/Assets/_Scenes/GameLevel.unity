@@ -6488,9 +6488,11 @@ MonoBehaviour:
   rounds:
   - name: Round 0
     enemies:
-    - {fileID: 814122792940733385, guid: 72b444496939dff44957f00988a7048c, type: 3}
-    - {fileID: 814122792940733385, guid: 72b444496939dff44957f00988a7048c, type: 3}
-    - {fileID: 7901540252842621419, guid: 6f32cd06cd3edf14686af60e75d79cde, type: 3}
+    - {fileID: 1519446728643734817, guid: 247f77edc3e83ef4eb3a737a39e83b5c, type: 3}
+    - {fileID: 1519446728643734817, guid: 247f77edc3e83ef4eb3a737a39e83b5c, type: 3}
+    - {fileID: 1519446728643734817, guid: 247f77edc3e83ef4eb3a737a39e83b5c, type: 3}
+    - {fileID: 1519446728643734817, guid: 247f77edc3e83ef4eb3a737a39e83b5c, type: 3}
+    - {fileID: 1519446728643734817, guid: 247f77edc3e83ef4eb3a737a39e83b5c, type: 3}
     count: 1
     rate: 6
     spawnRate: 0

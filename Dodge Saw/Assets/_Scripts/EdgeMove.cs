@@ -33,13 +33,17 @@ public class EdgeMove : EnemyMovement
         Ray _ray;
         _ray = new Ray(transform.position, _moveDirection);
         RaycastHit _hit;
+        Debug.DrawLine(transform.position, _ray.direction);
         if (Physics.Raycast(_ray, out _hit, _dst, layer))
         {
-            Debug.DrawLine(transform.position, _ray.direction);
             _rigid.velocity = Align(_moveDirection, _hit.normal);
-            float angle = Vector2.Angle(_moveDirection, _hit.normal);
+            Debug.Log("velocity is " + _rigid.velocity);
+            if(_rigid.velocity == new Vector3(0, 0, 0))
+            {
+                _rigid.velocity = new Vector3(0, 1, 0);
+            }
             _moveDirection = _rigid.velocity;
-            Debug.Log("_moveDirection is " + _moveDirection);
+            //float angle = Vector2.Angle(_moveDirection, _hit.normal);
         }
     }
 

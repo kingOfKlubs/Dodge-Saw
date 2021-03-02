@@ -36,9 +36,7 @@ public class SplitMove : EnemyMovement
         if (Physics.Raycast(_ray, out _hit, _dst, layer))
         {
             GameObject DiamondClone1 = Instantiate(miniDiamond, transform.position, Quaternion.identity);
-            DiamondClone1.transform.localScale = this.transform.localScale / 1.3f;
             GameObject DiamondClone2 = Instantiate(miniDiamond, transform.position, Quaternion.identity);
-            DiamondClone2.transform.localScale = this.transform.localScale / 1.3f;
             Destroy(this.gameObject);
         }
     }

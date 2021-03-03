@@ -86,7 +86,7 @@ public class TutorialManager : MonoBehaviour
             TouchPhase phase = _touch.phase;
         }
 
-        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || _popUpIndex == 0 && Input.GetKeyDown("space")) {
+        if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || _popUpIndex == 0 && Input.GetKeyUp("space")) {
             _hasTouched = true;
             _popUpIndex++;
         }

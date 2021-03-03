@@ -86,6 +86,11 @@ public class CoinSpawning : MonoBehaviour
 
     }
 
+    public void TutorialSpawnCoin(Vector2 pos, GameObject coinType)
+    {
+        StartCoroutine(SpawnCoins(pos, coinType));
+    }
+
     public void PreventOverlapingSpawn(GameObject coinType) {
 
         bool canSpawnHere = false;

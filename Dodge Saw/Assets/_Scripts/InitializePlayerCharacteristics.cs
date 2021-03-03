@@ -76,8 +76,6 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         alphaKey[2].time = 1.0f;
 
         gradient.SetKeys(colorKey, alphaKey);
-
-       
     }
     public static void SetWarpColor()
     {

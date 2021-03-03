@@ -13,6 +13,8 @@ public class TutorialManager : MonoBehaviour
     public ParticleSystem ring;
     public GameObject enemy;
     public GameObject panel;
+    public GameObject HoldAnim;
+    public GameObject SwipeAnim;
     #endregion
 
     #region Private Variables
@@ -45,6 +47,7 @@ public class TutorialManager : MonoBehaviour
             _coinSpawning = FindObjectOfType<CoinSpawning>();
             _coinSpawning._canSpawn = false;  //this needs to be reactivated after tutorial is over
             _runTutorial = true;
+            HoldAnim.SetActive(true);
         }
         else
         {
@@ -89,19 +92,23 @@ public class TutorialManager : MonoBehaviour
             TouchPhase phase = _touch.phase;
         }
 
+            
         if (_popUpIndex == 0 && _touch.phase == TouchPhase.Ended && _movement._distance <= 150 || _popUpIndex == 0 && Input.GetKeyUp("space")) {
             _hasTouched = true;
+            HoldAnim.SetActive(false);
+            SwipeAnim.SetActive(true);
             _popUpIndex++;
         }
         else if (_popUpIndex == 1 && _movement._distance >= 150 || _popUpIndex == 1 && Input.GetKeyDown(KeyCode.E))
         {
+            SwipeAnim.SetActive(false);
             _popUpIndex++;
         }
         else if (_popUpIndex == 2 && !_hasCollectedCoin)
         {
             if (!oneTimeCall)
             {
-                _coinSpawning.PreventOverlapingSpawn(_coinSpawning._coin);
+                _coinSpawning.TutorialSpawnCoin(new Vector2(-1.68f, 0), _coinSpawning._coin);
                 oneTimeCall = true;
             }
         }
@@ -141,7 +148,7 @@ public class TutorialManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
+        _position = new Vector2(1.85f, -2.61f);
         StartCoroutine("WaitForRing");
     }
 

@@ -41,6 +41,7 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         PopulateShop();
     }
 
@@ -144,6 +145,7 @@ public class StoreManager : MonoBehaviour
         for (int i = 0; i < shopPlayerItems.Length; i++)
         {
             ShopItem si = shopPlayerItems[i];
+            si.backgroundImage = Resources.Load<Sprite>("store Icon Background");
             GameObject shopItemObject = Instantiate(shopItemPrefab, PlayerPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct

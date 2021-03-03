@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
                 movement._coolDownImageLarge.gameObject.SetActive(false);
         }
 
-        if (CrossPlatformInputManager.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_isGamePaused)
             {
@@ -43,12 +43,18 @@ public class PauseMenu : MonoBehaviour
     }
     public void Pause()
     {
-        _pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        _isGamePaused = true;
-        if(_optionsUI.activeSelf == true)
+        if (Movement.Death)
         {
-            _optionsUI.SetActive(false);
+            Debug.Log("Player is dead. Do nothing");
+        }
+        else {
+            _pauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            _isGamePaused = true;
+            if(_optionsUI.activeSelf == true)
+            {
+                _optionsUI.SetActive(false);
+            }
         }
     }
     public void Options()

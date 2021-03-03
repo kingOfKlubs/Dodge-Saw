@@ -12,6 +12,7 @@ public class TutorialManager : MonoBehaviour
     public bool _hasCollectedCoin;
     public ParticleSystem ring;
     public GameObject enemy;
+    public GameObject panel;
     #endregion
 
     #region Private Variables
@@ -48,6 +49,7 @@ public class TutorialManager : MonoBehaviour
         else
         {
             _runTutorial = false;
+            panel.SetActive(false);
             //Destroy(this);
         }
     }
@@ -56,7 +58,8 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
         if(_runTutorial)
-        { 
+        {
+            panel.SetActive(true);
             Tutorial();
         }
     }
@@ -128,6 +131,7 @@ public class TutorialManager : MonoBehaviour
             if (!oneTimeCall) {
                 PlayerPrefsX.SetBool("hasCompletedTutorial", true);
                 _roundManager.UpdateStates(RoundManager.RoundStates.RoundStart);
+                panel.SetActive(false);
                 _runTutorial = false;
                 oneTimeCall = true;
             }

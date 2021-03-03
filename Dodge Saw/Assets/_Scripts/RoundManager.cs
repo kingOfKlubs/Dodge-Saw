@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using TMPro;
 
 public class RoundManager : MonoBehaviour {
 
@@ -51,6 +52,7 @@ public class RoundManager : MonoBehaviour {
     Vector2 topRange;
     Vector2 bottomRange;
     Vector2 _position;
+    TextMeshProUGUI _roundCounter;
     float searchCountdown = 3;
     float transitionTime = 0;
     int _round = 0;
@@ -78,9 +80,10 @@ public class RoundManager : MonoBehaviour {
         transitionTime = delay + PortalAnimDuration;
         topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
-        //enemyAI = FindObjectOfType<EnemyAI>();
         coinSpawning = FindObjectOfType<CoinSpawning>();
-        if(PlayerPrefsX.GetBool("hasCompletedTutorial") == false) {
+        _roundCounter = FindObjectOfType<RoundCounter>().GetComponent<TextMeshProUGUI>();
+        _roundCounter.text = (_nextRound + 1).ToString();
+        if (PlayerPrefsX.GetBool("hasCompletedTutorial") == false) {
             UpdateStates(RoundStates.RoundTutorial);    
         }else
             UpdateStates(RoundStates.RoundStart);
@@ -142,17 +145,6 @@ public class RoundManager : MonoBehaviour {
                 Destroy(objInScene[i], 3);
             }
         }
-        //if(roundCountDown <= 0)
-        //{
-        //    if (_currentRoundState != RoundStates.RoundSpawn)
-        //    {
-        //        UpdateStates(RoundStates.RoundSpawn);
-        //    }
-        //}
-        //else
-        //{
-        //    roundCountDown -= Time.deltaTime;
-        //}
     }
 
     // reactivates EnemyAI 
@@ -165,21 +157,12 @@ public class RoundManager : MonoBehaviour {
                 coinSpawning.gameObject.SetActive(true);
             };
         }
-        //if (enemyAI != null && coinSpawning != null)
-        //{
-        //    if (enemyAI.gameObject.activeSelf == false || coinSpawning.gameObject.activeSelf == false)
-        //    {
-        //        enemyAI.gameObject.SetActive(true);
-        //        coinSpawning.gameObject.SetActive(true);
-        //    };
-        //}
         UpdateStates(RoundStates.RoundSpawn);
     }
 
     // begins the round transition
     void RoundTransition()
     {
-        //enemyAI.gameObject.SetActive(false);
         coinSpawning.gameObject.SetActive(false);
         StartCoroutine(UpdateEffects(warp, altwarp)); //TODO make this swap 
         StartCoroutine(NewRound());
@@ -191,6 +174,7 @@ public class RoundManager : MonoBehaviour {
         shouldChange = true;
 
         yield return new WaitForSeconds(delay);
+        _roundCounter.text = (_nextRound + 1).ToString();
         Portal.SetActive(true);
 
         yield return new WaitForSeconds(PortalAnimDuration);

@@ -62,6 +62,7 @@ public class miniDiamond : MonoBehaviour
         }
 
         _rigid.velocity = new Vector2(_moveDirection.x, _moveDirection.y) * _moveSpeed;
+        DeleteOutOfBounds();
     }
 
     public virtual void OnTriggerEnter(Collider collision)
@@ -81,5 +82,13 @@ public class miniDiamond : MonoBehaviour
         VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);
+    }
+
+    public void DeleteOutOfBounds() {
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f)) {
+            Debug.Log("should be calling death here");
+            Death();
+        }
     }
 }

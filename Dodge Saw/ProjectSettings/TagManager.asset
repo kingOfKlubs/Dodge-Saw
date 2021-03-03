@@ -14,6 +14,11 @@ TagManager:
   - TimerUI
   - Enemy
   - GameObject
+  - Bottom Border
+  - Top Border
+  - Right Border
+  - Left Border
+  - Coin
   layers:
   - Default
   - TransparentFX

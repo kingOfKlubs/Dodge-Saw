@@ -58,6 +58,7 @@ public class RoundManager : MonoBehaviour {
     int _previousRound = 0;
     int index = 1;
     int attempts = 0;
+    int spawnAmountCounter = 1;
     bool shouldChange = false;
     #endregion
 
@@ -137,7 +138,7 @@ public class RoundManager : MonoBehaviour {
             GameObject[] objInScene = GameObject.FindGameObjectsWithTag("GameObject");
             for (int i = 0; i < objInScene.Length; i++)
             {
-                objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), .5f * Time.fixedDeltaTime);
+                objInScene[i].transform.position = Vector3.Lerp(objInScene[i].transform.position, new Vector3(objInScene[i].transform.position.x, objInScene[i].transform.position.y, objInScene[i].transform.position.z - 10), .7f * Time.fixedDeltaTime);
                 Destroy(objInScene[i], 3);
             }
         }
@@ -296,8 +297,8 @@ public class RoundManager : MonoBehaviour {
         {
             Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
             // instead make a new round dynamically
-            int randomCount = _nextRound; // this will probably need to be chaged if we have more than 3 presets
-            if(_nextRound > 5) {
+            int randomCount = ++spawnAmountCounter; // this will probably need to be chaged if we have more than 3 presets
+            if(spawnAmountCounter > 5) {
                 randomCount = 5;
             }
             _nextRound++;

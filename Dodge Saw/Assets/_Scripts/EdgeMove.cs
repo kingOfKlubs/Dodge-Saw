@@ -33,17 +33,27 @@ public class EdgeMove : EnemyMovement
         Ray _ray;
         _ray = new Ray(transform.position, _moveDirection);
         RaycastHit _hit;
-        Debug.DrawLine(transform.position, _ray.direction);
         if (Physics.Raycast(_ray, out _hit, _dst, layer))
         {
             _rigid.velocity = Align(_moveDirection, _hit.normal);
-            Debug.Log("velocity is " + _rigid.velocity);
             if(_rigid.velocity == new Vector3(0, 0, 0))
             {
-                _rigid.velocity = new Vector3(0, 1, 0);
+                switch (_hit.collider.tag) {
+                    case "Bottom Border":
+                        _rigid.velocity = new Vector3(1, 0, 0);
+                        break;
+                    case "Right Border":
+                        _rigid.velocity = new Vector3(0, 1, 0);
+                        break;
+                    case "Left Border":
+                        _rigid.velocity = new Vector3(0, -1, 0);
+                        break;
+                    case "Top Border":
+                        _rigid.velocity = new Vector3(-1, 0, 0);
+                        break;
+                }
             }
             _moveDirection = _rigid.velocity;
-            //float angle = Vector2.Angle(_moveDirection, _hit.normal);
         }
     }
 
@@ -69,7 +79,11 @@ public class EdgeMove : EnemyMovement
 
     public override void Death()
     {
+        Vector4 BaseColor = GetComponent<MeshRenderer>().sharedMaterials[0].GetVector("_EmissionColor");
+        Vector4 Sparks = GetComponent<MeshRenderer>().sharedMaterials[0].GetVector("_EmissionColor");
 
+        _destroyEffect.SetVector4("Base Color", BaseColor);
+        _destroyEffect.SetVector4("Sparks", Sparks);
         base.Death();
     }
 }

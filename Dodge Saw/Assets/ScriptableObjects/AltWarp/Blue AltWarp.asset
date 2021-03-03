@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blue AltWarp
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
-  texture: {fileID: 8400000, guid: 9b712b43b32514659a15009809fd2a0c, type: 2}
+  texture: {fileID: 0}
   color: {r: 0, g: 0.11642933, b: 1, a: 1}
   color2: {r: 0, g: 0.034409046, b: 1, a: 1}
   gradient:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Default Warp
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
-  texture: {fileID: 8400000, guid: 7ddff5de918294f659520640d8633bbc, type: 2}
+  texture: {fileID: 0}
   color: {r: 0, g: 0.5137255, b: 0.8509804, a: 1}
   color2: {r: 1, g: 0.5019608, b: 0, a: 1}
   gradient:
@@ -46,11 +46,11 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _itemName: Default
-  _buttonText: Unequip
+  _buttonText: Equip
   _layer:
     serializedVersion: 2
     m_Bits: 0
   cost: 0
-  equipped: 1
+  equipped: 0
   purchased: 1
   itemType: 3

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using TMPro;
+using UnityEngine.Playables;
 
 public class RoundManager : MonoBehaviour {
 
@@ -172,8 +173,10 @@ public class RoundManager : MonoBehaviour {
     {
         _previousRound = _round;
         shouldChange = true;
-
+        PlayableDirector playable = _roundCounter.GetComponent<PlayableDirector>();
+        playable.Play();
         yield return new WaitForSeconds(delay);
+        playable.Stop();
         _roundCounter.text = (_nextRound + 1).ToString();
         Portal.SetActive(true);
 

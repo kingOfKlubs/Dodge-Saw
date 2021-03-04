@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     public Image _coolDownImageLarge;
     public LayerMask border;
     public static bool Death;
+    public GameObject _deathEffect;
     #endregion
 
     #region Private Variables

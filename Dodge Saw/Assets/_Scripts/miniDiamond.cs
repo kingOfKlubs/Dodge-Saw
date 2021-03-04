@@ -71,7 +71,7 @@ public class miniDiamond : MonoBehaviour
         {
             Movement.Death = true;
             Destroy(collision.gameObject);
-            GameObject clone = Instantiate(_playerDeathEffect, collision.transform.position, collision.transform.rotation);
+            GameObject clone = Instantiate(collision.GetComponent<Movement>()._deathEffect, collision.transform.position, collision.transform.rotation);
             FindObjectOfType<AudioManager>().Play("PlayerCrash");
             Destroy(clone, 3);
         }
@@ -79,6 +79,12 @@ public class miniDiamond : MonoBehaviour
 
     public virtual void Death()
     {
+
+        Vector4 BaseColor = GetComponent<MeshRenderer>().sharedMaterials[0].GetVector("_EmissionColor");
+        Vector4 Sparks = GetComponent<MeshRenderer>().sharedMaterials[1].GetVector("_EmissionColor");
+
+        _destroyEffect.SetVector4("Base Color", BaseColor);
+        _destroyEffect.SetVector4("Sparks", Sparks);
         VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);

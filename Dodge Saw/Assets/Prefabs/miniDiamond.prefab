@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 8210290122493469625}
   - component: {fileID: 2456628773144843538}
   - component: {fileID: 1130675503402131397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: miniDiamond
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

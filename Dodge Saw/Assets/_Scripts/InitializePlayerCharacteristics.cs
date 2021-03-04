@@ -29,7 +29,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
     GradientColorKey[] colorKey;
     GradientAlphaKey[] alphaKey;
 
-    EnemyAI enemyAi;
+    RoundManager roundManager;
 
     
 
@@ -56,12 +56,11 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
             SetTrailColor();
             _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
-
+            SetDeathColor();
             //SetWarpColor();
             //SetEnemiesColor();
             //enemyAi = FindObjectOfType<EnemyAI>();
             //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
-            //SetDeathColor();
         }
     }
 
@@ -97,41 +96,41 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
         gradient.SetKeys(colorKey, alphaKey);
     }
-    public static void SetWarpColor()
-    {
-        if (GameObject.FindGameObjectWithTag("Warp") != null)
-        {
-            _warpParticles1 = GameObject.FindGameObjectWithTag("Warp").GetComponent<ParticleSystem>().main;
-            _warpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2"));
+    //public static void SetWarpColor()
+    //{
+    //    if (GameObject.FindGameObjectWithTag("Warp") != null)
+    //    {
+    //        _warpParticles1 = GameObject.FindGameObjectWithTag("Warp").GetComponent<ParticleSystem>().main;
+    //        _warpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2"));
 
-        }
-        if (GameObject.FindGameObjectWithTag("Warp1") != null)
-        {
-            _warpParticles2 = GameObject.FindGameObjectWithTag("Warp1").GetComponent<ParticleSystem>().main;
-            _warpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2")); 
-
-
-        }
-        if (GameObject.FindGameObjectWithTag("AltWarp") != null)
-        {
-            _altWarpParticles1 = GameObject.FindGameObjectWithTag("AltWarp").GetComponent<ParticleSystem>().main;
-            _altWarpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
+    //    }
+    //    if (GameObject.FindGameObjectWithTag("Warp1") != null)
+    //    {
+    //        _warpParticles2 = GameObject.FindGameObjectWithTag("Warp1").GetComponent<ParticleSystem>().main;
+    //        _warpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2")); 
 
 
-        }
-        if (GameObject.FindGameObjectWithTag("AltWarp1") != null)
-        {
-            _altWarpParticles2 = GameObject.FindGameObjectWithTag("AltWarp1").GetComponent<ParticleSystem>().main;
-            _altWarpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
+    //    }
+    //    if (GameObject.FindGameObjectWithTag("AltWarp") != null)
+    //    {
+    //        _altWarpParticles1 = GameObject.FindGameObjectWithTag("AltWarp").GetComponent<ParticleSystem>().main;
+    //        _altWarpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
 
 
-        }
-    }
+    //    }
+    //    if (GameObject.FindGameObjectWithTag("AltWarp1") != null)
+    //    {
+    //        _altWarpParticles2 = GameObject.FindGameObjectWithTag("AltWarp1").GetComponent<ParticleSystem>().main;
+    //        _altWarpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
 
-    public void SetEnemiesColor()
-    {
-        _enemyColor = PlayerPrefsX.GetColor("EnemyColor");
-    }
+
+    //    }
+    //}
+
+    //public void SetEnemiesColor()
+    //{
+    //    _enemyColor = PlayerPrefsX.GetColor("EnemyColor");
+    //}
 
     public void SetDeathColor()
     {
@@ -157,27 +156,29 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
         gradient.SetKeys(colorKey, alphaKey);
 
-        ParticleSystem[] deathGradient = enemyAi.enemies[0].GetComponent<Static>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
+
+
+        ParticleSystem[] deathGradient = _playerPrefab.GetComponent<Movement>()._deathEffect.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < deathGradient.Length; i++)
         {
             ParticleSystem.ColorOverLifetimeModule deathColor;
             deathColor = deathGradient[i].colorOverLifetime;
             deathColor.color = gradient;
         }
-        ParticleSystem[] deathGradient1 = enemyAi.enemies[1].GetComponent<Attack>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
-        for (int i = 0; i < deathGradient1.Length; i++)
-        {
-            ParticleSystem.ColorOverLifetimeModule deathColor;
-            deathColor = deathGradient1[i].colorOverLifetime;
-            deathColor.color = gradient;
-        }
-        ParticleSystem[] deathGradient2 = enemyAi.enemies[2].GetComponent<Bounce>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
-        for (int i = 0; i < deathGradient2.Length; i++)
-        {
-            ParticleSystem.ColorOverLifetimeModule deathColor;
-            deathColor = deathGradient2[i].colorOverLifetime;
-            deathColor.color = gradient;
-        }
+        //ParticleSystem[] deathGradient1 = enemyAi.enemies[1].GetComponent<Attack>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
+        //for (int i = 0; i < deathGradient1.Length; i++)
+        //{
+        //    ParticleSystem.ColorOverLifetimeModule deathColor;
+        //    deathColor = deathGradient1[i].colorOverLifetime;
+        //    deathColor.color = gradient;
+        //}
+        //ParticleSystem[] deathGradient2 = enemyAi.enemies[2].GetComponent<Bounce>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
+        //for (int i = 0; i < deathGradient2.Length; i++)
+        //{
+        //    ParticleSystem.ColorOverLifetimeModule deathColor;
+        //    deathColor = deathGradient2[i].colorOverLifetime;
+        //    deathColor.color = gradient;
+        //}
     }
 
    

@@ -79,6 +79,13 @@ public class StoreManager : MonoBehaviour
             PlayerPrefs.SetFloat("_playerColor.g", item.color.g);
             PlayerPrefs.SetFloat("_playerColor.b", item.color.b);
 
+            Color _playerColor = Color.clear;
+            _playerColor.r = PlayerPrefs.GetFloat("_playerColor.r");
+            _playerColor.g = PlayerPrefs.GetFloat("_playerColor.g");
+            _playerColor.b = PlayerPrefs.GetFloat("_playerColor.b");
+
+            player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+
         }
         if(item.itemType == ShopItem.ItemType.Trail)
         {
@@ -97,7 +104,6 @@ public class StoreManager : MonoBehaviour
             PlayerPrefsX.SetColor("_trailGradient1", item.gradient.colorKeys[0].color);
             PlayerPrefsX.SetColor("_trailGradient2", item.gradient.colorKeys[1].color); 
             PlayerPrefsX.SetColor("_trailGradient3", item.gradient.colorKeys[2].color);
-
         }
         if (item.itemType == ShopItem.ItemType.Warp)
         {
@@ -154,14 +160,14 @@ public class StoreManager : MonoBehaviour
 
     public void Unequip(ShopItem item)
     {
-        if(item.itemType == ShopItem.ItemType.Player)
-        {
-           player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", Color.red);
-        }
-        if (item.itemType == ShopItem.ItemType.Trail)
-        {
-            Debug.Log("Unequipped new trial");
-        }
+        //if(item.itemType == ShopItem.ItemType.Player)
+        //{
+        //   player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", Color.red);
+        //}
+        //if (item.itemType == ShopItem.ItemType.Trail)
+        //{
+        //    Debug.Log("Unequipped new trial");
+        //}
         item.backgroundImage = UnequippedItemBackground;
         item.equipped = false;
         item._buttonText = "Equip";
@@ -206,7 +212,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
@@ -248,7 +254,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
@@ -289,7 +295,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
@@ -330,7 +336,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
@@ -371,7 +377,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
@@ -412,7 +418,7 @@ public class StoreManager : MonoBehaviour
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)

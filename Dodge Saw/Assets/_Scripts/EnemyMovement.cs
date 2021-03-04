@@ -32,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _player = GameObject.FindGameObjectWithTag("Player");
+
         if (_playerDeathEffect != null)
         {
             if (_player != null)
@@ -86,7 +87,7 @@ public class EnemyMovement : MonoBehaviour
         {
             Movement.Death = true;
             Destroy(collision.gameObject);
-            GameObject clone = Instantiate(_playerDeathEffect, collision.transform.position, collision.transform.rotation);
+            GameObject clone = Instantiate(collision.GetComponent<Movement>()._deathEffect, collision.transform.position, collision.transform.rotation);
             FindObjectOfType<AudioManager>().Play("PlayerCrash");
             Destroy(clone, 3);
         }

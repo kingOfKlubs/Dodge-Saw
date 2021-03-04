@@ -117,14 +117,15 @@ public class SceneChanger : MonoBehaviour
             {
                 if(Time.timeScale >= .3f)
                 {
-                    Time.timeScale -= Time.fixedDeltaTime * .6f;
+                    Time.timeScale -= Time.fixedDeltaTime * .3f;
                     Debug.Log(Time.timeScale);
                 }
                 else 
                 {
                     Time.timeScale = 0;
                 }
-                _gameOverUI.SetActive(true);
+                if(Time.timeScale == 0)
+                    _gameOverUI.SetActive(true);
                 Movement movement = FindObjectOfType<Movement>();
                 if(movement != null)
                     movement._coolDownImageLarge.gameObject.SetActive(false);

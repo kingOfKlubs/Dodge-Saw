@@ -25,6 +25,7 @@ public class Attack : EnemyMovement
     public override void Move()
     {
         base.Move();
+        DeleteOutOfBounds();
     }
 
     public override void Death()
@@ -35,5 +36,15 @@ public class Attack : EnemyMovement
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
         base.Death();
+    }
+
+    public void DeleteOutOfBounds()
+    {
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f))
+        {
+            Debug.Log("should be calling death here");
+            Death();
+        }
     }
 }

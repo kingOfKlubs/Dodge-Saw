@@ -115,6 +115,15 @@ public class SceneChanger : MonoBehaviour
         {
             if (Movement.Death == true)
             {
+                if(Time.timeScale >= .3f)
+                {
+                    Time.timeScale -= Time.fixedDeltaTime * .6f;
+                    Debug.Log(Time.timeScale);
+                }
+                else 
+                {
+                    Time.timeScale = 0;
+                }
                 _gameOverUI.SetActive(true);
                 Movement movement = FindObjectOfType<Movement>();
                 if(movement != null)

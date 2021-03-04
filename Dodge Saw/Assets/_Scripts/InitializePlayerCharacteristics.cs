@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 public class InitializePlayerCharacteristics : MonoBehaviour
 {
     public GameObject _playerPrefab;
+    public Color[] defaultColor;
+    public Gradient defaultGradient;
 
     public static Color _playerColor;
 
@@ -28,21 +31,38 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
     EnemyAI enemyAi;
 
-    GameObject[] TimerUI;
+    
 
     // Start is called before the first frame update
     void Awake()
     {
-        SetPlayerColor();
-        _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
-        SetTrailColor();
-        _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
-        SetUIColor();
-        //SetWarpColor();
-        //SetEnemiesColor();
-        //enemyAi = FindObjectOfType<EnemyAI>();
-        //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
-        //SetDeathColor();
+        if (!PlayerPrefsX.GetBool("HasPlayed"))
+        {
+            _playerColor = defaultColor[0];
+            PlayerPrefs.SetFloat("_playerColor.r", _playerColor.r);
+            PlayerPrefs.SetFloat("_playerColor.g", _playerColor.g);
+            PlayerPrefs.SetFloat("_playerColor.b", _playerColor.b);
+            _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+
+            PlayerPrefsX.SetColor("_trailGradient1", defaultGradient.colorKeys[0].color);
+            PlayerPrefsX.SetColor("_trailGradient2", defaultGradient.colorKeys[1].color);
+            PlayerPrefsX.SetColor("_trailGradient3", defaultGradient.colorKeys[2].color);
+            _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = defaultGradient;
+            PlayerPrefsX.SetBool("HasPlayed", true);
+        }
+        else
+        {
+            SetPlayerColor();
+            _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+            SetTrailColor();
+            _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+
+            //SetWarpColor();
+            //SetEnemiesColor();
+            //enemyAi = FindObjectOfType<EnemyAI>();
+            //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
+            //SetDeathColor();
+        }
     }
 
     //public Color SetPlayerColor { set { value = _playerColor; } get { return _playerColor; } }
@@ -160,14 +180,5 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         }
     }
 
-    public void SetUIColor()
-    {
-        TimerUI = GameObject.FindGameObjectsWithTag("TimerUI");
-        foreach(GameObject timerUI in TimerUI)
-        {
-            _playerColor.a = .5f;
-            timerUI.GetComponent<Image>().color = _playerColor;
-
-        }
-    }
+   
 }

@@ -62,9 +62,18 @@ public class StoreManager : MonoBehaviour
 
     public void Equip(ShopItem item)
     {
+
         if(item.itemType == ShopItem.ItemType.Player)
         {
             // player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor",item.color);
+            
+            for (int i = 0; i < shopPlayerItems.Length; i++)
+            {
+                if(item != shopPlayerItems[i])
+                {
+                    Unequip(shopPlayerItems[i]);
+                }
+            }
             
             PlayerPrefs.SetFloat("_playerColor.r", item.color.r);
             PlayerPrefs.SetFloat("_playerColor.g", item.color.g);
@@ -74,6 +83,14 @@ public class StoreManager : MonoBehaviour
         if(item.itemType == ShopItem.ItemType.Trail)
         {
             Debug.Log("Equipped new trial");
+
+            for (int i = 0; i < shopTrailItems.Length; i++)
+            {
+                if (item != shopTrailItems[i])
+                {
+                    Unequip(shopTrailItems[i]);
+                }
+            }
             //PlayerPrefs.SetFloat("_trailColor.r", item.color.r);
             //PlayerPrefs.SetFloat("_trailColor.g", item.color.g);
             //PlayerPrefs.SetFloat("_trailColor.b", item.color.b);
@@ -84,6 +101,14 @@ public class StoreManager : MonoBehaviour
         }
         if (item.itemType == ShopItem.ItemType.Warp)
         {
+            for (int i = 0; i < shopPlayerItems.Length; i++)
+            {
+                if (item != shopWarpItems[i])
+                {
+                    Unequip(shopWarpItems[i]);
+                }
+            }
+
             Debug.Log("Equipped new Warp Color");
             PlayerPrefsX.SetColor("_warpColor1", item.color);
             PlayerPrefsX.SetColor("_warpColor2", item.color2);
@@ -96,12 +121,26 @@ public class StoreManager : MonoBehaviour
         }
         if (item.itemType == ShopItem.ItemType.Enemies)
         {
+            for (int i = 0; i < shopEnemyItems.Length; i++)
+            {
+                if (item != shopEnemyItems[i])
+                {
+                    Unequip(shopEnemyItems[i]);
+                }
+            }
             Debug.Log("Equipped new AltWarp Color");
             PlayerPrefsX.SetColor("EnemyColor", item.color);
             //PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
         }
         if (item.itemType == ShopItem.ItemType.Death)
         {
+            for (int i = 0; i < shopDeathItems.Length; i++)
+            {
+                if (item != shopDeathItems[i])
+                {
+                    Unequip(shopDeathItems[i]);
+                }
+            }
             Debug.Log("Equipped new DeathEffect Color");
             PlayerPrefsX.SetColor("_deathGradient1", item.gradient.colorKeys[0].color);
             PlayerPrefsX.SetColor("_deathGradient2", item.gradient.colorKeys[1].color);
@@ -109,7 +148,7 @@ public class StoreManager : MonoBehaviour
         }
         item.backgroundImage = EquippedItemBackground;
         item.equipped = true;
-        item._buttonText = "Unequip";
+        item._buttonText = "Equipped";
         PopulateShop();
     }
 
@@ -171,7 +210,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -211,7 +252,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -250,7 +293,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -289,7 +334,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -328,7 +375,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -367,7 +416,9 @@ public class StoreManager : MonoBehaviour
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
-                shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Unequip(si));
+            {
+                Debug.Log(si.name + " is Equipped");
+            }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
@@ -382,6 +433,10 @@ public class StoreManager : MonoBehaviour
     {
        //the current idea is to check other items of the same type if they are equipped with the ShopItem bool equipped
        //if so change thier backgrounds and button text
+
+
     }
+
+    //TODO when leaving the store save the shopItems 
 
 }

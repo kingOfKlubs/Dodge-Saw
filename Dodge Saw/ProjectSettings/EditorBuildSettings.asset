@@ -17,10 +17,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Store.unity
     guid: 5ed9b4aa2c4414959a9717b2ac685f82
-  - enabled: 0
-    path: Assets/_Scenes/MainMenu(other Iphones).unity
-    guid: 552ba6ec75c6a4f04a8bd52df829d3f3
-  - enabled: 0
-    path: Assets/_Scenes/GameLevel(other Iphones).unity
-    guid: a59f82dc9e95d477380c3dd900be61c0
   m_configObjects: {}

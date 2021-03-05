@@ -174,9 +174,9 @@ public class RoundManager : MonoBehaviour {
         _previousRound = _round;
         shouldChange = true;
         PlayableDirector playable = _roundCounter.GetComponent<PlayableDirector>(); // note this playable should only be as long as the delay
-        PlayableDirector playerAction = FindObjectOfType<Movement>().GetComponent<PlayableDirector>(); // note this playbale should only be as long as the delay + PortalAnimDuration
+        //PlayableDirector playerAction = FindObjectOfType<Movement>().GetComponent<PlayableDirector>(); // note this playbale should only be as long as the delay + PortalAnimDuration
         playable.Play();
-        playerAction.Play();
+        //playerAction.Play();
         yield return new WaitForSeconds(delay);
         _roundCounter.text = (_nextRound + 1).ToString();
         Portal.SetActive(true);
@@ -184,7 +184,7 @@ public class RoundManager : MonoBehaviour {
         yield return new WaitForSeconds(PortalAnimDuration);
         Portal.SetActive(false);
         playable.Stop();
-        playerAction.Stop();
+        //playerAction.Stop();
         UpdateStates(RoundStates.RoundStart);
     }
 

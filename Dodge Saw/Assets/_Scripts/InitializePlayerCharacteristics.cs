@@ -38,20 +38,26 @@ public class InitializePlayerCharacteristics : MonoBehaviour
     {
         if (!PlayerPrefsX.GetBool("HasPlayed"))
         {
+            // Setting up the Player's Color
             _playerColor = defaultColor[0];
             PlayerPrefs.SetFloat("_playerColor.r", _playerColor.r);
             PlayerPrefs.SetFloat("_playerColor.g", _playerColor.g);
             PlayerPrefs.SetFloat("_playerColor.b", _playerColor.b);
-            _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+            //_playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
 
+            // Setting up the Player's Trail
             PlayerPrefsX.SetColor("_trailGradient1", defaultGradient.colorKeys[0].color);
             PlayerPrefsX.SetColor("_trailGradient2", defaultGradient.colorKeys[1].color);
             PlayerPrefsX.SetColor("_trailGradient3", defaultGradient.colorKeys[2].color);
-            _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = defaultGradient;
+            //_playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = defaultGradient;
+
+            // Setting up the Player's Death Effect
+            PlayerPrefsX.SetColor("_deathGradient1", defaultGradient.colorKeys[0].color);
+            PlayerPrefsX.SetColor("_deathGradient2", defaultGradient.colorKeys[0].color);
+            PlayerPrefsX.SetColor("_deathGradient3", defaultGradient.colorKeys[0].color);
             PlayerPrefsX.SetBool("HasPlayed", true);
         }
-        else
-        {
+        
             SetPlayerColor();
             _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
             SetTrailColor();
@@ -61,7 +67,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             //SetEnemiesColor();
             //enemyAi = FindObjectOfType<EnemyAI>();
             //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
-        }
+        
     }
 
     //public Color SetPlayerColor { set { value = _playerColor; } get { return _playerColor; } }

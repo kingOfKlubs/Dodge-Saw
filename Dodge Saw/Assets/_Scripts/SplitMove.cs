@@ -5,6 +5,9 @@ using UnityEngine;
 public class SplitMove : EnemyMovement
 {
     public GameObject miniDiamond;
+    public int radius;
+
+    private bool calledOnce = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +18,12 @@ public class SplitMove : EnemyMovement
     void Update()
     {
         Move();
-        SplitOff();
+        CheckWall();
+        if (!calledOnce)
+        {
+            StartCoroutine(TimeToSplit());
+            calledOnce = true;
+        }
     }
 
     public override void Initiate()
@@ -28,17 +36,42 @@ public class SplitMove : EnemyMovement
         base.Move();
     }
 
-    public void SplitOff()
+    public void CheckWall()
     {
         Ray _ray;
         _ray = new Ray(transform.position, _moveDirection);
         RaycastHit _hit;
         if (Physics.Raycast(_ray, out _hit, _dst, layer))
         {
-            GameObject DiamondClone1 = Instantiate(miniDiamond, transform.position, Quaternion.identity);
-            GameObject DiamondClone2 = Instantiate(miniDiamond, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            SplitOff();
         }
+    }
+
+    public void SplitOff()
+    {
+        float angleStep = 360f / 2;
+        float angle = Vector2.Angle(transform.position, _player.transform.position);
+
+        for (int i = 0; i <= 2 - 1; i++)
+        {
+
+            float projectileDirXposition = this.transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180) * radius;
+            float projectileDirYposition = this.transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180) * radius;
+
+            Vector2 pos = transform.position;
+            Vector2 projectileVector = new Vector2(projectileDirXposition, projectileDirYposition);
+            Vector2 projectileMoveDirection = (projectileVector - pos).normalized * 5; // this value is equal to _moveSpeed but has to be one value instead so projectiles don't launch slowly
+
+            Debug.Log("projectileMoveDirection is " + projectileMoveDirection);
+
+            var proj = Instantiate(miniDiamond, pos, Quaternion.identity);
+            //proj.GetComponent<Rigidbody>().velocity = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y);
+            proj.GetComponent<miniDiamond>()._moveDirection = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y).normalized;
+
+            angle += angleStep;
+        }
+
+        Destroy(this.gameObject);
     }
 
     public override void Death()
@@ -49,5 +82,11 @@ public class SplitMove : EnemyMovement
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
         base.Death();
+    }
+
+    IEnumerator TimeToSplit()
+    {
+        yield return new WaitForSeconds(1);
+        SplitOff();
     }
 }

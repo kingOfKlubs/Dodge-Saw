@@ -28,6 +28,7 @@ public class SceneChanger : MonoBehaviour
 
     protected void OnEnable()
     {
+        canFindData = PlayerPrefsX.GetBool("HasVisitedStore");
         for (int i = 0; i < objectsToPersist.Count; i++)
         {
             if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)) && canFindData)
@@ -42,6 +43,7 @@ public class SceneChanger : MonoBehaviour
                 //Do Nothing
             }
         }
+        
     }
     protected void OnDisable()
     {
@@ -52,16 +54,21 @@ public class SceneChanger : MonoBehaviour
             var json = JsonUtility.ToJson(objectsToPersist[i]);
             bf.Serialize(file, json);
             file.Close();
+
         }
     }
+
+    public void Start()
+    {
+        float volume = PlayerPrefs.GetFloat("Volume");
+        mixer.SetFloat("Volume", volume);
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(startGameName);
         AM = FindObjectOfType<AudioManager>();
         //slider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
-        if(slider != null)
-        slider.value = PlayerPrefs.GetFloat("VolumeA",0);
-     
     }     
 
     public void QuitGame()
@@ -74,6 +81,7 @@ public class SceneChanger : MonoBehaviour
             bf.Serialize(file, json);
             file.Close();
         }
+        PlayerPrefsX.SetBool("HasVisitedStore", true);
         Application.Quit();
     }
 
@@ -105,8 +113,8 @@ public class SceneChanger : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        mixer.SetFloat("VolumeA", volume);
-        PlayerPrefs.SetFloat("VolumeA", volume);
+        mixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("Volume", volume);
     }
 
     public void Update()
@@ -115,17 +123,15 @@ public class SceneChanger : MonoBehaviour
         {
             if (Movement.Death == true)
             {
+                _gameOverUI.SetActive(true);
                 if(Time.timeScale >= .3f)
                 {
                     Time.timeScale -= Time.fixedDeltaTime * .3f;
-                    Debug.Log(Time.timeScale);
                 }
                 else 
                 {
                     Time.timeScale = 0;
                 }
-                if(Time.timeScale == 0)
-                    _gameOverUI.SetActive(true);
                 Movement movement = FindObjectOfType<Movement>();
                 if(movement != null)
                     movement._coolDownImageLarge.gameObject.SetActive(false);

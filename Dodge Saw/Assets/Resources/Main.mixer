@@ -17,7 +17,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 22d355713a20e45758fabe58d5301e99
-    name: volume
+    name: Volume
   m_AudioMixerGroupViews:
   - guids:
     - b38c5fb29a1d64d9bb3d5b7b2acc21e0
@@ -36,6 +36,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: 22d355713a20e45758fabe58d5301e99
   m_Pitch: e87c3088a10a845d382a9b255eefcbdd
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
   m_UserColorIndex: 0
@@ -65,5 +66,6 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: b1f2f6388de5140dd94f168681a784c7
-  m_FloatValues: {}
+  m_FloatValues:
+    22d355713a20e45758fabe58d5301e99: 0.00031109527
   m_TransitionOverrides: {}

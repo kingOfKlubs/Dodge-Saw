@@ -58,20 +58,27 @@ public class EnemyMovement : MonoBehaviour
             Death();
         }
 
-
-        if (Input.touchCount > 0)
+        if (!Movement._cooldown)
         {
-            touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
+            {
+                touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    _moveSpeed = .3f;
+                    anim.speed = .3f;
+                }
+            }
+            else if (Input.GetKey("space"))
             {
                 _moveSpeed = .3f;
                 anim.speed = .3f;
             }
-        }
-        else if (Input.GetKey("space"))
-        {
-            _moveSpeed = .3f;
-            anim.speed = .3f;
+            else
+            {
+                _moveSpeed = 5;
+                anim.speed = 1;
+            }
         }
         else
         {

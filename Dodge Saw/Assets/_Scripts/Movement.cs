@@ -18,11 +18,12 @@ public class Movement : MonoBehaviour
     public float _startTime = 0;
     public VisualEffect Warp;
     public VisualEffect altWarp;
+    public GameObject _deathEffect;
     public Image _coolDownImage;
     public Image _coolDownImageLarge;
     public LayerMask border;
     public static bool Death;
-    public GameObject _deathEffect;
+    public static bool _cooldown;
     #endregion
 
     #region Private Variables
@@ -89,7 +90,7 @@ public class Movement : MonoBehaviour
                 UpdateStates(GameStates.SlowTime);
             else if (_needCoolDown == false && _timeStopped <= 0)
             {
-                UpdateStates(GameStates.CoolTime);
+                UpdateStates(GameStates.CoolDownTime);
                 _needCoolDown = true;
             }
             switch (phase)
@@ -161,7 +162,7 @@ public class Movement : MonoBehaviour
                 UpdateStates(GameStates.SlowTime);
             else if (_needCoolDown == false && _timeStopped <= 0)
             {
-                UpdateStates(GameStates.CoolTime);
+                UpdateStates(GameStates.CoolDownTime);
                 _needCoolDown = true;
             }
             if (Input.GetKeyDown("a"))//move left
@@ -207,7 +208,7 @@ public class Movement : MonoBehaviour
         }
         else if (canSlowTime == false)
         {
-             UpdateStates(GameStates.CoolTime);
+             UpdateStates(GameStates.CoolDownTime);
         }
         else
         {
@@ -243,14 +244,15 @@ public class Movement : MonoBehaviour
             case GameStates.SlowTime:
                 MoveSlow();
                 break;
-            case GameStates.CoolTime:
-                MoveCool();
+            case GameStates.CoolDownTime:
+                SlowCoolDown();
                 break;
         }
     }
 
     public void MoveNormal()
     {
+        _cooldown = false;
         _timeStopped = _startTime;
         _moveSpeed = _initialSpeed;
         anim.speed = 1;
@@ -265,8 +267,9 @@ public class Movement : MonoBehaviour
         _coolDownImageLarge.gameObject.SetActive(false);
     }
 
-    public void MoveCool()
+    public void SlowCoolDown()
     {
+        _cooldown = true;
         _timeStopped = _startTime;
         _moveSpeed = _initialSpeed;
         anim.speed = 1;
@@ -282,10 +285,14 @@ public class Movement : MonoBehaviour
 
     public void MoveSlow()
     {
+        _cooldown = false;
         _coolDownImage.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImageLarge.fillAmount -= 1 / _startTime * Time.deltaTime;
-        _coolDownImage.gameObject.SetActive(false);
-        _coolDownImageLarge.gameObject.SetActive(true);
+        if (!PauseMenu._isGamePaused)
+        {
+            _coolDownImage.gameObject.SetActive(false);
+            _coolDownImageLarge.gameObject.SetActive(true);
+        }
         _moveSpeed = .3f;
         anim.speed = .3f;
         Warp.playRate = .3f;
@@ -307,5 +314,5 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public enum GameStates { NormalTime, SlowTime, CoolTime};
+    public enum GameStates { NormalTime, SlowTime, CoolDownTime};
 }

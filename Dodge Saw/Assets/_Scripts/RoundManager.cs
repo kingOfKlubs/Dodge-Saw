@@ -62,6 +62,7 @@ public class RoundManager : MonoBehaviour {
     int index = 1;
     int attempts = 0;
     int spawnAmountCounter = 1;
+    int enemyCap = 3;
     bool shouldChange = false;
     #endregion
 
@@ -286,25 +287,7 @@ public class RoundManager : MonoBehaviour {
         if (_nextRound + 1 > rounds.Count - 1)
         {
             Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
-            // instead make a new round dynamically
-            int randomCount = ++spawnAmountCounter; // this will probably need to be chaged if we have more than 3 presets
-            if(spawnAmountCounter > 5) {
-                randomCount = 5;
-            }
-            _nextRound++;
-
-
-            int amountOfEnemies = Random.Range(_nextRound, _nextRound + 6); //random number of enemies base on round number
-            GameObject[] newEnemyList = new GameObject[amountOfEnemies]; //array of enemies 
-            for (int i = 0; i < newEnemyList.Length; i++)
-            {
-                newEnemyList[i] = enemyTypes[Random.Range(0, enemyTypes.Length)];
-            }
-            
-            float randomRate = Random.Range(5, 8);// rate between spawns
-            float randomSpawnRate = Random.Range(1, 3);// rate between spawns
-
-            rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate, randomSpawnRate));
+            GenerateRound();
         }
         else
         {
@@ -355,5 +338,43 @@ public class RoundManager : MonoBehaviour {
             }
         }
         StartCoroutine(SpawnEnemy(_enemy, _position, _lifetime));
+    }
+
+    public void GenerateRound()
+    {
+        // make a new round dynamically
+
+        //this will cap our amount of spawns per wave to 5
+        int randomCount = ++spawnAmountCounter;
+        int cap = 5; // change this value to increase cap
+        if (spawnAmountCounter > cap) 
+        {
+            randomCount = cap;
+        }
+        _nextRound++;
+
+
+        int amountOfEnemies = Random.Range(_nextRound, _nextRound + 6); //random number of enemies base on round number
+        GameObject[] newEnemyList = new GameObject[amountOfEnemies]; //array of enemies 
+        for (int i = 0; i < newEnemyList.Length; i++)
+        {
+            newEnemyList[i] = enemyTypes[Random.Range(0, enemyCap)];
+        }
+
+        //were going to scale the enemies incoorperated in the round. this is to add in enemies while the rounds increase in difficulty randomly
+        if (enemyCap >= enemyTypes.Length)
+        {
+            enemyCap = enemyTypes.Length;
+        }
+        else
+        {
+            enemyCap++;
+        }
+
+
+        float randomRate = Random.Range(5, 8);// rate between wave spawns
+        float randomSpawnRate = Random.Range(1, 3);// rate between spawns per wave
+
+        rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate, randomSpawnRate));
     }
 }

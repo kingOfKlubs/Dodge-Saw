@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class InitializePlayerCharacteristics : MonoBehaviour
 {
     public GameObject _playerPrefab;
+    public VisualEffect Portal;
     public Color[] defaultColor;
     public Gradient defaultGradient;
 
@@ -43,13 +44,11 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             PlayerPrefs.SetFloat("_playerColor.r", _playerColor.r);
             PlayerPrefs.SetFloat("_playerColor.g", _playerColor.g);
             PlayerPrefs.SetFloat("_playerColor.b", _playerColor.b);
-            //_playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
 
             // Setting up the Player's Trail
             PlayerPrefsX.SetColor("_trailGradient1", defaultGradient.colorKeys[0].color);
             PlayerPrefsX.SetColor("_trailGradient2", defaultGradient.colorKeys[1].color);
             PlayerPrefsX.SetColor("_trailGradient3", defaultGradient.colorKeys[2].color);
-            //_playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = defaultGradient;
 
             // Setting up the Player's Death Effect
             PlayerPrefsX.SetColor("_deathGradient1", defaultGradient.colorKeys[0].color);
@@ -58,16 +57,25 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             PlayerPrefsX.SetBool("HasPlayed", true);
         }
         
-            SetPlayerColor();
-            _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
-            SetTrailColor();
-            _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
-            SetDeathColor();
-            //SetWarpColor();
-            //SetEnemiesColor();
-            //enemyAi = FindObjectOfType<EnemyAI>();
-            //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
+        SetPlayerColor();
+        _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+        SetTrailColor();
+        _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+        SetDeathColor();
+        //SetPortalColor();
+        //SetWarpColor();
+        //SetEnemiesColor();
+        //enemyAi = FindObjectOfType<EnemyAI>();
+        //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
         
+    }
+
+    private void SetPortalColor()
+    {
+        if(Portal != null)
+        {
+            Portal.SetVector4("Color", _playerColor);
+        }
     }
 
     //public Color SetPlayerColor { set { value = _playerColor; } get { return _playerColor; } }

@@ -24,9 +24,9 @@ public class miniDiamond : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _rigid = GetComponent<Rigidbody>();
-        _position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
-        _moveDirection = (new Vector3(_position.x,_position.y, 0) - transform.position).normalized;
+        //_rigid = GetComponent<Rigidbody>();
+        //_position = new Vector2(Random.Range(bottomRange.x + findingDimensions.padding, topRange.x - findingDimensions.padding), Random.Range(bottomRange.y + findingDimensions.padding, topRange.y - findingDimensions.padding));
+        //_moveDirection = (new Vector3(_position.x,_position.y, 0) - transform.position).normalized;
         anim = GetComponent<Animator>();
         _rigid = GetComponent<Rigidbody>();
         _player = GameObject.FindGameObjectWithTag("Player");

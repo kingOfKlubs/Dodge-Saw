@@ -20,6 +20,7 @@ TagManager:
   - Left Border
   - Coin
   - Portal
+  - Options
   layers:
   - Default
   - TransparentFX

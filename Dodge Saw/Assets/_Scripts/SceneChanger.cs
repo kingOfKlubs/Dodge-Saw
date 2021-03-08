@@ -11,6 +11,10 @@ using TMPro;
 public class SceneChanger : MonoBehaviour
 {
     public AudioMixer mixer;
+    public Animator anim;
+    public GameObject mainMenu;
+    public GameObject options;
+    public GameObject store;
     public Slider slider;
     public GameObject _gameOverUI;
     public GameObject _gameOverRewardUI;
@@ -25,6 +29,8 @@ public class SceneChanger : MonoBehaviour
     [Header("Scriptable Objects")]
     public List<ScriptableObject> objectsToPersist;
     public bool canFindData;
+
+   
 
     protected void OnEnable()
     {
@@ -89,13 +95,27 @@ public class SceneChanger : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Stop("Theme");
 		FindObjectOfType<AudioManager>().Play("HipHop");
-        SceneManager.LoadScene("Options");
+        if(anim != null)
+        {
+            anim.SetBool("Options", true);
+        }
+        if (mainMenu != null)
+            mainMenu.SetActive(false);
+        if (options != null)
+            options.SetActive(true);
     }
     public void Store()
     {
         FindObjectOfType<AudioManager>().Stop("Theme");
         FindObjectOfType<AudioManager>().Play("HipHop");
-        SceneManager.LoadScene("Store");
+        if (anim != null)
+        {
+            anim.SetBool("Store", true);
+        }
+        if (store != null)
+            store.SetActive(true);
+        if (mainMenu != null)
+            mainMenu.SetActive(false);
     }
 
     public void MainMenu()
@@ -106,8 +126,26 @@ public class SceneChanger : MonoBehaviour
             Destroy(player.gameObject);
         }
         Time.timeScale = 1;
-        SceneManager.LoadScene(mainMenuName);
+        SceneManager.LoadScene("MainMenu");
 		FindObjectOfType<AudioManager>().Play("Theme");
+        FindObjectOfType<AudioManager>().Stop("HipHop");
+    }
+
+    public void Main()
+    {
+        if(anim != null)
+        {
+            anim.SetBool("Options", false);
+            anim.SetBool("Store", false);
+        }
+        Time.timeScale = 1;
+        if(options != null)
+            options.SetActive(false);
+        if(mainMenu != null)
+            mainMenu.SetActive(true);
+        if(store != null)
+            store.SetActive(false);
+        FindObjectOfType<AudioManager>().Play("Theme");
         FindObjectOfType<AudioManager>().Stop("HipHop");
     }
 

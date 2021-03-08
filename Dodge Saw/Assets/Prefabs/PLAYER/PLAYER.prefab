@@ -124,13 +124,13 @@ MonoBehaviour:
   _startTime: 3
   Warp: {fileID: 0}
   altWarp: {fileID: 0}
+  _deathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
+    type: 3}
   _coolDownImage: {fileID: 0}
   _coolDownImageLarge: {fileID: 0}
   border:
     serializedVersion: 2
     m_Bits: 256
-  _deathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
-    type: 3}
   currentState: 0
 --- !u!54 &978993915872138650
 Rigidbody:

@@ -42,6 +42,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cylinders.001
+    second: {fileID: 2100000, guid: 878dfbd70e6599249bd4aa9b917d3e39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.001
     second: {fileID: 2100000, guid: 4519327edc7fb9d409494d9ec84df82f, type: 2}
   - first:

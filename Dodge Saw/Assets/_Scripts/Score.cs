@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using UnityEngine.UI;
 using TMPro;
 
@@ -13,6 +14,9 @@ public class Score : MonoBehaviour
     public static int _reward;
     public TextMeshProUGUI _scoreText;
     public TextMeshProUGUI _highScore;
+    public TextMeshProUGUI _gameOverScoreText;
+    public TextMeshProUGUI _gameOverHighScore;
+    //public VisualEffect fireworks;
     public GameObject UI;
 
     // Start is called before the first frame update
@@ -32,12 +36,15 @@ public class Score : MonoBehaviour
     void Update()
     {
         if(_scoreText != null)
-        _scoreText.text = "Score: " + _score;
+        {
+            _scoreText.text = "Score: " + _score;
+        }
         if (_score > PlayerPrefs.GetInt("HighScore", 0))
         {
             PlayerPrefs.SetInt("HighScore", _score);
             _highScore.text = "Top: " + _score.ToString();
             UI.SetActive(true);
+            // Turn on the firework visual effect 
         }
         GetMoney();
     }
@@ -56,5 +63,11 @@ public class Score : MonoBehaviour
             _reward++;
             Debug.Log(_reward);
         }
+    }
+
+    public void ShowScore()
+    {
+        _gameOverScoreText.text = _score.ToString();
+        _gameOverHighScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 }

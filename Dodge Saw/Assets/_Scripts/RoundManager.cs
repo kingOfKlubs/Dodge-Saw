@@ -59,11 +59,13 @@ public class RoundManager : MonoBehaviour {
     int _round = 0;
     int _nextRound = 0;
     int _previousRound = 0;
+    int incrementalCount;
     int index = 1;
     int attempts = 0;
     int spawnAmountCounter = 1;
     int enemyCap = 3;
     bool shouldChange = false;
+    bool incrementedEnemyCap = false;
     #endregion
 
     public enum RoundStates { RoundStart, RoundTransition, NewRound, RoundSpawn, RoundWaiting, RoundTutorial };
@@ -281,18 +283,20 @@ public class RoundManager : MonoBehaviour {
     void RoundCompleted()
     {
         Debug.Log("Round Completed!");
-        Debug.Log("Next Round " + _nextRound);
 
         //if we have reached the end of our presets start making rounds dynamically
         if (_nextRound + 1 > rounds.Count - 1)
         {
             Debug.Log("ALL PRESET ROUNDS COMPLETE! incrementing...");
+            Debug.Log(_nextRound);
             GenerateRound();
         }
         else
         {
             _nextRound++;
         }
+
+        Debug.Log("Next Round is: Round " + _nextRound);
         UpdateStates(RoundStates.RoundTransition);
         FindObjectOfType<AudioManager>().Play("EndOfRound");
     }
@@ -343,13 +347,13 @@ public class RoundManager : MonoBehaviour {
     public void GenerateRound()
     {
         // make a new round dynamically
-
+        if (_nextRound % 2 == 0)
+            incrementalCount = ++spawnAmountCounter;
         //this will cap our amount of spawns per wave to 5
-        int randomCount = ++spawnAmountCounter;
         int cap = 5; // change this value to increase cap
         if (spawnAmountCounter > cap) 
         {
-            randomCount = cap;
+            incrementalCount = cap;
         }
         _nextRound++;
 
@@ -358,6 +362,11 @@ public class RoundManager : MonoBehaviour {
         GameObject[] newEnemyList = new GameObject[amountOfEnemies]; //array of enemies 
         for (int i = 0; i < newEnemyList.Length; i++)
         {
+            if (incrementedEnemyCap)
+            {
+                newEnemyList[i] = enemyTypes[enemyCap];
+                incrementedEnemyCap = false;
+            }
             newEnemyList[i] = enemyTypes[Random.Range(0, enemyCap)];
         }
 
@@ -369,12 +378,13 @@ public class RoundManager : MonoBehaviour {
         else
         {
             enemyCap++;
+            incrementedEnemyCap = true;
         }
 
 
         float randomRate = Random.Range(5, 8);// rate between wave spawns
         float randomSpawnRate = Random.Range(1, 3);// rate between spawns per wave
 
-        rounds.Add(new Round("Round " + _nextRound, newEnemyList, randomCount, randomRate, randomSpawnRate));
+        rounds.Add(new Round("Round " + _nextRound, newEnemyList, incrementalCount, randomRate, randomSpawnRate));
     }
 }

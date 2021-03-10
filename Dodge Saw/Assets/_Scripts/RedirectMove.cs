@@ -74,7 +74,7 @@ public class RedirectMove : EnemyMovement
 
     public void LookAtPlayer()
     {
-        if (player != null)
+        if  (GameObject.FindGameObjectWithTag("Player") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform.position;
             transform.LookAt(player);

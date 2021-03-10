@@ -17,6 +17,7 @@ public class SceneChanger : MonoBehaviour
     public GameObject store;
     public Slider slider;
     public GameObject _gameOverUI;
+    public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
     [SerializeField]
     public string startGameName;
@@ -155,37 +156,39 @@ public class SceneChanger : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", volume);
     }
 
+    float timer = 2;
+
     public void Update()
     {
         if (_gameOverUI != null)
         {
             if (Movement.Death == true)
             {
-                _gameOverUI.SetActive(true);
-                if(Time.timeScale >= .3f)
+                timer -= Time.fixedDeltaTime;
+                if (timer <= 0)
                 {
-                    Time.timeScale -= Time.fixedDeltaTime * .3f;
-                }
-                else 
-                {
+                    _gameOverUI.SetActive(true);
+                    FindObjectOfType<Score>().ShowScore();
+                    if(_gameOver != null)
+                        _gameOver.gameObject.SetActive(true);
+                    Movement movement = FindObjectOfType<Movement>();
+                    if (movement != null)
+                        movement._coolDownImageLarge.gameObject.SetActive(false);
+                    if (Score._reward > 0)
+                    {
+                        _gameOverRewardUI.SetActive(true);
+                        if (rewardNumber != null)
+                            rewardNumber.text = "+ " + Score._reward;
+
+                    }
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        _gameOverRewardUI.SetActive(false);
+                        GoldCurrency GC = FindObjectOfType<GoldCurrency>();
+                        GC.AddMoneyToBank(Score._reward);
+                        Score._reward = 0;
+                    }
                     Time.timeScale = 0;
-                }
-                Movement movement = FindObjectOfType<Movement>();
-                if(movement != null)
-                    movement._coolDownImageLarge.gameObject.SetActive(false);
-                if(Score._reward > 0)
-                {
-                    _gameOverRewardUI.SetActive(true);
-                    if(rewardNumber != null)
-                    rewardNumber.text = "+ " + Score._reward;
-                    
-                }
-                if (Input.GetMouseButtonUp(0))
-                {
-                    _gameOverRewardUI.SetActive(false);
-                    GoldCurrency GC = FindObjectOfType<GoldCurrency>();
-                    GC.AddMoneyToBank(Score._reward);
-                    Score._reward = 0;
                 }
             }
             else

@@ -53,6 +53,7 @@ public class RoundManager : MonoBehaviour {
     Vector2 topRange;
     Vector2 bottomRange;
     Vector2 _position;
+    RoundCounter[] counters;
     TextMeshProUGUI _roundCounter;
     float searchCountdown = 3;
     float transitionTime = 0;
@@ -85,8 +86,12 @@ public class RoundManager : MonoBehaviour {
         topRange = findingDimensions.GetWorldPosition(0, new Vector2(Screen.width, Screen.height));
         bottomRange = findingDimensions.GetWorldPosition(0, new Vector2(0, 0));
         coinSpawning = FindObjectOfType<CoinSpawning>();
-        _roundCounter = FindObjectOfType<RoundCounter>().GetComponent<TextMeshProUGUI>();
-        _roundCounter.text = (_nextRound + 1).ToString();
+        counters = FindObjectsOfType<RoundCounter>();
+        foreach(RoundCounter count in counters)
+        {
+            count.GetComponent<TextMeshProUGUI>().text = (_nextRound + 1).ToString();
+        }
+        _roundCounter = GameObject.FindGameObjectWithTag("Round").GetComponent<TextMeshProUGUI>();
         if (PlayerPrefsX.GetBool("hasCompletedTutorial") == false) {
             UpdateStates(RoundStates.RoundTutorial);    
         }else
@@ -181,7 +186,11 @@ public class RoundManager : MonoBehaviour {
         playable.Play();
         //playerAction.Play();
         yield return new WaitForSeconds(delay);
-        _roundCounter.text = (_nextRound + 1).ToString();
+        //_roundCounter.text = (_nextRound + 1).ToString();
+        foreach (RoundCounter count in counters)
+        {
+            count.GetComponent<TextMeshProUGUI>().text = (_nextRound + 1).ToString();
+        }
         Portal.SetActive(true);
 
         yield return new WaitForSeconds(PortalAnimDuration);

@@ -371,11 +371,6 @@ public class RoundManager : MonoBehaviour {
         GameObject[] newEnemyList = new GameObject[amountOfEnemies]; //array of enemies 
         for (int i = 0; i < newEnemyList.Length; i++)
         {
-            if (incrementedEnemyCap)
-            {
-                newEnemyList[i] = enemyTypes[enemyCap];
-                incrementedEnemyCap = false;
-            }
             newEnemyList[i] = enemyTypes[Random.Range(0, enemyCap)];
         }
 
@@ -387,7 +382,6 @@ public class RoundManager : MonoBehaviour {
         else
         {
             enemyCap++;
-            incrementedEnemyCap = true;
         }
 
 

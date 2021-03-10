@@ -46,7 +46,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _itemName: White
-  _buttonText: Buy
+  _buttonText: Equipped
   _layer:
     serializedVersion: 2
     m_Bits: 0

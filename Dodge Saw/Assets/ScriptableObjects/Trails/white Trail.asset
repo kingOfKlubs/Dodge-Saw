@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: white Trail
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: f2904608addf24a7db4d51a23ae1ea69, type: 3}
-  texture: {fileID: 0}
+  texture: {fileID: 8400000, guid: 2418d94a8c7ec47ad989eb6ff8453faa, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}
   gradient:
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   _itemName: White
-  _buttonText: Buy
+  _buttonText: Equipped
   _layer:
     serializedVersion: 2
     m_Bits: 0

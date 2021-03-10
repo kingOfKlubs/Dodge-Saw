@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire Trail
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
-  texture: {fileID: 0}
+  texture: {fileID: 8400000, guid: 532f2d56998034ca0a9ce3324419673e, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}
   gradient:

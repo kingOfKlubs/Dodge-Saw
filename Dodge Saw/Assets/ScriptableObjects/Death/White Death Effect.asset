@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: White Death Effect
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: f2904608addf24a7db4d51a23ae1ea69, type: 3}
-  texture: {fileID: 0}
+  texture: {fileID: 8400000, guid: 5b7fef9b2d525472f8b72bc676f43f5f, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}
   gradient:
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
   _itemName: white
-  _buttonText: Buy
+  _buttonText: Equipped
   _layer:
     serializedVersion: 2
     m_Bits: 0

@@ -85,16 +85,6 @@ public class DataManager : MonoBehaviour
                         objectsToPersist.Add(new Item(objectsToReference[j].backgroundImage, objectsToReference[j].texture, objectsToReference[j].color, objectsToReference[j].color2, objectsToReference[j].gradient, objectsToReference[j]._itemName, objectsToReference[j]._buttonText, objectsToReference[j].cost, objectsToReference[j].equipped, objectsToReference[j].purchased, objectsToReference[j].itemType));
                     }
                 }
-                //else   //this is to check if the content is different from the defaults
-                //{
-                //    for (int j = 0; j < objectsToPersist.Count; j++)
-                //    {
-                //        if(objectsToPersist[j] != objectsToReference[j])
-                //        {
-
-                //        }
-                //    }
-                //}
             }
             else
             {

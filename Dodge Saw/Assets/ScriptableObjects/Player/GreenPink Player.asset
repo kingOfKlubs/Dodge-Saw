@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
-  m_Name: Black Player
+  m_Name: GreenPink Player
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
   texture: {fileID: 8400000, guid: 3b5a7397589044c0abc880038561c0e9, type: 2}

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.iOS;
+//using UnityEngine.iOS;
+using UnityEngine.Android;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 using UnityStandardAssets.CrossPlatformInput;

@@ -24,9 +24,8 @@ public class ShopItem : ScriptableObject
     //for the name
     public string _itemName;
     //for the buttons text
-    public string _buttonText;
 
-    public LayerMask _layer;
+    public string _buttonText;
 
     //for the cost
     public int cost;
@@ -37,11 +36,11 @@ public class ShopItem : ScriptableObject
     public bool purchased;
 
     //to manage the type of item this is
-    public ItemType itemType;
+    public Item.ItemType itemType;
 
     private void OnEnable()
     {
         hideFlags = HideFlags.DontUnloadUnusedAsset;
     }
-    public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death}
+    //public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death}
 }

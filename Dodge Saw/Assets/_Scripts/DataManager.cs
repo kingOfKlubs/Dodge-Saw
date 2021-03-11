@@ -78,13 +78,13 @@ public class DataManager : MonoBehaviour
                 FileStream file = File.Open(Application.persistentDataPath + "/Store_Data" + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
                 JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
                 file.Close();
-                if(objectsToReference.Count > objectsToPersist.Count)
-                {
-                    for (int j = objectsToPersist.Count; j < objectsToReference.Count; j++)
-                    {
-                        objectsToPersist.Add(new Item(objectsToReference[j].backgroundImage, objectsToReference[j].texture, objectsToReference[j].color, objectsToReference[j].color2, objectsToReference[j].gradient, objectsToReference[j]._itemName, objectsToReference[j]._buttonText, objectsToReference[j].cost, objectsToReference[j].equipped, objectsToReference[j].purchased, objectsToReference[j].itemType));
-                    }
-                }
+                //if(objectsToReference.Count > objectsToPersist.Count)
+                //{
+                //    for (int j = objectsToPersist.Count; j < objectsToReference.Count; j++)
+                //    {
+                //        objectsToPersist.Add(new Item(objectsToReference[j].backgroundImage, objectsToReference[j].texture, objectsToReference[j].color, objectsToReference[j].color2, objectsToReference[j].gradient, objectsToReference[j]._itemName, objectsToReference[j]._buttonText, objectsToReference[j].cost, objectsToReference[j].equipped, objectsToReference[j].purchased, objectsToReference[j].itemType));
+                //    }
+                //}
             }
             else
             {

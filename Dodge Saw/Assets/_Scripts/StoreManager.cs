@@ -14,12 +14,12 @@ public class StoreManager : MonoBehaviour
 
 
     [Header("List of Items Sold")]
-    [SerializeField] private ShopItem[] shopPlayerItems;
-    [SerializeField] private ShopItem[] shopTrailItems;
-    [SerializeField] private ShopItem[] shopEnemyItems;
-    [SerializeField] private ShopItem[] shopWarpItems;
-    [SerializeField] private ShopItem[] shopDeathItems;
-    [SerializeField] private ShopItem[] shopIAPItems;
+    public List<Item> shopPlayerItems;
+    public List<Item> shopTrailItems;
+    public List<Item> shopEnemyItems;
+    public List<Item> shopWarpItems;
+    public List<Item> shopDeathItems;
+    public List<Item> shopIAPItems;
 
     [Header("References")]
     [SerializeField] private Transform PlayerPage;
@@ -41,11 +41,11 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
         PopulateShop();
     }
 
-    public void Buy(ShopItem item)
+    public void Buy(Item item)
     {
         if (GoldCurrency._bank >= item.cost)
         {
@@ -53,21 +53,21 @@ public class StoreManager : MonoBehaviour
             GoldCurrency gc = FindObjectOfType<GoldCurrency>();
             gc.TakeMoneyFromBank(item.cost);
             item.purchased = true;
-            item._buttonText = "Equip";
+            item.buttonText = "Equip";
             PopulateShop();
         }
         else
             UnableToPurchase();
     }
 
-    public void Equip(ShopItem item)
+    public void Equip(Item item)
     {
 
-        if(item.itemType == ShopItem.ItemType.Player)
+        if(item.itemType == Item.ItemType.Player)
         {
             // player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor",item.color);
             
-            for (int i = 0; i < shopPlayerItems.Length; i++)
+            for (int i = 0; i < shopPlayerItems.Count; i++)
             {
                 if(item != shopPlayerItems[i])
                 {
@@ -87,11 +87,11 @@ public class StoreManager : MonoBehaviour
             player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
 
         }
-        if(item.itemType == ShopItem.ItemType.Trail)
+        if(item.itemType == Item.ItemType.Trail)
         {
             Debug.Log("Equipped new trial");
 
-            for (int i = 0; i < shopTrailItems.Length; i++)
+            for (int i = 0; i < shopTrailItems.Count; i++)
             {
                 if (item != shopTrailItems[i])
                 {
@@ -105,9 +105,9 @@ public class StoreManager : MonoBehaviour
             PlayerPrefsX.SetColor("_trailGradient2", item.gradient.colorKeys[1].color); 
             PlayerPrefsX.SetColor("_trailGradient3", item.gradient.colorKeys[2].color);
         }
-        if (item.itemType == ShopItem.ItemType.Warp)
+        if (item.itemType == Item.ItemType.Warp)
         {
-            for (int i = 0; i < shopPlayerItems.Length; i++)
+            for (int i = 0; i < shopPlayerItems.Count; i++)
             {
                 if (item != shopWarpItems[i])
                 {
@@ -119,15 +119,15 @@ public class StoreManager : MonoBehaviour
             PlayerPrefsX.SetColor("_warpColor1", item.color);
             PlayerPrefsX.SetColor("_warpColor2", item.color2);
         }
-        if (item.itemType == ShopItem.ItemType.AltWarp)
+        if (item.itemType == Item.ItemType.AltWarp)
         {
             Debug.Log("Equipped new AltWarp Color");
             PlayerPrefsX.SetColor("_altWarpColor1", item.color);
             PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
         }
-        if (item.itemType == ShopItem.ItemType.Enemies)
+        if (item.itemType == Item.ItemType.Enemies)
         {
-            for (int i = 0; i < shopEnemyItems.Length; i++)
+            for (int i = 0; i < shopEnemyItems.Count; i++)
             {
                 if (item != shopEnemyItems[i])
                 {
@@ -138,9 +138,9 @@ public class StoreManager : MonoBehaviour
             PlayerPrefsX.SetColor("EnemyColor", item.color);
             //PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
         }
-        if (item.itemType == ShopItem.ItemType.Death)
+        if (item.itemType == Item.ItemType.Death)
         {
-            for (int i = 0; i < shopDeathItems.Length; i++)
+            for (int i = 0; i < shopDeathItems.Count; i++)
             {
                 if (item != shopDeathItems[i])
                 {
@@ -154,11 +154,11 @@ public class StoreManager : MonoBehaviour
         }
         item.backgroundImage = EquippedItemBackground;
         item.equipped = true;
-        item._buttonText = "Equipped";
+        item.buttonText = "Equipped";
         PopulateShop();
     }
 
-    public void Unequip(ShopItem item)
+    public void Unequip(Item item)
     {
         //if(item.itemType == ShopItem.ItemType.Player)
         //{
@@ -170,7 +170,7 @@ public class StoreManager : MonoBehaviour
         //}
         item.backgroundImage = UnequippedItemBackground;
         item.equipped = false;
-        item._buttonText = "Equip";
+        item.buttonText = "Equip";
         PopulateShop();
     }
 
@@ -187,9 +187,9 @@ public class StoreManager : MonoBehaviour
         }
 
         //this is for setting up the shop items
-        for (int i = 0; i < shopPlayerItems.Length; i++)
+        for (int i = 0; i < shopPlayerItems.Count; i++)
         {
-            ShopItem si = shopPlayerItems[i];
+            Item si = shopPlayerItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, PlayerPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -208,30 +208,30 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
 
         }
-        for (int i = 0; i < shopTrailItems.Length; i++)
+        for (int i = 0; i < shopTrailItems.Count; i++)
         {
-            ShopItem si = shopTrailItems[i];
+            Item si = shopTrailItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, TrailPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -250,29 +250,29 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
         }
-        for (int i = 0; i < shopEnemyItems.Length; i++)
+        for (int i = 0; i < shopEnemyItems.Count; i++)
         {
-            ShopItem si = shopEnemyItems[i];
+            Item si = shopEnemyItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, EnemyPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -291,29 +291,29 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
         }
-        for (int i = 0; i < shopWarpItems.Length; i++)
+        for (int i = 0; i < shopWarpItems.Count; i++)
         {
-            ShopItem si = shopWarpItems[i];
+            Item si = shopWarpItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, WarpPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -332,29 +332,29 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
         }
-        for (int i = 0; i < shopDeathItems.Length; i++)
+        for (int i = 0; i < shopDeathItems.Count; i++)
         {
-            ShopItem si = shopDeathItems[i];
+            Item si = shopDeathItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, DeathPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -373,29 +373,29 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
         }
-        for (int i = 0; i < shopIAPItems.Length; i++)
+        for (int i = 0; i < shopIAPItems.Count; i++)
         {
-            ShopItem si = shopIAPItems[i];
+            Item si = shopIAPItems[i];
             GameObject shopItemObject = Instantiate(shopItemPrefab, IAPPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
@@ -414,23 +414,23 @@ public class StoreManager : MonoBehaviour
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().texture = si.texture;
             shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si._itemName;
+            shopItemObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
             //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si._buttonText;
+            shopItemObject.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
             //Grab button, assign a function to it's onClick event
             if (si.purchased && si.equipped)
             {
-                Debug.Log(si.name + " is Equipped");
+                Debug.Log(si.itemName + " is Equipped");
             }
             else if (si.purchased && !si.equipped)
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
                 shopItemObject.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(() => Buy(si));
-                si._buttonText = "Buy";
+                si.buttonText = "Buy";
             }
 
         }

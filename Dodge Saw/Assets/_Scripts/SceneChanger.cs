@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -29,40 +28,35 @@ public class SceneChanger : MonoBehaviour
     public string persisterName;
     [Header("Scriptable Objects")]
     public List<ScriptableObject> objectsToPersist;
-    public bool canFindData;
-
    
-
     protected void OnEnable()
     {
-        canFindData = PlayerPrefsX.GetBool("HasVisitedStore");
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)) && canFindData)
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
-                JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
-                file.Close();
-            }
-            else
-            {
-                //Do Nothing
-            }
-        }
-        
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)))
+        //    {
+        //        BinaryFormatter bf = new BinaryFormatter();
+        //        FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
+        //        JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
+        //        file.Close();
+        //    }
+        //    else
+        //    {
+                
+        //    }
+        //}
     }
+
     protected void OnDisable()
     {
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-            var json = JsonUtility.ToJson(objectsToPersist[i]);
-            bf.Serialize(file, json);
-            file.Close();
-
-        }
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
+        //    bf.Serialize(file, json);
+        //    file.Close();
+        //}
     }
 
     public void Start()
@@ -80,15 +74,14 @@ public class SceneChanger : MonoBehaviour
 
     public void QuitGame()
     {
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-            var json = JsonUtility.ToJson(objectsToPersist[i]);
-            bf.Serialize(file, json);
-            file.Close();
-        }
-        PlayerPrefsX.SetBool("HasVisitedStore", true);
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
+        //    bf.Serialize(file, json);
+        //    file.Close();
+        //}
         Application.Quit();
     }
 

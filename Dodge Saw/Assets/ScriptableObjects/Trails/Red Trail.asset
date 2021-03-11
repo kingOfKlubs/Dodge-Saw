@@ -51,6 +51,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   cost: 5
-  equipped: 1
-  purchased: 1
+  equipped: 0
+  purchased: 0
   itemType: 1

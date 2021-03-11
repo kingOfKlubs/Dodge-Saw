@@ -46,11 +46,11 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
   _itemName: Blue
-  _buttonText: Buy
+  _buttonText: Equip
   _layer:
     serializedVersion: 2
     m_Bits: 0
   cost: 5
   equipped: 0
-  purchased: 0
+  purchased: 1
   itemType: 5

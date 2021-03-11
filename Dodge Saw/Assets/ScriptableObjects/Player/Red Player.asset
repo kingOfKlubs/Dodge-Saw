@@ -46,7 +46,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _itemName: Red
-  _buttonText: Equip
+  _buttonText: Buy
   _layer:
     serializedVersion: 2
     m_Bits: 0

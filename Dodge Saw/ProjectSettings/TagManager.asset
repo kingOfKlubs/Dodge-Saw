@@ -21,6 +21,7 @@ TagManager:
   - Coin
   - Portal
   - Options
+  - Round
   layers:
   - Default
   - TransparentFX

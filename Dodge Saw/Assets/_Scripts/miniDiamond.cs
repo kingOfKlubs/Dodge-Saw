@@ -93,7 +93,6 @@ public class miniDiamond : MonoBehaviour
     public void DeleteOutOfBounds() {
         Vector2 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
         if ((screenPosition.y > Screen.height) || (screenPosition.y < 0f) || (screenPosition.x > Screen.width) || (screenPosition.x < 0f)) {
-            Debug.Log("should be calling death here");
             Death();
         }
     }

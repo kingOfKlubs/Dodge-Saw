@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -17,6 +16,7 @@ public class SceneChanger : MonoBehaviour
     public GameObject store;
     public Slider slider;
     public GameObject _gameOverUI;
+    public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
     [SerializeField]
     public string startGameName;
@@ -28,40 +28,35 @@ public class SceneChanger : MonoBehaviour
     public string persisterName;
     [Header("Scriptable Objects")]
     public List<ScriptableObject> objectsToPersist;
-    public bool canFindData;
-
    
-
     protected void OnEnable()
     {
-        canFindData = PlayerPrefsX.GetBool("HasVisitedStore");
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)) && canFindData)
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
-                JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
-                file.Close();
-            }
-            else
-            {
-                //Do Nothing
-            }
-        }
-        
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)))
+        //    {
+        //        BinaryFormatter bf = new BinaryFormatter();
+        //        FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
+        //        JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
+        //        file.Close();
+        //    }
+        //    else
+        //    {
+                
+        //    }
+        //}
     }
+
     protected void OnDisable()
     {
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-            var json = JsonUtility.ToJson(objectsToPersist[i]);
-            bf.Serialize(file, json);
-            file.Close();
-
-        }
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
+        //    bf.Serialize(file, json);
+        //    file.Close();
+        //}
     }
 
     public void Start()
@@ -79,15 +74,14 @@ public class SceneChanger : MonoBehaviour
 
     public void QuitGame()
     {
-        for (int i = 0; i < objectsToPersist.Count; i++)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-            var json = JsonUtility.ToJson(objectsToPersist[i]);
-            bf.Serialize(file, json);
-            file.Close();
-        }
-        PlayerPrefsX.SetBool("HasVisitedStore", true);
+        //for (int i = 0; i < objectsToPersist.Count; i++)
+        //{
+        //    BinaryFormatter bf = new BinaryFormatter();
+        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
+        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
+        //    bf.Serialize(file, json);
+        //    file.Close();
+        //}
         Application.Quit();
     }
 
@@ -155,37 +149,39 @@ public class SceneChanger : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", volume);
     }
 
+    float timer = 2;
+
     public void Update()
     {
         if (_gameOverUI != null)
         {
             if (Movement.Death == true)
             {
-                _gameOverUI.SetActive(true);
-                if(Time.timeScale >= .3f)
+                timer -= Time.fixedDeltaTime;
+                if (timer <= 0)
                 {
-                    Time.timeScale -= Time.fixedDeltaTime * .3f;
-                }
-                else 
-                {
+                    _gameOverUI.SetActive(true);
+                    FindObjectOfType<Score>().ShowScore();
+                    if(_gameOver != null)
+                        _gameOver.gameObject.SetActive(true);
+                    Movement movement = FindObjectOfType<Movement>();
+                    if (movement != null)
+                        movement._coolDownImageLarge.gameObject.SetActive(false);
+                    if (Score._reward > 0)
+                    {
+                        _gameOverRewardUI.SetActive(true);
+                        if (rewardNumber != null)
+                            rewardNumber.text = "+ " + Score._reward;
+
+                    }
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        _gameOverRewardUI.SetActive(false);
+                        GoldCurrency GC = FindObjectOfType<GoldCurrency>();
+                        GC.AddMoneyToBank(Score._reward);
+                        Score._reward = 0;
+                    }
                     Time.timeScale = 0;
-                }
-                Movement movement = FindObjectOfType<Movement>();
-                if(movement != null)
-                    movement._coolDownImageLarge.gameObject.SetActive(false);
-                if(Score._reward > 0)
-                {
-                    _gameOverRewardUI.SetActive(true);
-                    if(rewardNumber != null)
-                    rewardNumber.text = "+ " + Score._reward;
-                    
-                }
-                if (Input.GetMouseButtonUp(0))
-                {
-                    _gameOverRewardUI.SetActive(false);
-                    GoldCurrency GC = FindObjectOfType<GoldCurrency>();
-                    GC.AddMoneyToBank(Score._reward);
-                    Score._reward = 0;
                 }
             }
             else

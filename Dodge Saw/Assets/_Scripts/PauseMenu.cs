@@ -39,6 +39,7 @@ public class PauseMenu : MonoBehaviour
     {
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        FindObjectOfType<AudioManager>().Play("Theme");
         _isGamePaused = false;
 
     }
@@ -51,6 +52,7 @@ public class PauseMenu : MonoBehaviour
         else {
             _pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
+            FindObjectOfType<AudioManager>().Stop("Theme");
             _isGamePaused = true;
             if(_optionsUI.activeSelf == true)
             {

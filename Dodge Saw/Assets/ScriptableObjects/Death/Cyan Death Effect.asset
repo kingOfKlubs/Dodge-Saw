@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
   m_Name: Cyan Death Effect
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: 2f11ff5ae1c994f728ce7d1508b26650, type: 3}
+  backgroundImage: {fileID: 21300000, guid: e4f1fee3de32377429fd1348fae62b10, type: 3}
   texture: {fileID: 8400000, guid: c10c05c9206e54d9282d0c5ad1f25de2, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}
@@ -47,9 +47,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   _itemName: Cyan
   _buttonText: Buy
-  _layer:
-    serializedVersion: 2
-    m_Bits: 0
   cost: 5
   equipped: 0
   purchased: 0

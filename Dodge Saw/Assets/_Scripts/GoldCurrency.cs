@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GoldCurrency : MonoBehaviour
 {
 	
 	public static int _bank;
-	public Text _currencyText;
+	public TextMeshProUGUI _currencyText;
 
 	// Start is called before the first frame update
 	void Start()
 	{
         //PlayerPrefs.SetInt("Currency", 505);
-        _currencyText = GetComponentInChildren<Text>();
+        _currencyText = GetComponentInChildren<TextMeshProUGUI>();
         if(PlayerPrefs.HasKey("Currency"))
         {
 		    _bank = PlayerPrefs.GetInt("Currency");
@@ -31,7 +32,7 @@ public class GoldCurrency : MonoBehaviour
     {
         _bank += coins;
         PlayerPrefs.SetInt("Currency", _bank);
-        _currencyText.text = "" + _bank.ToString();
+        //_currencyText.text = "" + _bank.ToString();
 
     }
     public void TakeMoneyFromBank(int coins)

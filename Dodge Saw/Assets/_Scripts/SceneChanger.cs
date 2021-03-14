@@ -18,6 +18,7 @@ public class SceneChanger : MonoBehaviour
     public GameObject _gameOverUI;
     public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
+    public GameObject coinNumPrefab;
     [SerializeField]
     public string startGameName;
     public string mainMenuName;
@@ -28,6 +29,11 @@ public class SceneChanger : MonoBehaviour
     {
         float volume = PlayerPrefs.GetFloat("Volume");
         mixer.SetFloat("Volume", volume);
+    }
+
+    public void Update()
+    {
+        GameOver();
     }
 
     public void StartGame()
@@ -76,6 +82,7 @@ public class SceneChanger : MonoBehaviour
         {
             Destroy(player.gameObject);
         }
+        Score._reward = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
 		FindObjectOfType<AudioManager>().Play("Theme");
@@ -106,20 +113,22 @@ public class SceneChanger : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", volume);
     }
 
-    float timer = 2;
+    float timer = 1.25f;
+    float stopTimer = 4f;
 
-    public void Update()
+    public void GameOver()
     {
         if (_gameOverUI != null)
         {
             if (Movement.Death == true)
             {
+                Score.GetMoney();
                 timer -= Time.fixedDeltaTime;
                 if (timer <= 0)
                 {
                     _gameOverUI.SetActive(true);
                     FindObjectOfType<Score>().ShowScore();
-                    if(_gameOver != null)
+                    if (_gameOver != null)
                         _gameOver.gameObject.SetActive(true);
                     Movement movement = FindObjectOfType<Movement>();
                     if (movement != null)
@@ -133,16 +142,25 @@ public class SceneChanger : MonoBehaviour
                     }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        _gameOverRewardUI.SetActive(false);
+                        
+                        GoldManager gm = FindObjectOfType<GoldManager>();
+                        gm.AddCoins(Input.mousePosition, Score._reward);
                         GoldCurrency GC = FindObjectOfType<GoldCurrency>();
-                        GC.AddMoneyToBank(Score._reward);
+                        GC.AddMoneyToBank(Score._reward);               
                         Score._reward = 0;
+                        Score._scoreRecord = 0;
+                        _gameOverRewardUI.SetActive(false);
                     }
-                    Time.timeScale = 0;
                 }
+                stopTimer -= Time.deltaTime;
+                //if (stopTimer <= 0)
+                //{
+                //    Time.timeScale = 0;
+                //}
             }
             else
                 _gameOverUI.SetActive(false);
         }
     }
 }
+

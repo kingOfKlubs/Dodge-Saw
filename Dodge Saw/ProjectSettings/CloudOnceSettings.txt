@@ -7,7 +7,15 @@
 			"GoogleID":"CgkIj9nRpcwZEAIQAA"
 		}
 	],
-	"CloudVariables":[],
+	"CloudVariables":[
+		{
+			"Key":"",
+			"Type":"0",
+			"DefaultValue":"0",
+			"PersistenceType":"0",
+			"AllowNegative":false
+		}
+	],
 	"AppleSupported":true,
 	"GoogleSupported":true,
 	"GoogleAppID":"879473486991",

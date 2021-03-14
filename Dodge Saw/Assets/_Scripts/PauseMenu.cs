@@ -8,18 +8,21 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool _isGamePaused = false;
     public GameObject _pauseMenuUI;
+    public GameObject _pauseUI;
     public GameObject _optionsUI;
+
+    Movement movement;
 
     private void Start()
     {
         Time.timeScale = 1;
+        movement = FindObjectOfType<Movement>();
     }
 
     void Update()
     {
         if(_isGamePaused)
         {
-            Movement movement = FindObjectOfType<Movement>();
             if (movement != null)
                 movement._coolDownImageLarge.gameObject.SetActive(false);
         }
@@ -51,6 +54,7 @@ public class PauseMenu : MonoBehaviour
         }
         else {
             _pauseMenuUI.SetActive(true);
+            _pauseUI.SetActive(true);
             Time.timeScale = 0f;
             FindObjectOfType<AudioManager>().Stop("Theme");
             _isGamePaused = true;
@@ -62,7 +66,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void Options()
     {
-        _pauseMenuUI.SetActive(false);
+        _pauseUI.SetActive(false);
         _optionsUI.SetActive(true);
     }
 }

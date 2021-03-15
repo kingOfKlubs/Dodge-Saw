@@ -45,7 +45,6 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         PopulateShop();
     }
 

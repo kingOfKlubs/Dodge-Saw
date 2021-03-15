@@ -113,7 +113,8 @@ public class SceneChanger : MonoBehaviour {
 
     public void Main()
     {
-        store.SetActive(false);
+        if (store != null)
+            store.SetActive(false);
         Time.timeScale = 1;
         FindObjectOfType<AudioManager>().Play("Theme");
         FindObjectOfType<AudioManager>().Stop("HipHop");

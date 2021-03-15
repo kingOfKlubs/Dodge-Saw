@@ -7,23 +7,35 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using TMPro;
 
-public class SceneChanger : MonoBehaviour
-{
+public class SceneChanger : MonoBehaviour {
     public AudioMixer mixer;
     public Animator anim;
+
+    [Header("Main Menu Pages")]
     public GameObject mainMenu;
     public GameObject options;
     public GameObject store;
     public Slider slider;
+
+    [Header("Game Level Pages")]
     public GameObject _gameOverUI;
     public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
     public GameObject coinNumPrefab;
+
     [SerializeField]
     public string startGameName;
     public string mainMenuName;
     public TextMeshProUGUI rewardNumber;
+
+    [Header("Tweening Info")]
+    public LeanTweenType easeType;
+    public float duration;
+    public float moveLeft, moveY;
+
     AudioManager AM;
+    float timer = 1.25f;
+    float stopTimer = 4f;
 
     public void Start()
     {
@@ -41,7 +53,7 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(startGameName);
         AM = FindObjectOfType<AudioManager>();
         //slider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
-    }     
+    }
 
     public void QuitGame()
     {
@@ -51,58 +63,58 @@ public class SceneChanger : MonoBehaviour
     public void Options()
     {
         FindObjectOfType<AudioManager>().Stop("Theme");
-		FindObjectOfType<AudioManager>().Play("HipHop");
-        if(anim != null)
-        {
-            anim.SetBool("Options", true);
-        }
-        if (mainMenu != null)
-            mainMenu.SetActive(false);
-        if (options != null)
-            options.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("HipHop");
     }
+
+    public void OptionsAction()
+    {
+        LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
+        LeanTween.moveLocalY(options, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Options);
+    }
+
+    public void BackAction()
+    {
+        LeanTween.moveLocalY(options, -moveY, duration).setEase(easeType);
+        LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
+    }
+
+    public void StoreAction()
+    {
+        store.SetActive(true);
+        LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
+        LeanTween.moveLocalY(store, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Store);
+    }
+
+    public void ExitStoreAction()
+    {
+        LeanTween.moveLocalY(store, moveY, duration).setEase(easeType);
+        LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
+    }
+
     public void Store()
     {
         FindObjectOfType<AudioManager>().Stop("Theme");
         FindObjectOfType<AudioManager>().Play("HipHop");
-        if (anim != null)
-        {
-            anim.SetBool("Store", true);
-        }
-        if (store != null)
-            store.SetActive(true);
-        if (mainMenu != null)
-            mainMenu.SetActive(false);
     }
 
     public void MainMenu()
     {
         Movement player = FindObjectOfType<Movement>();
-        if(player != null)
+        if (player != null)
         {
             Destroy(player.gameObject);
         }
         Score._reward = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
-		FindObjectOfType<AudioManager>().Play("Theme");
+        FindObjectOfType<AudioManager>().Play("Theme");
         FindObjectOfType<AudioManager>().Stop("HipHop");
     }
 
     public void Main()
     {
-        if(anim != null)
-        {
-            anim.SetBool("Options", false);
-            anim.SetBool("Store", false);
-        }
+        store.SetActive(false);
         Time.timeScale = 1;
-        if(options != null)
-            options.SetActive(false);
-        if(mainMenu != null)
-            mainMenu.SetActive(true);
-        if(store != null)
-            store.SetActive(false);
         FindObjectOfType<AudioManager>().Play("Theme");
         FindObjectOfType<AudioManager>().Stop("HipHop");
     }
@@ -112,9 +124,6 @@ public class SceneChanger : MonoBehaviour
         mixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
     }
-
-    float timer = 1.25f;
-    float stopTimer = 4f;
 
     public void GameOver()
     {

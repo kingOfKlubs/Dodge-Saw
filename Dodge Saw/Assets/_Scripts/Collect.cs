@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Collect : MonoBehaviour
 {
     public int _cost;
     public ParticleSystem collectEffect;
-    public GameObject _destroyEffect;
+    public VisualEffect _destroyEffect;
     public Movement player;
     public float _lifeTime;
     public float time;
@@ -56,7 +57,10 @@ public class Collect : MonoBehaviour
             
     }
     public void Death() {
-        GameObject deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
+        Vector4 BaseColor = GetComponent<MeshRenderer>().sharedMaterial.GetVector("_EmissionColor") * 3;
+
+        _destroyEffect.SetVector4("Flash Color", BaseColor);
+        GameObject deathClone = Instantiate(_destroyEffect.gameObject, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);
     }

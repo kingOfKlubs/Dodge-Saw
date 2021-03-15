@@ -43,7 +43,6 @@ public class GoldManager : MonoBehaviour
 
     void Awake()
     {
-        targetPosition = target.position;
         _c = PlayerPrefs.GetInt("Currency");
         //prepare pool
         PrepareCoins();
@@ -77,6 +76,7 @@ public class GoldManager : MonoBehaviour
 
                 //animate coin to target position
                 float duration = Random.Range(minAnimDuration, maxAnimDuration);
+                targetPosition = target.position;
                 coin.transform.LeanMove(targetPosition, duration)
                 .setEase(easeType)
                 .setOnComplete(() => {
@@ -95,3 +95,4 @@ public class GoldManager : MonoBehaviour
         Animate(collectedCoinPosition, amount);
     }
 }
+       

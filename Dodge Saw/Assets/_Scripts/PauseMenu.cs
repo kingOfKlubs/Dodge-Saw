@@ -23,8 +23,8 @@ public class PauseMenu : MonoBehaviour
     {
         if(_isGamePaused)
         {
-            if (movement != null)
-                movement._coolDownImageLarge.gameObject.SetActive(false);
+            //if (movement != null)
+                //movement._coolDownImageLarge.gameObject.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
             _pauseMenuUI.SetActive(true);
             _pauseUI.SetActive(true);
             Time.timeScale = 0f;
-            FindObjectOfType<AudioManager>().Stop("Theme");
+            FindObjectOfType<AudioManager>().Mute("Theme");
             _isGamePaused = true;
             if(_optionsUI.activeSelf == true)
             {

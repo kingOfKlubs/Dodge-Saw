@@ -22,6 +22,7 @@ public class SceneChanger : MonoBehaviour {
     public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
     public GameObject coinNumPrefab;
+    public ParticleSystem CoinCollectEffect;
 
     [SerializeField]
     public string startGameName;
@@ -148,13 +149,16 @@ public class SceneChanger : MonoBehaviour {
                         _gameOverRewardUI.SetActive(true);
                         if (rewardNumber != null)
                             rewardNumber.text = "+ " + Score._reward;
-
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            CoinCollectEffect.Play();
+                        }
                     }
+                    
                     if (Input.GetMouseButtonUp(0))
                     {
-                        
                         GoldManager gm = FindObjectOfType<GoldManager>();
-                        gm.AddCoins(Input.mousePosition, Score._reward);
+                        gm.AddCoins(new Vector2(0,0), Score._reward);
                         GoldCurrency GC = FindObjectOfType<GoldCurrency>();
                         GC.AddMoneyToBank(Score._reward);               
                         Score._reward = 0;

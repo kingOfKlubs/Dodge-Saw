@@ -29,11 +29,14 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private Transform DeathPage;
     [SerializeField] private Transform IAPPage;
     [SerializeField] private GameObject shopItemPrefab;
+    [SerializeField] private ParticleSystem CoinFallEffect;
 
     [SerializeField] private Sprite EquippedItemBackground;
     [SerializeField] private Sprite UnequippedItemBackground;
     public GameObject player;
     public float shakeDistance;
+    public float shakeTime;
+    public GameObject NotEnoughFundsText;
     GameObject us;
 
     private CanvasGroup[] CanvasGroup;
@@ -55,6 +58,7 @@ public class StoreManager : MonoBehaviour
             gc.TakeMoneyFromBank(item.cost);
             item.purchased = true;
             item.buttonText = "Equip";
+            CoinFallEffect.Play();
             PopulateShop();
         }
         else
@@ -177,7 +181,8 @@ public class StoreManager : MonoBehaviour
 
     public void UnableToPurchase(GameObject item)
     {
-           
+        LeanTween.rotateAround(item,new Vector3(0,0,1),shakeDistance, shakeTime).setLoopPingPong(3);
+        NotEnoughFundsText.SetActive(true);
         Debug.Log("You don't have sufficient funds to purchase this item");
     }
 
@@ -313,7 +318,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si));
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
 
@@ -355,7 +360,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si));
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
 
@@ -397,7 +402,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si));
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
 
@@ -439,7 +444,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
             else
             {
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si));
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
 

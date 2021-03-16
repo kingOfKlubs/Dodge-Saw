@@ -28,6 +28,11 @@ public class GoldCurrency : MonoBehaviour
         _currencyText.text = "" + PlayerPrefs.GetInt("Currency", 0).ToString();
 	}
 
+    //private void LateUpdate()
+    //{
+    //    _currencyText.text = "" + PlayerPrefs.GetInt("Currency", 0).ToString();
+    //}
+
     public void AddMoneyToBank(int coins)
     {
         _bank += coins;
@@ -40,6 +45,9 @@ public class GoldCurrency : MonoBehaviour
         _bank -= coins;
         PlayerPrefs.SetInt("Currency", _bank);
         _currencyText.text = "" + _bank.ToString();
-
     }
+    //public int GetCurrentBalance()
+    //{
+    //    return PlayerPrefs.GetInt("Currency",0);
+    //}
 }

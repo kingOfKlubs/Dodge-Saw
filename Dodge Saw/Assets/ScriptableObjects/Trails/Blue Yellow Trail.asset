@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
   m_Name: Blue Yellow Trail
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: e4f1fee3de32377429fd1348fae62b10, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 12396a524aa88594a8bbac4d90e9fdfc, type: 3}
   texture: {fileID: 8400000, guid: 2ed922792bfe14386b88f782f5881560, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}

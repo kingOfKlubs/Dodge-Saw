@@ -34,13 +34,12 @@ public class SceneChanger : MonoBehaviour {
     public float duration;
     public float moveLeft, moveY;
 
-    AudioManager AM;
     float timer = 1.25f;
     float stopTimer = 4f;
 
     public void Start()
     {
-        float volume = PlayerPrefs.GetFloat("Volume");
+        float volume = PlayerPrefs.GetFloat("Volume",0);
         mixer.SetFloat("Volume", volume);
     }
 
@@ -51,9 +50,8 @@ public class SceneChanger : MonoBehaviour {
 
     public void StartGame()
     {
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         SceneManager.LoadScene(startGameName);
-        AM = FindObjectOfType<AudioManager>();
-        //slider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
     }
 
     public void QuitGame()
@@ -69,12 +67,14 @@ public class SceneChanger : MonoBehaviour {
 
     public void OptionsAction()
     {
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
         LeanTween.moveLocalY(options, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Options);
     }
 
     public void BackAction()
     {
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         LeanTween.moveLocalY(options, -moveY, duration).setEase(easeType);
         LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
     }
@@ -82,12 +82,14 @@ public class SceneChanger : MonoBehaviour {
     public void StoreAction()
     {
         store.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
         LeanTween.moveLocalY(store, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Store);
     }
 
     public void ExitStoreAction()
     {
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         LeanTween.moveLocalY(store, moveY, duration).setEase(easeType);
         LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
     }
@@ -123,6 +125,7 @@ public class SceneChanger : MonoBehaviour {
 
     public void SetVolume(float volume)
     {
+        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         mixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
     }

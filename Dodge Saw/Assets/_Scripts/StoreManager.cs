@@ -41,6 +41,12 @@ public class StoreManager : MonoBehaviour
 
     private CanvasGroup[] CanvasGroup;
     private GameObject[] items;
+    private AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +63,7 @@ public class StoreManager : MonoBehaviour
             gc.TakeMoneyFromBank(item.cost);
             item.purchased = true;
             item.buttonText = "Equip";
+            audioManager.Play("ChaChing");
             CoinFallEffect.Play();
             PopulateShop();
         }
@@ -159,6 +166,7 @@ public class StoreManager : MonoBehaviour
         item.backgroundImage = EquippedItemBackground;
         item.equipped = true;
         item.buttonText = "Equipped";
+        audioManager.Play("Equip");
         PopulateShop();
     }
 
@@ -180,6 +188,7 @@ public class StoreManager : MonoBehaviour
 
     public void UnableToPurchase(GameObject item)
     {
+        audioManager.Play("Denied");
         LeanTween.rotateAround(item,new Vector3(0,0,1),shakeDistance, shakeTime).setLoopPingPong(3);
         NotEnoughFundsText.SetActive(true);
         Debug.Log("You don't have sufficient funds to purchase this item");

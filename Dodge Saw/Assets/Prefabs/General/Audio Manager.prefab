@@ -86,3 +86,31 @@ MonoBehaviour:
     loop: 0
     soure: {fileID: 0}
     Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+  - Name: ButtonPressed
+    clip: {fileID: 8300000, guid: 604588be2879c0243a2739eb5c6e434e, type: 3}
+    volume: 0.75
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+  - Name: ChaChing
+    clip: {fileID: 8300000, guid: 7b705b988a95fe24a881b618d76fa076, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+  - Name: Denied
+    clip: {fileID: 8300000, guid: 39ffd3c06c6b73647a78b5eb76fdbf4f, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+  - Name: Equip
+    clip: {fileID: 8300000, guid: 375df245e57c36a42bcb0cca53285b8f, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}

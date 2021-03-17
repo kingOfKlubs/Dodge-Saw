@@ -37,6 +37,13 @@ public class SceneChanger : MonoBehaviour {
     float timer = 1.25f;
     float stopTimer = 4f;
 
+    AudioManager audioManager;
+
+    public void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
     public void Start()
     {
         float volume = PlayerPrefs.GetFloat("Volume",0);
@@ -50,7 +57,7 @@ public class SceneChanger : MonoBehaviour {
 
     public void StartGame()
     {
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
         SceneManager.LoadScene(startGameName);
     }
 
@@ -61,20 +68,20 @@ public class SceneChanger : MonoBehaviour {
 
     public void Options()
     {
-        FindObjectOfType<AudioManager>().Stop("Theme");
-        FindObjectOfType<AudioManager>().Play("HipHop");
+        AudioManager.instance.Stop("Theme");
+        AudioManager.instance.Play("HipHop");
     }
 
     public void OptionsAction()
     {
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
         LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
         LeanTween.moveLocalY(options, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Options);
     }
 
     public void BackAction()
     {
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
         LeanTween.moveLocalY(options, -moveY, duration).setEase(easeType);
         LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
     }
@@ -82,22 +89,22 @@ public class SceneChanger : MonoBehaviour {
     public void StoreAction()
     {
         store.SetActive(true);
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
         LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
         LeanTween.moveLocalY(store, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Store);
     }
 
     public void ExitStoreAction()
     {
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
         LeanTween.moveLocalY(store, moveY, duration).setEase(easeType);
         LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
     }
 
     public void Store()
     {
-        FindObjectOfType<AudioManager>().Stop("Theme");
-        FindObjectOfType<AudioManager>().Play("HipHop");
+        AudioManager.instance.Stop("Theme");
+        AudioManager.instance.Play("HipHop");
     }
 
     public void MainMenu()
@@ -110,8 +117,8 @@ public class SceneChanger : MonoBehaviour {
         Score._reward = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
-        FindObjectOfType<AudioManager>().Play("Theme");
-        FindObjectOfType<AudioManager>().Stop("HipHop");
+        AudioManager.instance.Play("Theme");
+        AudioManager.instance.Stop("HipHop");
     }
 
     public void Main()
@@ -119,15 +126,15 @@ public class SceneChanger : MonoBehaviour {
         if (store != null)
             store.SetActive(false);
         Time.timeScale = 1;
-        FindObjectOfType<AudioManager>().Play("Theme");
-        FindObjectOfType<AudioManager>().Stop("HipHop");
+        AudioManager.instance.Play("Theme");
+        AudioManager.instance.Stop("HipHop");
     }
 
     public void SetVolume(float volume)
     {
-        FindObjectOfType<AudioManager>().Play("ButtonPressed");
         mixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
+        AudioManager.instance.Play("ButtonPressed");
     }
 
     public void GameOver()

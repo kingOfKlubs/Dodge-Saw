@@ -11,12 +11,19 @@ public class PauseMenu : MonoBehaviour
     public GameObject _pauseUI;
     public GameObject _optionsUI;
 
+    AudioManager audioManager;
+
     Movement movement;
 
     private void Start()
     {
         Time.timeScale = 1;
         movement = FindObjectOfType<Movement>();
+    }
+
+    private void OnEnable()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -42,9 +49,9 @@ public class PauseMenu : MonoBehaviour
     {
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        FindObjectOfType<AudioManager>().Play("Theme");
+        audioManager.Play("Theme");
         _isGamePaused = false;
-
+        AudioManager.instance.Play("ButtonPressed");
     }
     public void Pause()
     {
@@ -56,17 +63,19 @@ public class PauseMenu : MonoBehaviour
             _pauseMenuUI.SetActive(true);
             _pauseUI.SetActive(true);
             Time.timeScale = 0f;
-            FindObjectOfType<AudioManager>().Mute("Theme");
+            audioManager.Mute("Theme");
             _isGamePaused = true;
             if(_optionsUI.activeSelf == true)
             {
                 _optionsUI.SetActive(false);
             }
+            AudioManager.instance.Play("ButtonPressed");
         }
     }
     public void Options()
     {
         _pauseUI.SetActive(false);
         _optionsUI.SetActive(true);
+        AudioManager.instance.Play("ButtonPressed");
     }
 }

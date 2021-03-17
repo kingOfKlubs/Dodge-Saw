@@ -19,9 +19,12 @@ public class Score : MonoBehaviour
     //public VisualEffect fireworks;
     public GameObject UI;
 
+    AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         if(_highScore != null)
         _highScore.text = "Top: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         _scoreText = GetComponent<TextMeshProUGUI>();
@@ -49,8 +52,8 @@ public class Score : MonoBehaviour
 
     public void ResetHighScore()
     {
+        audioManager.Play("ButtonPressed");
         PlayerPrefs.DeleteKey("HighScore");
-        _highScore.text = "0";
     }
 
     public static void GetMoney()

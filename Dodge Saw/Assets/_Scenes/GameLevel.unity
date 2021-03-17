@@ -5072,8 +5072,8 @@ GameObject:
   - component: {fileID: 1170511735}
   - component: {fileID: 1170511734}
   - component: {fileID: 1170511733}
-  - component: {fileID: 1170511732}
   - component: {fileID: 1170511737}
+  - component: {fileID: 1170511732}
   - component: {fileID: 1170511738}
   - component: {fileID: 1170511739}
   m_Layer: 5
@@ -6793,7 +6793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -30, y: 18.2}
+  m_AnchoredPosition: {x: -30, y: 18.199707}
   m_SizeDelta: {x: 252.4436, y: 143.5798}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1389962264
@@ -9668,7 +9668,7 @@ VisualEffect:
       - m_Value: {x: 2.4622889, y: 0.2578313, z: 0, w: 1}
         m_Name: Particle Color
         m_Overridden: 1
-      - m_Value: {x: 2, y: 0.50980395, z: 0, w: 1}
+      - m_Value: {x: 2.670157, y: 2.670157, z: 2.670157, w: 1}
         m_Name: Portal Flash Color
         m_Overridden: 1
     m_Uint:
@@ -10801,6 +10801,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
         type: 3}
+      propertyPath: Sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 691369bf7ca60cb4799d0af702d14d69, type: 3}
+    - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
+        type: 3}
       propertyPath: Sounds.Array.data[6].Name
       value: ButtonPressed
       objectReference: {fileID: 0}
@@ -11241,6 +11246,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: e4ecbf93e48ce446b84192f24866075b, type: 3}
     - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
         type: 3}
+      propertyPath: Sounds.Array.data[4].pitch
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
+        type: 3}
       propertyPath: Sounds.Array.data[50].Name
       value: EndOfRound
       objectReference: {fileID: 0}
@@ -11628,6 +11638,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Sounds.Array.data[49].pitch
       value: 1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
+        type: 3}
+      propertyPath: Sounds.Array.data[4].volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4127587338916184559, guid: e1d0bad44617f44189d17545a7640087,
         type: 3}

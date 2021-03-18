@@ -183,24 +183,31 @@ public class RoundManager : MonoBehaviour {
         _previousRound = _round;
         shouldChange = true;
         PlayableDirector playable = _roundCounter.GetComponent<PlayableDirector>(); // note this playable should only be as long as the delay
-        //PlayableDirector playerAction = FindObjectOfType<Movement>().GetComponent<PlayableDirector>(); // note this playbale should only be as long as the delay + PortalAnimDuration
         playable.Play();
-        //playerAction.Play();
-        yield return new WaitForSeconds(delay);
-        //_roundCounter.text = (_nextRound + 1).ToString();
+
+        // right now delay = 3
+        yield return new WaitForSeconds(delay -.4f); // = 2.1
+        AudioManager.instance.Play("Portal");
+        yield return new WaitForSeconds(delay - 2.6f); // = .9
+
         foreach (RoundCounter count in counters)
         {
             count.GetComponent<TextMeshProUGUI>().text = (_nextRound + 1).ToString();
         }
+
         if (_nextRound % 2 == 1) {
             portalPurple.SetActive(true);
-            yield return new WaitForSeconds(PortalAnimDuration);
+            yield return new WaitForSeconds(PortalAnimDuration-1.55f);
+            AudioManager.instance.Play("Warp");
+            yield return new WaitForSeconds(PortalAnimDuration-3.5f);
             portalPurple.SetActive(false);
         }
         else if (_nextRound % 2 == 0) {
             portalOrange.SetActive(true);
-            yield return new WaitForSeconds(PortalAnimDuration);
-            portalOrange.SetActive(false);
+            yield return new WaitForSeconds(PortalAnimDuration-1.55f);
+            AudioManager.instance.Play("Warp");
+            yield return new WaitForSeconds(PortalAnimDuration-3.5f);
+            portalOrange.SetActive(false);   
         }
 
         playable.Stop();
@@ -293,7 +300,9 @@ public class RoundManager : MonoBehaviour {
         // This is where we will spawn enemies
         ParticleSystem RingClone = Instantiate(ring, _position, Quaternion.identity);
         Destroy(RingClone.gameObject, 3);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
+        AudioManager.instance.Play("EnemySpawn");
+        yield return new WaitForSeconds(.5f);
         GameObject EnemyClone = Instantiate(_enemy, _position, Quaternion.identity);
     }
 

@@ -19,8 +19,8 @@ public class GoldManager : MonoBehaviour
 
     [Space]
     [Header("Animation settings")]
-    [SerializeField] [Range(0.5f, 0.9f)] float minAnimDuration;
-    [SerializeField] [Range(0.9f, 2f)] float maxAnimDuration;
+    [SerializeField] [Range(0.5f, 0.9f)] float AnimDuration;
+    //[SerializeField] [Range(0.9f, 2f)] float maxAnimDuration;
 
     [SerializeField] LeanTweenType easeType;
     [SerializeField] float spread;
@@ -75,7 +75,7 @@ public class GoldManager : MonoBehaviour
                 coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
 
                 //animate coin to target position
-                float duration = Random.Range(minAnimDuration, maxAnimDuration);
+                float duration = AnimDuration++;
                 targetPosition = target.position;
                 coin.transform.LeanMove(targetPosition, duration)
                 .setEase(easeType)

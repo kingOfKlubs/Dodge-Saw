@@ -69,6 +69,7 @@ public class SplitMove : EnemyMovement
             proj.GetComponent<miniDiamond>()._moveDirection = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y).normalized;
 
             angle += angleStep;
+            AudioManager.instance.Play("EnemySplit");
         }
 
         Destroy(this.gameObject);

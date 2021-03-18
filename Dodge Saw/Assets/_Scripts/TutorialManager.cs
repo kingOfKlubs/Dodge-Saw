@@ -33,14 +33,12 @@ public class TutorialManager : MonoBehaviour
     Vector2 topRange;
     Vector2 bottomRange;
     private FindingDimensions findingDimensions = new FindingDimensions();
-    AudioManager audioManager;
     #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefsX.GetBool("hasCompletedTutorial") == false)
         {
             
@@ -158,7 +156,7 @@ public class TutorialManager : MonoBehaviour
     {
         PlayerPrefsX.SetBool("hasCompletedTutorial", false);
         Debug.Log(PlayerPrefsX.GetBool("hasCompletedTutorial"));
-        audioManager.Play("ButtonPressed");
+        AudioManager.instance.Play("ButtonPressed");
     }
 
     public void CompleteTutorial()

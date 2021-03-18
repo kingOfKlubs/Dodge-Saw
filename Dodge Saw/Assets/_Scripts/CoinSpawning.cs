@@ -82,6 +82,7 @@ public class CoinSpawning : MonoBehaviour
 
         Destroy(leadIn.gameObject, 2);
         yield return new WaitForSeconds(animDuration);
+        AudioManager.instance.Play("CoinSpawn");
         GameObject CoinClone = Instantiate(coinType, _position, Quaternion.identity);
 
     }

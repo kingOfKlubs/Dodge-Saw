@@ -26,6 +26,7 @@ public class Bounce : EnemyMovement
         RaycastHit _hit;
         if (Physics.Raycast(_ray, out _hit, _dst, layer))
         {
+            AudioManager.instance.Play("EnemyBump");
             _rigid.velocity = Vector2.Reflect(_moveDirection, _hit.normal);
             _moveDirection = _rigid.velocity;
         }

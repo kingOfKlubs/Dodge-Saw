@@ -101,6 +101,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public virtual void Death() {
+        AudioManager.instance.Play("EnemyDeath");
         VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);

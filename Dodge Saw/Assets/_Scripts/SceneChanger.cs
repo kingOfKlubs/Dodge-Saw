@@ -37,13 +37,6 @@ public class SceneChanger : MonoBehaviour {
     float timer = 1.25f;
     float stopTimer = 4f;
 
-    AudioManager audioManager;
-
-    public void Awake()
-    {
-        audioManager = FindObjectOfType<AudioManager>();
-    }
-
     public void Start()
     {
         float volume = PlayerPrefs.GetFloat("Volume",0);
@@ -162,6 +155,7 @@ public class SceneChanger : MonoBehaviour {
                         if (Input.GetMouseButtonDown(0))
                         {
                             CoinCollectEffect.Play();
+                            AudioManager.instance.Play("TapCollect");
                         }
                     }
                     

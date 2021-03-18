@@ -9,6 +9,7 @@ public class EdgeMove : EnemyMovement
     void Start()
     {       
         Initiate();
+        AudioManager.instance.Play("ImElectric");
     }
 
     // Update is called once per frame
@@ -84,6 +85,7 @@ public class EdgeMove : EnemyMovement
 
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
+        AudioManager.instance.Stop("ImElectric");
         base.Death();
     }
 }

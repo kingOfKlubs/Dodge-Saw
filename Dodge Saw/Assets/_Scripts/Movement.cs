@@ -286,6 +286,7 @@ public class Movement : MonoBehaviour
 
     public void MoveSlow()
     {
+
         _cooldown = false;
         _coolDownImage.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImageLarge.fillAmount -= 1 / _startTime * Time.deltaTime;

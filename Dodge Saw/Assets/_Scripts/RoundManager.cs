@@ -29,7 +29,8 @@ public class RoundManager : MonoBehaviour {
     public List<Round> rounds;
     public GameObject[] enemyTypes;
     public Color[] colors;
-    public GameObject Portal;
+    public GameObject portalOrange;
+    public GameObject portalPurple;
     public ParticleSystem ring;
     public VisualEffect warp;
     public VisualEffect altwarp;
@@ -191,10 +192,17 @@ public class RoundManager : MonoBehaviour {
         {
             count.GetComponent<TextMeshProUGUI>().text = (_nextRound + 1).ToString();
         }
-        Portal.SetActive(true);
+        if (_nextRound % 2 == 1) {
+            portalPurple.SetActive(true);
+            yield return new WaitForSeconds(PortalAnimDuration);
+            portalPurple.SetActive(false);
+        }
+        else if (_nextRound % 2 == 0) {
+            portalOrange.SetActive(true);
+            yield return new WaitForSeconds(PortalAnimDuration);
+            portalOrange.SetActive(false);
+        }
 
-        yield return new WaitForSeconds(PortalAnimDuration);
-        Portal.SetActive(false);
         playable.Stop();
         //playerAction.Stop();
         UpdateStates(RoundStates.RoundStart);

@@ -81,7 +81,7 @@ public class SceneChanger : MonoBehaviour {
 
     public void StoreAction()
     {
-        store.SetActive(true);
+        //store.SetActive(true);
         AudioManager.instance.Play("ButtonPressed");
         LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
         LeanTween.moveLocalY(store, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Store);
@@ -116,8 +116,8 @@ public class SceneChanger : MonoBehaviour {
 
     public void Main()
     {
-        if (store != null)
-            store.SetActive(false);
+        //if (store != null)
+            //store.SetActive(false);
         Time.timeScale = 1;
         AudioManager.instance.Play("Theme");
         AudioManager.instance.Stop("HipHop");

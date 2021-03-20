@@ -27,8 +27,6 @@ public class Item
     //to manage the type of item this is
     public ItemType itemType;
 
-    public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death, IAP }
-
     public Item(Sprite _backgroundImage, Texture _texture, Color _color, Color _color2, Gradient _gradient, string _itemName, string _buttonText, int _cost, bool _equipped, bool _purchased, ItemType _itemType)
     {
         backgroundImage = _backgroundImage;
@@ -45,4 +43,4 @@ public class Item
     }
 }
 
-
+public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death, IAP }

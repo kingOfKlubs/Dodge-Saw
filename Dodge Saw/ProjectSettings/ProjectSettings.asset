@@ -54,7 +54,7 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   m_MTRendering: 1
-  m_StackTraceTypes: 010000000100000001000000010000000100000001000000
+  m_StackTraceTypes: 020000000100000001000000010000000200000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   iosUseCustomAppBackgroundBehavior: 0
@@ -101,7 +101,7 @@ PlayerSettings:
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
   xboxEnablePIXSampling: 0
-  metalFramebufferOnly: 0
+  metalFramebufferOnly: 1
   xboxOneResolution: 0
   xboxOneSResolution: 0
   xboxOneXResolution: 3
@@ -167,7 +167,7 @@ PlayerSettings:
   enableFrameTimingStats: 0
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
-  m_ColorGamuts: 00000000
+  m_ColorGamuts: 0000000003000000
   targetPixelDensity: 30
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
@@ -879,7 +879,7 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   cloudProjectId: bef56f36-6ca4-40e5-bcad-5c282a5b42a9
-  framebufferDepthMemorylessMode: 0
+  framebufferDepthMemorylessMode: 2
   projectName: Time Dash
   organizationId: devmau-c7ef27ed-4b67-430b-a37b-cf6bfbca3a11
   cloudEnabled: 0

@@ -26,7 +26,18 @@ public class DataManager : MonoBehaviour {
 
     public void SaveItem(Item item) {
         ItemData _item = new ItemData(item);
-        //TODO add saving to the objects to Persist list hereÍÍ
+        //TODO add saving to the objects to Persist list here
+        for (int i = 0; i < objectsToPersist.Count; i++){
+            if (_item.itemName == objectsToPersist[i].itemName && _item.itemType == objectsToPersist[i].itemType)
+            {
+                objectsToPersist[i].itemName = _item.itemName;
+                objectsToPersist[i].buttonText = _item.buttonText;
+                objectsToPersist[i].cost = _item.cost;
+                objectsToPersist[i].equipped = _item.equipped;
+                objectsToPersist[i].purchased = _item.purchased;
+                objectsToPersist[i].itemType = _item.itemType;
+            }
+        }
     }
 
     public void SaveGame()
@@ -84,6 +95,14 @@ public class DataManager : MonoBehaviour {
                 items[i].purchased = objectsToReference[i].purchased;
                 items[i].itemType = objectsToReference[i].itemType;
             }
+
+            objectsToPersist[i].itemName = objectsToReference[i]._itemName;
+            objectsToPersist[i].buttonText = objectsToReference[i]._buttonText;
+            objectsToPersist[i].cost = objectsToReference[i].cost;
+            objectsToPersist[i].equipped = objectsToReference[i].equipped;
+            objectsToPersist[i].purchased = objectsToReference[i].purchased;
+            objectsToPersist[i].itemType = objectsToReference[i].itemType;
+
         }
 
 

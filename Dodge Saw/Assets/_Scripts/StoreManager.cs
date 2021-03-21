@@ -49,11 +49,12 @@ public class StoreManager : MonoBehaviour
     private CanvasGroup[] CanvasGroup;
     private GameObject[] items;
     private AudioManager audioManager;
-    private DataManager dataManager = new DataManager();
+    private DataManager dataManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        dataManager = FindObjectOfType<DataManager>();
         PopulateShop();
     }
 
@@ -66,10 +67,10 @@ public class StoreManager : MonoBehaviour
             gc.TakeMoneyFromBank(item.cost);
             item.purchased = true;
             item.buttonText = "Equip";
-            audioManager.Play("ChaChing");
+            AudioManager.instance.Play("ChaChing");
             CoinFallEffect.Play();
-            dataManager.SaveItem(item);
             PopulateShop();
+            dataManager.SaveItem(item); 
         }
         else
             UnableToPurchase(itemObject);
@@ -167,8 +168,9 @@ public class StoreManager : MonoBehaviour
         item.backgroundImage = EquippedItemBackground;
         item.equipped = true;
         item.buttonText = "Equipped";
-        audioManager.Play("Equip");
+        AudioManager.instance.Play("Equip");
         PopulateShop();
+        dataManager.SaveItem(item);
     }
 
     public void Unequip(Item item)
@@ -181,7 +183,7 @@ public class StoreManager : MonoBehaviour
 
     public void UnableToPurchase(GameObject item)
     {
-        audioManager.Play("Denied");
+        AudioManager.instance.Play("Denied");
         LeanTween.rotateAround(item,new Vector3(0,0,1),shakeDistance, shakeTime).setLoopPingPong(3);
         NotEnoughFundsText.SetActive(true);
         Debug.Log("You don't have sufficient funds to purchase this item");
@@ -214,13 +216,9 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if(si.backgroundImage != null) {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
+            
 
             //assign texture from the prefab to the instantiated object
             if (si.texture != null) {
@@ -251,7 +249,7 @@ public class StoreManager : MonoBehaviour
                 si.buttonText = "Buy";
             }
 
-
+            dataManager.SaveItem(si);
         }
         for (int i = 0; i < shopTrailItems.Count; i++)
         {
@@ -271,13 +269,9 @@ public class StoreManager : MonoBehaviour
 
 
             //assign image from the prefab to the instantiated object
-            if (si.backgroundImage != null) {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
+
 
             //assign texture from the prefab to the instantiated object
             if (si.texture != null) {
@@ -308,7 +302,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
+            dataManager.SaveItem(si);
         }
         for (int i = 0; i < shopEnemyItems.Count; i++)
         {
@@ -328,13 +322,8 @@ public class StoreManager : MonoBehaviour
 
 
             //assign image from the prefab to the instantiated object
-            if (si.backgroundImage != null) {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
 
             if (si.texture != null) {
                 shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
@@ -363,7 +352,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
+            dataManager.SaveItem(si);
         }
         //for (int i = 0; i < shopWarpItems.Count; i++)
         //{
@@ -437,13 +426,8 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.backgroundImage != null) {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
 
             //assign texture from the prefab to the instantiated object
             if (si.texture != null) {
@@ -473,7 +457,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
+            dataManager.SaveItem(si);
         }
         for (int i = 0; i < shopIAPItems.Count; i++)
         {
@@ -492,13 +476,8 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.backgroundImage != null) {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
 
             //assign texture from the prefab to the instantiated object
             if (si.texture != null) {
@@ -528,7 +507,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
+            dataManager.SaveItem(si);
         }
     }
 }

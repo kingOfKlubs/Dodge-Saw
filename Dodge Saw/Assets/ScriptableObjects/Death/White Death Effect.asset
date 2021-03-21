@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8eb199aac1f4b168ae3ed655682173, type: 3}
   m_Name: White Death Effect
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: 8a70697394265a84b9a25047e8889920, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 12396a524aa88594a8bbac4d90e9fdfc, type: 3}
   texture: {fileID: 8400000, guid: 5b7fef9b2d525472f8b72bc676f43f5f, type: 2}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 0, g: 0, b: 0, a: 0}

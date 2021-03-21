@@ -46,7 +46,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
   _itemName: Red
-  _buttonText: Equipped
+  _buttonText: Buy
   cost: 5
   equipped: 0
   purchased: 0

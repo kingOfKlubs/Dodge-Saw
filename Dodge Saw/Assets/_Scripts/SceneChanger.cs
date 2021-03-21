@@ -9,6 +9,7 @@ using TMPro;
 
 public class SceneChanger : MonoBehaviour {
     public AudioMixer mixer;
+    public AudioMixer sfxMixer;
     public Animator anim;
 
     [Header("Main Menu Pages")]
@@ -41,6 +42,8 @@ public class SceneChanger : MonoBehaviour {
     {
         float volume = PlayerPrefs.GetFloat("Volume",0);
         mixer.SetFloat("Volume", volume);
+        float sfxVolume = PlayerPrefs.GetFloat("sfxVolume",0);
+        sfxMixer.SetFloat("Volume", sfxVolume);
     }
 
     public void Update()
@@ -127,6 +130,12 @@ public class SceneChanger : MonoBehaviour {
     {
         mixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
+        AudioManager.instance.Play("ButtonPressed");
+    }
+    public void SetSFXVolume(float volume)
+    {
+        sfxMixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("sfxVolume", volume);
         AudioManager.instance.Play("ButtonPressed");
     }
 

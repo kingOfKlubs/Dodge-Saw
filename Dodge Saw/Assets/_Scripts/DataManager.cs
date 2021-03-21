@@ -123,9 +123,6 @@ public class DataManager : MonoBehaviour {
             //else if (objectsToPersist[i].itemType == Item.ItemType.Warp) {
             //    storeManager.shopWarpItems.Add(objectsToPersist[i]);
             //}
-            else if (items[i].itemType == ItemType.IAP) {
-                storeManager.shopIAPItems.Add(items[i]);
-            }
         }
     }
 

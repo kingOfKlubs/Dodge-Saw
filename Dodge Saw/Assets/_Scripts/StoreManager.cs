@@ -19,7 +19,7 @@ public class StoreManager : MonoBehaviour
     public List<Item> shopEnemyItems;
     //public List<Item> shopWarpItems;
     public List<Item> shopDeathItems;
-    public List<Item> shopIAPItems;
+    public List<GameObject> shopIAPItems;
 
     [Header("References")]
     [SerializeField] private Transform PlayerPage;
@@ -461,53 +461,7 @@ public class StoreManager : MonoBehaviour
         }
         for (int i = 0; i < shopIAPItems.Count; i++)
         {
-            Item si = shopIAPItems[i];
-            GameObject shopItemObject = Instantiate(shopItemPrefab, IAPPage);
-
-            //this access' the prefabs's component, and change it based off your ShopItem struct
-            //ShopItem(image)
-            // - Panel
-            // - Texture (Raw Image)
-            // - name (Text)
-            // - Cost (Text)
-            //  - Coin (image)
-            // - Unequip (button)
-            // - Equip (button)
-            // - Buy (button)
-
-            //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-
-            //assign texture from the prefab to the instantiated object
-            if (si.texture != null) {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[6];
-            }
-
-            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().color = si.color;
-            //assign the name from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
-            //assign the cost from the pregab to the instantiated object
-            shopItemObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
-            //assign the buttons from the prefab to the instantiated object
-            shopItemObject.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
-
-            //Grab button, assign a function to it's onClick event
-            if (si.purchased && si.equipped)
-            {
-                Debug.Log(si.itemName + " is Equipped");
-            }
-            else if (si.purchased && !si.equipped)
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
-            else
-            {
-                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
-                si.buttonText = "Buy";
-            }
-            dataManager.SaveItem(si);
+            GameObject shopItemObject = Instantiate(shopIAPItems[i], IAPPage);
         }
     }
 }

@@ -117,12 +117,13 @@ public class DataManager : MonoBehaviour {
             else if (items[i].itemType == ItemType.Trail) {
                 storeManager.shopTrailItems.Add(items[i]);
             }
-            else if (items[i].itemType == ItemType.Enemies) {
-                storeManager.shopEnemyItems.Add(items[i]);
+            else if (items[i].itemType == ItemType.Skin) {
+                storeManager.shopSkinItems.Add(items[i]);
             }
-            //else if (objectsToPersist[i].itemType == Item.ItemType.Warp) {
-            //    storeManager.shopWarpItems.Add(objectsToPersist[i]);
-            //}
+            else if (objectsToPersist[i].itemType == ItemType.Cosmetic)
+            {
+                storeManager.shopCosmeticItems.Add(items[i]);
+            }
         }
     }
 

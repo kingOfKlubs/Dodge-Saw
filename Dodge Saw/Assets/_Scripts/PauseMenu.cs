@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
     {
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        audioManager.Play("Theme");
+        AudioManager.instance.Play("Theme");
         _isGamePaused = false;
         AudioManager.instance.Play("ButtonPressed");
     }
@@ -63,7 +63,7 @@ public class PauseMenu : MonoBehaviour
             _pauseMenuUI.SetActive(true);
             _pauseUI.SetActive(true);
             Time.timeScale = 0f;
-            audioManager.Mute("Theme");
+            AudioManager.instance.Mute("Theme");
             _isGamePaused = true;
             if(_optionsUI.activeSelf == true)
             {

@@ -43,4 +43,4 @@ public class Item
     }
 }
 
-public enum ItemType { Player, Trail, Enemies, Warp, AltWarp, Death, IAP }
+public enum ItemType { Player, Trail, Skin, Cosmetic, Death, IAP }

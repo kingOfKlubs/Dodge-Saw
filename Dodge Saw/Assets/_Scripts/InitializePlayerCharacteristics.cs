@@ -7,8 +7,10 @@ using UnityEngine.VFX;
 public class InitializePlayerCharacteristics : MonoBehaviour
 {
     public GameObject _playerPrefab;
+    public GameObject _playerSkinPrefab;
     public VisualEffect Portal;
     public Color[] defaultColor;
+    public Mesh[] meshes;
     public Gradient defaultGradient;
 
     public static Color _playerColor;
@@ -32,7 +34,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
     RoundManager roundManager;
 
-    
+   
 
     // Start is called before the first frame update
     void Awake()
@@ -62,6 +64,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
         SetDeathColor();
+        SetSkin(GameObject.FindGameObjectWithTag("Player"));
         //SetPortalColor();
         //SetWarpColor();
         //SetEnemiesColor();
@@ -69,6 +72,22 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
         
     }
+
+    public void SetSkin(GameObject player)
+    {
+        switch (PlayerPrefs.GetString("ChosenSkin"))
+        {
+            case ("Player Skin 1"):
+                player.GetComponent<MeshFilter>().sharedMesh = meshes[1];
+                _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[1];
+                break;
+            default:
+                player.GetComponent<MeshFilter>().sharedMesh = meshes[0];
+                _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[0];
+                break;
+        }
+    }
+
 
     private void SetPortalColor()
     {

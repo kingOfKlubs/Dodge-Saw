@@ -8,13 +8,14 @@ public class GoldCurrency : MonoBehaviour
 {
 	
 	public static int _bank;
-	public TextMeshProUGUI _currencyText;
+	public TextMeshProUGUI[] _currencyText;
+    GameObject[] _currencyTexts;
 
 	// Start is called before the first frame update
 	void Start()
 	{
         //PlayerPrefs.SetInt("Currency", 505);
-        _currencyText = GetComponentInChildren<TextMeshProUGUI>();
+        _currencyText = FindObjectsOfType<TextMeshProUGUI>();
         if(PlayerPrefs.HasKey("Currency"))
         {
 		    _bank = PlayerPrefs.GetInt("Currency");
@@ -24,8 +25,13 @@ public class GoldCurrency : MonoBehaviour
             _bank = 0;
             PlayerPrefs.SetInt("Currency", _bank);
         }
-
-        _currencyText.text = "" + PlayerPrefs.GetInt("Currency", 0).ToString();
+        foreach(TextMeshProUGUI text in _currencyText)
+        {
+            if(text.tag == "Currency")
+            {
+                text.text = "" + PlayerPrefs.GetInt("Currency", 0).ToString();
+            }
+        }
 	}
 
     //private void LateUpdate()
@@ -44,7 +50,13 @@ public class GoldCurrency : MonoBehaviour
     {
         _bank -= coins;
         PlayerPrefs.SetInt("Currency", _bank);
-        _currencyText.text = "" + _bank.ToString();
+        foreach (TextMeshProUGUI text in _currencyText)
+        {
+            if (text.tag == "Currency")
+            {
+                text.text = "" + _bank.ToString();
+            }
+        }
     }
     //public int GetCurrentBalance()
     //{

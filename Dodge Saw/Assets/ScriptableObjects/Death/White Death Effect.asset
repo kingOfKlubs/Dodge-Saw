@@ -50,4 +50,4 @@ MonoBehaviour:
   cost: 0
   equipped: 1
   purchased: 1
-  itemType: 5
+  itemType: 4

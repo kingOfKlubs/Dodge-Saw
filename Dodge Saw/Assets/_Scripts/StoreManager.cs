@@ -16,16 +16,16 @@ public class StoreManager : MonoBehaviour
     [Header("List of Items Sold")]
     public List<Item> shopPlayerItems;
     public List<Item> shopTrailItems;
-    public List<Item> shopEnemyItems;
-    //public List<Item> shopWarpItems;
+    public List<Item> shopSkinItems;
+    public List<Item> shopCosmeticItems;
     public List<Item> shopDeathItems;
     public List<GameObject> shopIAPItems;
 
     [Header("References")]
     [SerializeField] private Transform PlayerPage;
     [SerializeField] private Transform TrailPage;
-    [SerializeField] private Transform EnemyPage;
-    [SerializeField] private Transform WarpPage;
+    [SerializeField] private Transform SkinPage;
+    [SerializeField] private Transform CosmeticsPage;
     [SerializeField] private Transform DeathPage;
     [SerializeField] private Transform IAPPage;
     [SerializeField] private GameObject shopItemPrefab;
@@ -118,38 +118,33 @@ public class StoreManager : MonoBehaviour
             PlayerPrefsX.SetColor("_trailGradient2", item.gradient.colorKeys[1].color); 
             PlayerPrefsX.SetColor("_trailGradient3", item.gradient.colorKeys[2].color);
         }
-        //if (item.itemType == Item.ItemType.Warp)
-        //{
-        //    for (int i = 0; i < shopPlayerItems.Count; i++)
-        //    {
-        //        if (item != shopWarpItems[i])
-        //        {
-        //            Unequip(shopWarpItems[i]);
-        //        }
-        //    }
-
-        //    Debug.Log("Equipped new Warp Color");
-        //    PlayerPrefsX.SetColor("_warpColor1", item.color);
-        //    PlayerPrefsX.SetColor("_warpColor2", item.color2);
-        //}
-        if (item.itemType == ItemType.AltWarp)
+        if (item.itemType == ItemType.Cosmetic)
         {
-            Debug.Log("Equipped new AltWarp Color");
-            PlayerPrefsX.SetColor("_altWarpColor1", item.color);
-            PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
-        }
-        if (item.itemType == ItemType.Enemies)
-        {
-            for (int i = 0; i < shopEnemyItems.Count; i++)
+            for (int i = 0; i < shopCosmeticItems.Count; i++)
             {
-                if (item != shopEnemyItems[i])
+                if (item != shopCosmeticItems[i])
                 {
-                    Unequip(shopEnemyItems[i]);
+                    Unequip(shopCosmeticItems[i]);
                 }
             }
-            Debug.Log("Equipped new AltWarp Color");
-            PlayerPrefsX.SetColor("EnemyColor", item.color);
-            //PlayerPrefsX.SetColor("_altWarpColor2", item.color2);
+
+            Debug.Log("Equipped new Cosmetic");
+            //PlayerPrefsX.SetColor("_warpColor1", item.color);
+            //PlayerPrefsX.SetColor("_warpColor2", item.color2);
+        }
+        if (item.itemType == ItemType.Skin)
+        {
+            for (int i = 0; i < shopSkinItems.Count; i++)
+            {
+                if (item != shopSkinItems[i])
+                {
+                    Unequip(shopSkinItems[i]);
+                }
+            }
+            Debug.Log("Equipped new Skin");
+            PlayerPrefs.SetString("ChosenSkin", item.itemName);
+            InitializePlayerCharacteristics playerCharacteristics = FindObjectOfType<InitializePlayerCharacteristics>();
+            playerCharacteristics.SetSkin(GameObject.FindGameObjectWithTag("Player"));
         }
         if (item.itemType == ItemType.Death)
         {
@@ -304,10 +299,10 @@ public class StoreManager : MonoBehaviour
             }
             dataManager.SaveItem(si);
         }
-        for (int i = 0; i < shopEnemyItems.Count; i++)
+        for (int i = 0; i < shopSkinItems.Count; i++)
         {
-            Item si = shopEnemyItems[i];
-            GameObject shopItemObject = Instantiate(shopItemPrefab, EnemyPage);
+            Item si = shopSkinItems[i];
+            GameObject shopItemObject = Instantiate(shopItemPrefab, SkinPage);
 
             //this access' the prefabs's component, and change it based off your ShopItem struct
             //ShopItem(image)
@@ -354,61 +349,65 @@ public class StoreManager : MonoBehaviour
             }
             dataManager.SaveItem(si);
         }
-        //for (int i = 0; i < shopWarpItems.Count; i++)
-        //{
-        //    Item si = shopWarpItems[i];
-        //    GameObject shopItemObject = Instantiate(shopItemPrefab, WarpPage);
+        for (int i = 0; i < shopCosmeticItems.Count; i++)
+        {
+            Item si = shopCosmeticItems[i];
+            GameObject shopItemObject = Instantiate(shopItemPrefab, CosmeticsPage);
 
-        //    //this access' the prefabs's component, and change it based off your ShopItem struct
-        //    //ShopItem(image)
-        //    // - Panel
-        //    // - Texture (Raw Image)
-        //    // - name (Text)
-        //    // - Cost (Text)
-        //    //  - Coin (image)
-        //    // - Unequip (button)
-        //    // - Equip (button)
-        //    // - Buy (button)
+            //this access' the prefabs's component, and change it based off your ShopItem struct
+            //ShopItem(image)
+            // - Panel
+            // - Texture (Raw Image)
+            // - name (Text)
+            // - Cost (Text)
+            //  - Coin (image)
+            // - Unequip (button)
+            // - Equip (button)
+            // - Buy (button)
 
-        //    //assign image from the prefab to the instantiated object
-        //    if (si.backgroundImage != null) {
-        //        shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-        //    }
-        //    else {
-        //        if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-        //        else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-        //    }
+            //assign image from the prefab to the instantiated object
+            if (si.backgroundImage != null)
+            {
+                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
+            }
+            else
+            {
+                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
+            }
 
-        //    //assign texture from the prefab to the instantiated object
-        //    if (si.texture != null) {
-        //        shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-        //    }
-        //    else {
-        //        shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[3];
-        //    }
+            //assign texture from the prefab to the instantiated object
+            if (si.texture != null)
+            {
+                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
+            }
+            else
+            {
+                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[3];
+            }
 
-        //    //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
-        //    //assign the name from the prefab to the instantiated object
-        //    shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
-        //    //assign the cost from the pregab to the instantiated object
-        //    shopItemObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
-        //    //assign the buttons from the prefab to the instantiated object
-        //    shopItemObject.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
+            //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
+            //assign the name from the prefab to the instantiated object
+            shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
+            //assign the cost from the pregab to the instantiated object
+            shopItemObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = si.cost.ToString();
+            //assign the buttons from the prefab to the instantiated object
+            shopItemObject.transform.GetChild(4).GetChild(0).GetComponent<TextMeshProUGUI>().text = si.buttonText;
 
-        //    //Grab button, assign a function to it's onClick event
-        //    if (si.purchased && si.equipped)
-        //    {
-        //        Debug.Log(si.itemName + " is Equipped");
-        //    }
-        //    else if (si.purchased && !si.equipped)
-        //        shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
-        //    else
-        //    {
-        //        shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
-        //        si.buttonText = "Buy";
-        //    }
+            //Grab button, assign a function to it's onClick event
+            if (si.purchased && si.equipped)
+            {
+                Debug.Log(si.itemName + " is Equipped");
+            }
+            else if (si.purchased && !si.equipped)
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Equip(si));
+            else
+            {
+                shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
+                si.buttonText = "Buy";
+            }
 
-        ////}
+        }
         for (int i = 0; i < shopDeathItems.Count; i++)
         {
             Item si = shopDeathItems[i];

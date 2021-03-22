@@ -5299,6 +5299,7 @@ GameObject:
   - component: {fileID: 1170511732}
   - component: {fileID: 1170511738}
   - component: {fileID: 1170511739}
+  - component: {fileID: 1170511740}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5511,6 +5512,18 @@ MonoBehaviour:
   AnimDuration: 0.5
   easeType: 10
   spread: 0.3
+--- !u!114 &1170511740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170511731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86663b7f85a392748a92f8f45d0b5cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1203345942
 GameObject:
   m_ObjectHideFlags: 0
@@ -10862,7 +10875,6 @@ GameObject:
   - component: {fileID: 2119650405}
   - component: {fileID: 2119650408}
   - component: {fileID: 2119650407}
-  - component: {fileID: 2119650406}
   m_Layer: 5
   m_Name: Gold Coin
   m_TagString: Untagged
@@ -10890,19 +10902,6 @@ RectTransform:
   m_AnchoredPosition: {x: -147, y: -28.106}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2119650406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119650404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38df0700ba14c4108a58056b18bd758a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currencyText: []
 --- !u!114 &2119650407
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,11 +60,10 @@ public class StoreManager : MonoBehaviour
 
     public void Buy(Item item, GameObject itemObject)
     {
-        if (GoldCurrency._bank >= item.cost)
+        if (BankManager._bank >= item.cost)
         {
             Debug.Log("you just purchased this item");
-            GoldCurrency gc = FindObjectOfType<GoldCurrency>();
-            gc.TakeMoneyFromBank(item.cost);
+            BankManager.instance.TakeMoneyFromBank(item.cost);
             item.purchased = true;
             item.buttonText = "Equip";
             AudioManager.instance.Play("ChaChing");
@@ -366,15 +365,8 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.backgroundImage != null)
-            {
-                shopItemObject.GetComponent<Image>().sprite = si.backgroundImage;
-            }
-            else
-            {
-                if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-                else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            }
+            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
+            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
 
             //assign texture from the prefab to the instantiated object
             if (si.texture != null)

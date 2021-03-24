@@ -172,8 +172,7 @@ public class SceneChanger : MonoBehaviour {
                     {
                         GoldManager gm = FindObjectOfType<GoldManager>();
                         gm.AddCoins(new Vector2(0,0), Score._reward);
-                        GoldCurrency GC = FindObjectOfType<GoldCurrency>();
-                        GC.AddMoneyToBank(Score._reward);               
+                        BankManager.instance.AddMoneyToBank(Score._reward);
                         Score._reward = 0;
                         Score._scoreRecord = 0;
                         _gameOverRewardUI.SetActive(false);

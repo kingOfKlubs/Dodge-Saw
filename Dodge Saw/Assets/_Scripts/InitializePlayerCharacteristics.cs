@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 
 public class InitializePlayerCharacteristics : MonoBehaviour
 {
     public GameObject _playerPrefab;
-    public GameObject _playerSkinPrefab;
+    public GameObject[] _playerSkinPrefab;
+    public Transform stuntTransform;
     public VisualEffect Portal;
     public Color[] defaultColor;
     public Mesh[] meshes;
@@ -64,7 +66,10 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
         SetDeathColor();
-        SetSkin(GameObject.FindGameObjectWithTag("Player"));
+        SetSkin();
+        if(SceneManager.GetActiveScene().buildIndex == 0) {
+            SetStuntPlayer();
+        }
         //SetPortalColor();
         //SetWarpColor();
         //SetEnemiesColor();
@@ -73,17 +78,30 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         
     }
 
-    public void SetSkin(GameObject player)
+    public void SetSkin()
     {
         switch (PlayerPrefs.GetString("ChosenSkin"))
         {
             case ("Player Skin 1"):
-                player.GetComponent<MeshFilter>().sharedMesh = meshes[1];
                 _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[1];
                 break;
             default:
-                player.GetComponent<MeshFilter>().sharedMesh = meshes[0];
                 _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[0];
+                break;
+        }
+    }
+
+    public void SetStuntPlayer() {
+        foreach(GameObject go in _playerSkinPrefab) {
+            go.SetActive(false);
+        }
+
+        switch (PlayerPrefs.GetString("ChosenSkin")) {
+            case ("Player Skin 1"):
+                _playerSkinPrefab[1].SetActive(true);
+                break;
+            default:
+                _playerSkinPrefab[0].SetActive(true);
                 break;
         }
     }

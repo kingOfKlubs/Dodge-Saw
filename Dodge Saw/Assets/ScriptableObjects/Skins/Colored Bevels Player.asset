@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 12396a524aa88594a8bbac4d90e9fdfc, type: 3}
   texture: {fileID: 8400000, guid: 2e3e09440e15257428fae763003aa709, type: 2}
-  _mesh: {fileID: -3190485236019160658, guid: 96020f08275ca684b82bba524496e6a2, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   color2: {r: 1, g: 1, b: 1, a: 1}
   gradient:
@@ -48,7 +47,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Player Skin 1
   _buttonText: Buy
-  cost: 100
+  cost: 10
   equipped: 0
   purchased: 0
   itemType: 2

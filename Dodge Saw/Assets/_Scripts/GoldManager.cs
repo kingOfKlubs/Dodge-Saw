@@ -44,6 +44,7 @@ public class GoldManager : MonoBehaviour
     void Awake()
     {
         _c = PlayerPrefs.GetInt("Currency");
+        coinUIText.text = PlayerPrefs.GetInt("Currency").ToString();
         //prepare pool
         PrepareCoins();
     }

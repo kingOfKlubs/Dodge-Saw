@@ -229,6 +229,11 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position,_direction * _dst);
+    }
+
     public GameStates UpdateStates(GameStates newGameState)
     {
         currentState = newGameState;

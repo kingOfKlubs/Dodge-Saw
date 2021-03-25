@@ -20,18 +20,10 @@ public class DebugStore : MonoBehaviour
 
     private void AddMoneyToBank(int coins)
     {
-        int _bank = PlayerPrefs.GetInt("Currency");
-        _bank += coins;
-        PlayerPrefs.SetInt("Currency", _bank);
-        _currencyText.text = "" + _bank.ToString();
-
+        BankManager.instance.AddMoneyToBank(coins);
     }
     private void TakeMoneyFromBank(int coins)
     {
-        int _bank = PlayerPrefs.GetInt("Currency");
-        _bank -= coins;
-        PlayerPrefs.SetInt("Currency", _bank);
-        _currencyText.text = "" + _bank.ToString();
-
+        BankManager.instance.TakeMoneyFromBank(coins);
     }
 }

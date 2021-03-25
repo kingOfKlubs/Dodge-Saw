@@ -34,9 +34,6 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private Sprite EquippedItemBackground;
     [SerializeField] private Sprite UnequippedItemBackground;
 
-    [Header("Textures(This in the order for 'List of Items Sold')")]
-    [SerializeField] private Texture[] shopTextures;
-
     [Header("Store's Purchase Effect")]
     [SerializeField] private ParticleSystem CoinFallEffect;
 
@@ -77,7 +74,6 @@ public class StoreManager : MonoBehaviour
 
     public void Equip(Item item)
     {
-
         if(item.itemType == ItemType.Player)
         {
             // player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor",item.color);
@@ -126,10 +122,8 @@ public class StoreManager : MonoBehaviour
                     Unequip(shopCosmeticItems[i]);
                 }
             }
-
             Debug.Log("Equipped new Cosmetic");
-            //PlayerPrefsX.SetColor("_warpColor1", item.color);
-            //PlayerPrefsX.SetColor("_warpColor2", item.color2);
+            PlayerPrefs.SetString("ChosenCosmetic", item.itemName);
         }
         if (item.itemType == ItemType.Skin)
         {
@@ -210,18 +204,15 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-            
+            if (si.equipped) {
+                shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground;
+            } else {
+                shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground;
+            }
 
             //assign texture from the prefab to the instantiated object
-            if (si.texture != null) {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture  = shopTextures[0];
-            }
-                        
+            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
+            //assign the Color from the prefab to the instantiated object  
             shopItemObject.transform.GetChild(1).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
@@ -242,7 +233,6 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
             dataManager.SaveItem(si);
         }
         for (int i = 0; i < shopTrailItems.Count; i++)
@@ -259,24 +249,17 @@ public class StoreManager : MonoBehaviour
             //  - Coin (image)
             // - Unequip (button)
             // - Equip (button)
-            // - Buy (button)
-
+            // - Buy (button
 
             //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-
+            if (si.equipped) {
+                shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground;
+            } else {
+                shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground;
+            }
 
             //assign texture from the prefab to the instantiated object
-            if (si.texture != null) {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[1];
-            }
-
-
-            //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
+            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
@@ -314,18 +297,16 @@ public class StoreManager : MonoBehaviour
             // - Equip (button)
             // - Buy (button)
 
-
             //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
-
-            if (si.texture != null) {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[2];
+            if (si.equipped) {
+                shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground;
+            } else {
+                shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground;
             }
 
+            //assign texture from the prefab to the instantiated object
+            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
+            //assign Color from the prefab to the instantiated object
             shopItemObject.transform.GetChild(1).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
@@ -365,20 +346,14 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
+            if (si.equipped) {
+                shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground;
+            } else {
+                shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground;
+            }
 
             //assign texture from the prefab to the instantiated object
-            if (si.texture != null)
-            {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else
-            {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[3];
-            }
-
-            //shopItemObject.transform.GetChild(0).GetComponent<RawImage>().color = si.color;
+            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;
             //assign the cost from the pregab to the instantiated object
@@ -398,7 +373,7 @@ public class StoreManager : MonoBehaviour
                 shopItemObject.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => Buy(si, shopItemObject));
                 si.buttonText = "Buy";
             }
-
+            dataManager.SaveItem(si);
         }
         for (int i = 0; i < shopDeathItems.Count; i++)
         {
@@ -417,17 +392,15 @@ public class StoreManager : MonoBehaviour
             // - Buy (button)
 
             //assign image from the prefab to the instantiated object
-            if (si.equipped) { shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground; }
-            else { shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground; }
+            if (si.equipped) {
+                shopItemObject.GetComponent<Image>().sprite = EquippedItemBackground;
+            } else {
+                shopItemObject.GetComponent<Image>().sprite = UnequippedItemBackground;
+            }
 
             //assign texture from the prefab to the instantiated object
-            if (si.texture != null) {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
-            }
-            else {
-                shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = shopTextures[4];
-            }
-
+            shopItemObject.transform.GetChild(1).GetComponent<RawImage>().texture = si.texture;
+            //assign Color from the prefab to the instantiated object
             shopItemObject.transform.GetChild(1).GetComponent<RawImage>().color = si.color;
             //assign the name from the prefab to the instantiated object
             shopItemObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = si.itemName;

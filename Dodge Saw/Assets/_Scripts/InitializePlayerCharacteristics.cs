@@ -8,35 +8,20 @@ using UnityEngine.VFX;
 public class InitializePlayerCharacteristics : MonoBehaviour
 {
     public GameObject _playerPrefab;
-    public GameObject[] _playerSkinPrefab;
-    public Transform stuntTransform;
-    public VisualEffect Portal;
-    public Color[] defaultColor;
-    public Mesh[] meshes;
+    public Color defaultColor;
     public Gradient defaultGradient;
-
+    public GameObject[] _playerSkinPrefab;
+    public GameObject[] CosmeticItems;
+    public GameObject[] _players;
+    public TrailRenderer _currentTrail { get; set; }
+    
     public static Color _playerColor;
 
-    public TrailRenderer _currentTrail { get; set; }
-
-    Color _enemyColor;
-
-    static Color _warpColor;
-    static Color _warpColor2;
-    static ParticleSystem.MainModule _warpParticles1;
-    static ParticleSystem.MainModule _warpParticles2;
-    static ParticleSystem.MainModule _altWarpParticles1;
-    static ParticleSystem.MainModule _altWarpParticles2;
-    
     Color _deathEffectColor; 
-
     Gradient gradient;
     GradientColorKey[] colorKey;
     GradientAlphaKey[] alphaKey;
-
     RoundManager roundManager;
-
-   
 
     // Start is called before the first frame update
     void Awake()
@@ -44,7 +29,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         if (!PlayerPrefsX.GetBool("HasPlayed"))
         {
             // Setting up the Player's Color
-            _playerColor = defaultColor[0];
+            _playerColor = defaultColor;
             PlayerPrefs.SetFloat("_playerColor.r", _playerColor.r);
             PlayerPrefs.SetFloat("_playerColor.g", _playerColor.g);
             PlayerPrefs.SetFloat("_playerColor.b", _playerColor.b);
@@ -66,27 +51,61 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
         SetDeathColor();
-        SetSkin();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            SetSkin();
+            SetCosmetic();
+        }
         if(SceneManager.GetActiveScene().buildIndex == 0) {
             SetStuntPlayer();
         }
-        //SetPortalColor();
-        //SetWarpColor();
-        //SetEnemiesColor();
-        //enemyAi = FindObjectOfType<EnemyAI>();
-        //enemyAi.enemies[1].GetComponent<MeshRenderer>().sharedMaterials[0].SetColor("_EmissionColor", _enemyColor);
-        
     }
 
     public void SetSkin()
     {
+        foreach (GameObject go in _players)
+        {
+            go.SetActive(false);
+        }
         switch (PlayerPrefs.GetString("ChosenSkin"))
         {
             case ("Player Skin 1"):
-                _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[1];
+                _players[1].SetActive(true);
+                break;
+            case ("Player Skin 2"):
+                _players[2].SetActive(true);
                 break;
             default:
-                _playerPrefab.GetComponent<MeshFilter>().sharedMesh = meshes[0];
+                _players[0].SetActive(true);
+                break;
+        }
+    }
+
+    public void SetCosmetic()
+    {
+        foreach (GameObject go in CosmeticItems)
+        {
+            go.SetActive(false);
+        }
+        switch (PlayerPrefs.GetString("ChosenCosmetic"))
+        {
+            case ("Wings"):
+                CosmeticItems[0].SetActive(true);
+                break;
+            case ("Halo"):
+                CosmeticItems[1].SetActive(true);
+                break;
+            case ("Crown"):
+                CosmeticItems[2].SetActive(true);
+                break;
+            case ("Rockets"):
+                CosmeticItems[3].SetActive(true);
+                break;
+            default:
+                foreach (GameObject go in CosmeticItems)
+                {
+                    go.SetActive(false);
+                }
                 break;
         }
     }
@@ -100,22 +119,14 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             case ("Player Skin 1"):
                 _playerSkinPrefab[1].SetActive(true);
                 break;
+            case ("Player Skin 2"):
+                _playerSkinPrefab[2].SetActive(true);
+                break;
             default:
                 _playerSkinPrefab[0].SetActive(true);
                 break;
         }
     }
-
-
-    private void SetPortalColor()
-    {
-        if(Portal != null)
-        {
-            Portal.SetVector4("Color", _playerColor);
-        }
-    }
-
-    //public Color SetPlayerColor { set { value = _playerColor; } get { return _playerColor; } }
 
     public void SetPlayerColor()
     {
@@ -123,6 +134,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         _playerColor.g = PlayerPrefs.GetFloat("_playerColor.g");
         _playerColor.b = PlayerPrefs.GetFloat("_playerColor.b");
     }
+
     public void SetTrailColor()
     { 
         gradient = new Gradient();
@@ -147,41 +159,6 @@ public class InitializePlayerCharacteristics : MonoBehaviour
 
         gradient.SetKeys(colorKey, alphaKey);
     }
-    //public static void SetWarpColor()
-    //{
-    //    if (GameObject.FindGameObjectWithTag("Warp") != null)
-    //    {
-    //        _warpParticles1 = GameObject.FindGameObjectWithTag("Warp").GetComponent<ParticleSystem>().main;
-    //        _warpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2"));
-
-    //    }
-    //    if (GameObject.FindGameObjectWithTag("Warp1") != null)
-    //    {
-    //        _warpParticles2 = GameObject.FindGameObjectWithTag("Warp1").GetComponent<ParticleSystem>().main;
-    //        _warpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_warpColor1"), PlayerPrefsX.GetColor("_warpColor2")); 
-
-
-    //    }
-    //    if (GameObject.FindGameObjectWithTag("AltWarp") != null)
-    //    {
-    //        _altWarpParticles1 = GameObject.FindGameObjectWithTag("AltWarp").GetComponent<ParticleSystem>().main;
-    //        _altWarpParticles1.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
-
-
-    //    }
-    //    if (GameObject.FindGameObjectWithTag("AltWarp1") != null)
-    //    {
-    //        _altWarpParticles2 = GameObject.FindGameObjectWithTag("AltWarp1").GetComponent<ParticleSystem>().main;
-    //        _altWarpParticles2.startColor = new ParticleSystem.MinMaxGradient(PlayerPrefsX.GetColor("_altWarpColor1"), PlayerPrefsX.GetColor("_altWarpColor2"));
-
-
-    //    }
-    //}
-
-    //public void SetEnemiesColor()
-    //{
-    //    _enemyColor = PlayerPrefsX.GetColor("EnemyColor");
-    //}
 
     public void SetDeathColor()
     {
@@ -205,9 +182,8 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         alphaKey[2].alpha = 0.0f;
         alphaKey[2].time = 1.0f;
 
+        //set up the gradient with values from above
         gradient.SetKeys(colorKey, alphaKey);
-
-
 
         ParticleSystem[] deathGradient = _playerPrefab.GetComponent<Movement>()._deathEffect.GetComponentsInChildren<ParticleSystem>();
         for (int i = 0; i < deathGradient.Length; i++)
@@ -216,21 +192,5 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             deathColor = deathGradient[i].colorOverLifetime;
             deathColor.color = gradient;
         }
-        //ParticleSystem[] deathGradient1 = enemyAi.enemies[1].GetComponent<Attack>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
-        //for (int i = 0; i < deathGradient1.Length; i++)
-        //{
-        //    ParticleSystem.ColorOverLifetimeModule deathColor;
-        //    deathColor = deathGradient1[i].colorOverLifetime;
-        //    deathColor.color = gradient;
-        //}
-        //ParticleSystem[] deathGradient2 = enemyAi.enemies[2].GetComponent<Bounce>()._playerDeathEffect.GetComponentsInChildren<ParticleSystem>();
-        //for (int i = 0; i < deathGradient2.Length; i++)
-        //{
-        //    ParticleSystem.ColorOverLifetimeModule deathColor;
-        //    deathColor = deathGradient2[i].colorOverLifetime;
-        //    deathColor.color = gradient;
-        //}
     }
-
-   
 }

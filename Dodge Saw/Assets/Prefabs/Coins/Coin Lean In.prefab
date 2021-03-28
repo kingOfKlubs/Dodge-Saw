@@ -61,7 +61,7 @@ VisualEffect:
       - m_Value: {x: 12.528302, y: 12.528302, z: 12.528302, w: 1}
         m_Name: New Color
         m_Overridden: 1
-      - m_Value: {x: 2.246104, y: 0.63223654, z: 0, w: 3}
+      - m_Value: {x: 2.2588236, y: 2.2588236, z: 2.2588236, w: 3}
         m_Name: Flash Color
         m_Overridden: 1
     m_Uint:

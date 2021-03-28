@@ -23,6 +23,7 @@ TagManager:
   - Options
   - Round
   - Currency
+  - Lightning Rod
   layers:
   - Default
   - TransparentFX

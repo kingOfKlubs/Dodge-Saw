@@ -90,6 +90,7 @@ public class EnemyMovement : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider collision)
     {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"),LayerMask.NameToLayer("ignore") , true);
         if (collision.tag == "Player")
         {
             Movement.Death = true;

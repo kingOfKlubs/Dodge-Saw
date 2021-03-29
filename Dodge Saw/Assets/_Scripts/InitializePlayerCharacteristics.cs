@@ -50,6 +50,14 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         _playerPrefab.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
         SetTrailColor();
         _playerPrefab.transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+        if(_players != null)
+        {
+            for (int i = 0; i < _players.Length; i++)
+            {
+                _players[i].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+                _players[i].transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+            }
+        }
         SetDeathColor();
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
@@ -74,6 +82,7 @@ public class InitializePlayerCharacteristics : MonoBehaviour
                 break;
             case ("Player Skin 2"):
                 _players[2].SetActive(true);
+
                 break;
             default:
                 _players[0].SetActive(true);
@@ -118,12 +127,15 @@ public class InitializePlayerCharacteristics : MonoBehaviour
         switch (PlayerPrefs.GetString("ChosenSkin")) {
             case ("Player Skin 1"):
                 _playerSkinPrefab[1].SetActive(true);
+                _playerSkinPrefab[1].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
                 break;
             case ("Player Skin 2"):
                 _playerSkinPrefab[2].SetActive(true);
+                _playerSkinPrefab[2].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
                 break;
             default:
                 _playerSkinPrefab[0].SetActive(true);
+                _playerSkinPrefab[0].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
                 break;
         }
     }

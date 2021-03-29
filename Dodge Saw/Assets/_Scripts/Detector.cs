@@ -55,8 +55,21 @@ public class Detector : MonoBehaviour
             {
                 if (col.name == _linkList[i].targetName)
                 {
+                    _linkList[i]._connector.makeConnection = false;
                     Destroy(_linkList[i]._link);
                 }
+            }
+        }
+    }
+
+    public void StopConnection()
+    {
+        if (_linkList.Count > 0)
+        {
+            for (int i = 0; i < _linkList.Count; i++)
+            {
+                _linkList[i]._connector.makeConnection = false;
+                Destroy(_linkList[i]._link);
             }
         }
     }

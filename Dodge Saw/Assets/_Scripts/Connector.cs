@@ -5,10 +5,10 @@ using UnityEngine;
 public class Connector : MonoBehaviour {
 
     public LineRenderer _lineRenderer;
+    public bool makeConnection;
 
     private Vector3 _startPos;
     private Vector3 _endPos;
-    private bool makeConnection;
 
     // Start is called before the first frame update
     void Start()

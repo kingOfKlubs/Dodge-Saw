@@ -249,7 +249,7 @@ VisualEffectResource:
       VFX_SHADERGRAPH 1\n\t\t#define HAS_SHADERGRAPH_PARAM_COLOR 1\n\t\t#define HAS_SHADERGRAPH_PARAM_ALPHA
       1\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t#define VFX_LOCAL_SPACE 1\n\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/Universal/VFXDefines.hlsl\"\n\t\t\n\n\t\tCBUFFER_START(parameters)\n\t\t   
-      float4 uniform_a;\n\t\t    float4 uniform_b;\n\t\t    float4 Color_84574A94;\n\t\tCBUFFER_END\n\t\t\n\t\tstruct
+      float4 uniform_a;\n\t\t    float4 uniform_b;\n\t\t    float4 Color_;\n\t\tCBUFFER_END\n\t\t\n\t\tstruct
       Attributes\n\t\t{\n\t\t    float lifetime;\n\t\t    float pivotX;\n\t\t   
       float pivotY;\n\t\t    float pivotZ;\n\t\t    float3 position;\n\t\t    float3
       color;\n\t\t    float alpha;\n\t\t    bool alive;\n\t\t    float3 axisX;\n\t\t   
@@ -286,11 +286,10 @@ VisualEffectResource:
       #if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t\t\tfloat3 posWS : TEXCOORD8;\n\t\t\t   
       #endif\n\t\t\t\t\n\t\t\t\t#if VFX_PASSDEPTH == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\tfloat4
       cPosPrevious : TEXCOORD6;\n\t\t\t\tfloat4 cPosNonJiterred : TEXCOORD7;\n\t\t\t\t#endif\n\t\t\t   
-      VFX_OPTIONAL_INTERPOLATION float Vector1_B6073D0E : NORMAL0;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION
-      float Vector1_951C506E : NORMAL1;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION float
-      Vector1_15257C48 : NORMAL2;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION float2 Vector2_7FCF5052
-      : NORMAL3;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION float Vector1_4EBB095E : NORMAL4;\n\t\t\t   
-      \n\n\t\t\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\t#define
+      VFX_OPTIONAL_INTERPOLATION float Width_ : NORMAL0;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION
+      float Height_ : NORMAL1;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION float NoiseScale_
+      : NORMAL2;\n\t\t\t    VFX_OPTIONAL_INTERPOLATION float2 NoiseSpeed_ : NORMAL3;\n\t\t\t   
+      VFX_OPTIONAL_INTERPOLATION float DistortionAmount_ : NORMAL4;\n\t\t\t    \n\n\t\t\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\t#define
       VFX_VARYING_PS_INPUTS ps_input\n\t\t\t#define VFX_VARYING_POSCS pos\n\t\t\t#define
       VFX_VARYING_ALPHA builtInInterpolants.z\n\t\t\t#define VFX_VARYING_ALPHATHRESHOLD
       builtInInterpolants.x\n\t\t\t#define VFX_VARYING_FRAMEBLEND builtInInterpolants.y\n\t\t\t#define
@@ -407,18 +406,17 @@ VisualEffectResource:
       && defined (VFX_VARYING_FRAMEBLEND)\n\t\t\t\t\t\to.VFX_VARYING_UV.zw = uvData.uvs.zw;\n\t\t\t\t\t\to.VFX_VARYING_FRAMEBLEND
       = uvData.blend;\n\t\t\t\t\t\t#if USE_FLIPBOOK_MOTIONVECTORS && defined(VFX_VARYING_MOTIONVECTORSCALE)\n\t\t\t\t\t\t\n\t\t\t\t\t\to.VFX_VARYING_MOTIONVECTORSCALE
       = motionVectorScale * invFlipBookSize;\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t   
-      \n\t\t\t    float Vector1_B6073D0E__ = (float)0;{\n\t\t\t        float tmp_w
-      = attributes.age / attributes.lifetime;\n\t\t\t        float tmp_x = SampleCurve(uniform_b,tmp_w);\n\t\t\t       
-      \n\t\t\t        Vector1_B6073D0E__ = tmp_x;\n\t\t\t    }\n\t\t\t    o.Vector1_B6073D0E
-      = Vector1_B6073D0E__;float Vector1_951C506E__ = (float)0;{\n\t\t\t        \n\t\t\t       
-      Vector1_951C506E__ = (float)2;\n\t\t\t    }\n\t\t\t    o.Vector1_951C506E =
-      Vector1_951C506E__;float Vector1_15257C48__ = (float)0;{\n\t\t\t        \n\t\t\t       
-      Vector1_15257C48__ = (float)43.9000015;\n\t\t\t    }\n\t\t\t    o.Vector1_15257C48
-      = Vector1_15257C48__;float2 Vector2_7FCF5052__ = (float2)0;{\n\t\t\t       
-      \n\t\t\t        Vector2_7FCF5052__ = float2(0.200000003, 0);\n\t\t\t    }\n\t\t\t   
-      o.Vector2_7FCF5052 = Vector2_7FCF5052__;float Vector1_4EBB095E__ = (float)0;{\n\t\t\t       
-      \n\t\t\t        Vector1_4EBB095E__ = (float)0.200000003;\n\t\t\t    }\n\t\t\t   
-      o.Vector1_4EBB095E = Vector1_4EBB095E__;\n\n\t\t\t\t\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t#include
+      \n\t\t\t    float Width___ = (float)0;{\n\t\t\t        float tmp_w = attributes.age
+      / attributes.lifetime;\n\t\t\t        float tmp_x = SampleCurve(uniform_b,tmp_w);\n\t\t\t       
+      \n\t\t\t        Width___ = tmp_x;\n\t\t\t    }\n\t\t\t    o.Width_ = Width___;float
+      Height___ = (float)0;{\n\t\t\t        \n\t\t\t        Height___ = (float)2;\n\t\t\t   
+      }\n\t\t\t    o.Height_ = Height___;float NoiseScale___ = (float)0;{\n\t\t\t       
+      \n\t\t\t        NoiseScale___ = (float)43.9000015;\n\t\t\t    }\n\t\t\t   
+      o.NoiseScale_ = NoiseScale___;float2 NoiseSpeed___ = (float2)0;{\n\t\t\t       
+      \n\t\t\t        NoiseSpeed___ = float2(0.200000003, 0);\n\t\t\t    }\n\t\t\t   
+      o.NoiseSpeed_ = NoiseSpeed___;float DistortionAmount___ = (float)0;{\n\t\t\t       
+      \n\t\t\t        DistortionAmount___ = (float)0.200000003;\n\t\t\t    }\n\t\t\t   
+      o.DistortionAmount_ = DistortionAmount___;\n\n\t\t\t\t\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommonOutput.hlsl\"\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\t#include
       \"Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl\"\n\t\t\t\t\t#include
       \"Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl\"\n\t\t\t\t\t#include
@@ -463,25 +461,25 @@ VisualEffectResource:
       half4 uv0;\n\t\t\t    float3 TimeParameters;\n\t\t\t};\n\t\t\t\n\t\t\tstruct
       SG_Output_e871b10ca0f04e24588211b47ed8e480\n\t\t\t{\n\t\t\t    float Alpha_4;\n\t\t\t};\n\t\t\t\n\t\t\tSG_Output_e871b10ca0f04e24588211b47ed8e480
       SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(\n\t\t\t    SG_Input_e871b10ca0f04e24588211b47ed8e480
-      IN,\n\t\t\t    /* Property: Width */ float Vector1_B6073D0E,\n\t\t\t    /*
-      Property: Height */ float Vector1_951C506E,\n\t\t\t    /* Property: NoiseScale
-      */ float Vector1_15257C48,\n\t\t\t    /* Property: NoiseSpeed */ float2 Vector2_7FCF5052,\n\t\t\t   
-      /* Property: Distortion Amount */ float Vector1_4EBB095E)\n\t\t\t{\n\t\t\t   
-      // Node: UV\n\t\t\t    float4 _UV_AB9570E7_Out_0 = IN.uv0;\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float2 _Property_3833909_Out_0 = Vector2_7FCF5052;\n\t\t\t\n\t\t\t   
-      // Node: Multiply\n\t\t\t    float2 _Multiply_5F280984_Out_2;\n\t\t\t    Unity_Multiply_float(_Property_3833909_Out_0,
+      IN,\n\t\t\t    /* Property: Width */ float Width_,\n\t\t\t    /* Property:
+      Height */ float Height_,\n\t\t\t    /* Property: NoiseScale */ float NoiseScale_,\n\t\t\t   
+      /* Property: NoiseSpeed */ float2 NoiseSpeed_,\n\t\t\t    /* Property: Distortion
+      Amount */ float DistortionAmount_)\n\t\t\t{\n\t\t\t    // Node: UV\n\t\t\t   
+      float4 _UV_AB9570E7_Out_0 = IN.uv0;\n\t\t\t\n\t\t\t    // Node: Property\n\t\t\t   
+      float2 _Property_3833909_Out_0 = NoiseSpeed_;\n\t\t\t\n\t\t\t    // Node: Multiply\n\t\t\t   
+      float2 _Multiply_5F280984_Out_2;\n\t\t\t    Unity_Multiply_float(_Property_3833909_Out_0,
       (IN.TimeParameters.x.xx), _Multiply_5F280984_Out_2);\n\t\t\t\n\t\t\t    //
       Node: Tiling And Offset\n\t\t\t    float2 _TilingAndOffset_65A770BC_Out_3;\n\t\t\t   
       Unity_TilingAndOffset_float(IN.uv0.xy, float2 (1, 1), _Multiply_5F280984_Out_2,
       _TilingAndOffset_65A770BC_Out_3);\n\t\t\t\n\t\t\t    // Node: Property\n\t\t\t   
-      float _Property_5185BFB2_Out_0 = Vector1_15257C48;\n\t\t\t\n\t\t\t    // Node:
-      Simple Noise\n\t\t\t    float _SimpleNoise_9E166531_Out_2;\n\t\t\t    Unity_SimpleNoise_float(_TilingAndOffset_65A770BC_Out_3,
+      float _Property_5185BFB2_Out_0 = NoiseScale_;\n\t\t\t\n\t\t\t    // Node: Simple
+      Noise\n\t\t\t    float _SimpleNoise_9E166531_Out_2;\n\t\t\t    Unity_SimpleNoise_float(_TilingAndOffset_65A770BC_Out_3,
       _Property_5185BFB2_Out_0, _SimpleNoise_9E166531_Out_2);\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_D6A4B620_Out_0 = Vector1_4EBB095E;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_D6A4B620_Out_0 = DistortionAmount_;\n\t\t\t\n\t\t\t   
       // Node: Lerp\n\t\t\t    float4 _Lerp_80EA9DE1_Out_3;\n\t\t\t    Unity_Lerp_float4(_UV_AB9570E7_Out_0,
       (_SimpleNoise_9E166531_Out_2.xxxx), (_Property_D6A4B620_Out_0.xxxx), _Lerp_80EA9DE1_Out_3);\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_8AFD8777_Out_0 = Vector1_B6073D0E;\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_62B6ACB6_Out_0 = Vector1_951C506E;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_8AFD8777_Out_0 = Width_;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_62B6ACB6_Out_0 = Height_;\n\t\t\t\n\t\t\t   
       // Node: Rectangle\n\t\t\t    float _Rectangle_E40B2C4D_Out_3;\n\t\t\t    Unity_Rectangle_float((_Lerp_80EA9DE1_Out_3.xy),
       _Property_8AFD8777_Out_0, _Property_62B6ACB6_Out_0, _Rectangle_E40B2C4D_Out_3);\n\t\t\t\n\t\t\t   
       // Visual Effect Master\n\t\t\t    SG_Output_e871b10ca0f04e24588211b47ed8e480
@@ -489,15 +487,14 @@ VisualEffectResource:
       OUT;\n\t\t\t}\n\t\t\t\n\n\t\t\t\n\t\t\t#if VFX_PASSDEPTH == VFX_PASSDEPTH_SELECTION\n\t\t\tint
       _ObjectId;\n\t\t\tint _PassValue;\n\t\t\t#endif\n\t\t\t\n\t\t\t#pragma fragment
       frag\n\t\t\tfloat4 frag(ps_input i) : SV_TARGET\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t   
-      #ifdef VFX_SHADERGRAPH\n\t\t\t        float Vector1_B6073D0E = i.Vector1_B6073D0E;float
-      Vector1_951C506E = i.Vector1_951C506E;float Vector1_15257C48 = i.Vector1_15257C48;float2
-      Vector2_7FCF5052 = i.Vector2_7FCF5052;float Vector1_4EBB095E = i.Vector1_4EBB095E;\n\t\t\t       
-      //Call Shader Graph\n\t\t\t        SG_Input_e871b10ca0f04e24588211b47ed8e480
-      INSG = (SG_Input_e871b10ca0f04e24588211b47ed8e480)0;\n\t\t\t        INSG.uv0.xy
-      = i.uv;\n\t\t\t        INSG.TimeParameters = _TimeParameters.xyz;\n\t\t\t       
-      \n\t\t\t        SG_Output_e871b10ca0f04e24588211b47ed8e480 OUTSG = SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(INSG,Vector1_B6073D0E,
-      Vector1_951C506E, Vector1_15257C48, Vector2_7FCF5052, Vector1_4EBB095E);\n\t\t\t       
-      \n\n\t\t\t        \n\t\t\t        float alpha = OUTSG.Alpha_4;\n\t\t\t    #else\n\t\t\t       
+      #ifdef VFX_SHADERGRAPH\n\t\t\t        float Width_ = i.Width_;float Height_
+      = i.Height_;float NoiseScale_ = i.NoiseScale_;float2 NoiseSpeed_ = i.NoiseSpeed_;float
+      DistortionAmount_ = i.DistortionAmount_;\n\t\t\t        //Call Shader Graph\n\t\t\t       
+      SG_Input_e871b10ca0f04e24588211b47ed8e480 INSG = (SG_Input_e871b10ca0f04e24588211b47ed8e480)0;\n\t\t\t       
+      INSG.uv0.xy = i.uv;\n\t\t\t        INSG.TimeParameters = _TimeParameters.xyz;\n\t\t\t       
+      \n\t\t\t        SG_Output_e871b10ca0f04e24588211b47ed8e480 OUTSG = SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(INSG,Width_,
+      Height_, NoiseScale_, NoiseSpeed_, DistortionAmount_);\n\t\t\t        \n\n\t\t\t       
+      \n\t\t\t        float alpha = OUTSG.Alpha_4;\n\t\t\t    #else\n\t\t\t       
       float alpha = VFXGetFragmentColor(i).a;\n\t\t\t        alpha *= VFXGetTextureColor(VFX_SAMPLER(mainTexture),i).a;\t\t\n\t\t\t   
       #endif\n\t\t\t\tVFXClipFragmentColor(alpha,i);\n\t\t\t\t\n\t\t\t\t#if VFX_PASSDEPTH
       == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\t\t\n\t\t\t\t\t\t\tfloat2 velocity =
@@ -528,11 +525,11 @@ VisualEffectResource:
       cPosPrevious : TEXCOORD5;\n\t\t\t\tfloat4 cPosNonJiterred : TEXCOORD6;\n\t\t\t\t#endif\n\t\t\t\t\n\t\t\t\t#if
       SHADERGRAPH_NEEDS_NORMAL_FORWARD\n\t\t\t\tfloat3 normal : TEXCOORD7;\n\t\t\t\t#endif\n\t\t\t\t#if
       SHADERGRAPH_NEEDS_TANGENT_FORWARD\n\t\t\t\tfloat4 tangent : TEXCOORD8;\n\t\t\t\t#endif\n\t\t\t\t\n\t\t       
-      VFX_OPTIONAL_INTERPOLATION float Vector1_B6073D0E : NORMAL0;\n\t\t        VFX_OPTIONAL_INTERPOLATION
-      float Vector1_951C506E : NORMAL1;\n\t\t        VFX_OPTIONAL_INTERPOLATION float
-      Vector1_15257C48 : NORMAL2;\n\t\t        VFX_OPTIONAL_INTERPOLATION float2
-      Vector2_7FCF5052 : NORMAL3;\n\t\t        VFX_OPTIONAL_INTERPOLATION float Vector1_4EBB095E
-      : NORMAL4;\n\t\t        \n\n\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\tstruct
+      VFX_OPTIONAL_INTERPOLATION float Width_ : NORMAL0;\n\t\t        VFX_OPTIONAL_INTERPOLATION
+      float Height_ : NORMAL1;\n\t\t        VFX_OPTIONAL_INTERPOLATION float NoiseScale_
+      : NORMAL2;\n\t\t        VFX_OPTIONAL_INTERPOLATION float2 NoiseSpeed_ : NORMAL3;\n\t\t       
+      VFX_OPTIONAL_INTERPOLATION float DistortionAmount_ : NORMAL4;\n\t\t       
+      \n\n\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\tstruct
       ps_output\n\t\t\t{\n\t\t\t\tfloat4 color : SV_Target0;\n\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t\t\tfloat4
       outMotionVector : SV_Target1;\n\t\t#endif\n\t\t\t};\n\t\t\n\t\t#define VFX_VARYING_PS_INPUTS
       ps_input\n\t\t#define VFX_VARYING_POSCS pos\n\t\t#define VFX_VARYING_COLOR
@@ -653,18 +650,17 @@ VisualEffectResource:
       && defined (VFX_VARYING_FRAMEBLEND)\n\t\t\t\t\t\to.VFX_VARYING_UV.zw = uvData.uvs.zw;\n\t\t\t\t\t\to.VFX_VARYING_FRAMEBLEND
       = uvData.blend;\n\t\t\t\t\t\t#if USE_FLIPBOOK_MOTIONVECTORS && defined(VFX_VARYING_MOTIONVECTORSCALE)\n\t\t\t\t\t\t\n\t\t\t\t\t\to.VFX_VARYING_MOTIONVECTORSCALE
       = motionVectorScale * invFlipBookSize;\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t   
-      \n\t\t\t    float Vector1_B6073D0E__ = (float)0;{\n\t\t\t        float tmp_w
-      = attributes.age / attributes.lifetime;\n\t\t\t        float tmp_x = SampleCurve(uniform_b,tmp_w);\n\t\t\t       
-      \n\t\t\t        Vector1_B6073D0E__ = tmp_x;\n\t\t\t    }\n\t\t\t    o.Vector1_B6073D0E
-      = Vector1_B6073D0E__;float Vector1_951C506E__ = (float)0;{\n\t\t\t        \n\t\t\t       
-      Vector1_951C506E__ = (float)2;\n\t\t\t    }\n\t\t\t    o.Vector1_951C506E =
-      Vector1_951C506E__;float Vector1_15257C48__ = (float)0;{\n\t\t\t        \n\t\t\t       
-      Vector1_15257C48__ = (float)43.9000015;\n\t\t\t    }\n\t\t\t    o.Vector1_15257C48
-      = Vector1_15257C48__;float2 Vector2_7FCF5052__ = (float2)0;{\n\t\t\t       
-      \n\t\t\t        Vector2_7FCF5052__ = float2(0.200000003, 0);\n\t\t\t    }\n\t\t\t   
-      o.Vector2_7FCF5052 = Vector2_7FCF5052__;float Vector1_4EBB095E__ = (float)0;{\n\t\t\t       
-      \n\t\t\t        Vector1_4EBB095E__ = (float)0.200000003;\n\t\t\t    }\n\t\t\t   
-      o.Vector1_4EBB095E = Vector1_4EBB095E__;\n\n\t\t\t\t\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t#include
+      \n\t\t\t    float Width___ = (float)0;{\n\t\t\t        float tmp_w = attributes.age
+      / attributes.lifetime;\n\t\t\t        float tmp_x = SampleCurve(uniform_b,tmp_w);\n\t\t\t       
+      \n\t\t\t        Width___ = tmp_x;\n\t\t\t    }\n\t\t\t    o.Width_ = Width___;float
+      Height___ = (float)0;{\n\t\t\t        \n\t\t\t        Height___ = (float)2;\n\t\t\t   
+      }\n\t\t\t    o.Height_ = Height___;float NoiseScale___ = (float)0;{\n\t\t\t       
+      \n\t\t\t        NoiseScale___ = (float)43.9000015;\n\t\t\t    }\n\t\t\t   
+      o.NoiseScale_ = NoiseScale___;float2 NoiseSpeed___ = (float2)0;{\n\t\t\t       
+      \n\t\t\t        NoiseSpeed___ = float2(0.200000003, 0);\n\t\t\t    }\n\t\t\t   
+      o.NoiseSpeed_ = NoiseSpeed___;float DistortionAmount___ = (float)0;{\n\t\t\t       
+      \n\t\t\t        DistortionAmount___ = (float)0.200000003;\n\t\t\t    }\n\t\t\t   
+      o.DistortionAmount_ = DistortionAmount___;\n\n\t\t\t\t\n\t\t\t\treturn o;\n\t\t\t}\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommonOutput.hlsl\"\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\t#include
       \"Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl\"\n\t\t\t\t\t#include
       \"Packages/com.unity.render-pipelines.core/ShaderLibrary/Packing.hlsl\"\n\t\t\t\t\t#include
@@ -712,27 +708,26 @@ VisualEffectResource:
       SG_Output_e871b10ca0f04e24588211b47ed8e480\n\t\t\t{\n\t\t\t    float3 Color_6;\n\t\t\t   
       float Alpha_4;\n\t\t\t};\n\t\t\t\n\t\t\tSG_Output_e871b10ca0f04e24588211b47ed8e480
       SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(\n\t\t\t    SG_Input_e871b10ca0f04e24588211b47ed8e480
-      IN,\n\t\t\t    /* Property: Width */ float Vector1_B6073D0E,\n\t\t\t    /*
-      Property: Height */ float Vector1_951C506E,\n\t\t\t    /* Property: NoiseScale
-      */ float Vector1_15257C48,\n\t\t\t    /* Property: NoiseSpeed */ float2 Vector2_7FCF5052,\n\t\t\t   
-      /* Property: Distortion Amount */ float Vector1_4EBB095E,\n\t\t\t    /* Property:
-      Color */ float4 Color_84574A94)\n\t\t\t{\n\t\t\t    // Node: Property\n\t\t\t   
-      float4 _Property_3A93FC42_Out_0 = Color_84574A94;\n\t\t\t\n\t\t\t    // Node:
-      UV\n\t\t\t    float4 _UV_AB9570E7_Out_0 = IN.uv0;\n\t\t\t\n\t\t\t    // Node:
-      Property\n\t\t\t    float2 _Property_3833909_Out_0 = Vector2_7FCF5052;\n\t\t\t\n\t\t\t   
-      // Node: Multiply\n\t\t\t    float2 _Multiply_5F280984_Out_2;\n\t\t\t    Unity_Multiply_float(_Property_3833909_Out_0,
-      (IN.TimeParameters.x.xx), _Multiply_5F280984_Out_2);\n\t\t\t\n\t\t\t    //
-      Node: Tiling And Offset\n\t\t\t    float2 _TilingAndOffset_65A770BC_Out_3;\n\t\t\t   
+      IN,\n\t\t\t    /* Property: Width */ float Width_,\n\t\t\t    /* Property:
+      Height */ float Height_,\n\t\t\t    /* Property: NoiseScale */ float NoiseScale_,\n\t\t\t   
+      /* Property: NoiseSpeed */ float2 NoiseSpeed_,\n\t\t\t    /* Property: Distortion
+      Amount */ float DistortionAmount_,\n\t\t\t    /* Property: Color */ float4
+      Color_)\n\t\t\t{\n\t\t\t    // Node: Property\n\t\t\t    float4 _Property_3A93FC42_Out_0
+      = Color_;\n\t\t\t\n\t\t\t    // Node: UV\n\t\t\t    float4 _UV_AB9570E7_Out_0
+      = IN.uv0;\n\t\t\t\n\t\t\t    // Node: Property\n\t\t\t    float2 _Property_3833909_Out_0
+      = NoiseSpeed_;\n\t\t\t\n\t\t\t    // Node: Multiply\n\t\t\t    float2 _Multiply_5F280984_Out_2;\n\t\t\t   
+      Unity_Multiply_float(_Property_3833909_Out_0, (IN.TimeParameters.x.xx), _Multiply_5F280984_Out_2);\n\t\t\t\n\t\t\t   
+      // Node: Tiling And Offset\n\t\t\t    float2 _TilingAndOffset_65A770BC_Out_3;\n\t\t\t   
       Unity_TilingAndOffset_float(IN.uv0.xy, float2 (1, 1), _Multiply_5F280984_Out_2,
       _TilingAndOffset_65A770BC_Out_3);\n\t\t\t\n\t\t\t    // Node: Property\n\t\t\t   
-      float _Property_5185BFB2_Out_0 = Vector1_15257C48;\n\t\t\t\n\t\t\t    // Node:
-      Simple Noise\n\t\t\t    float _SimpleNoise_9E166531_Out_2;\n\t\t\t    Unity_SimpleNoise_float(_TilingAndOffset_65A770BC_Out_3,
+      float _Property_5185BFB2_Out_0 = NoiseScale_;\n\t\t\t\n\t\t\t    // Node: Simple
+      Noise\n\t\t\t    float _SimpleNoise_9E166531_Out_2;\n\t\t\t    Unity_SimpleNoise_float(_TilingAndOffset_65A770BC_Out_3,
       _Property_5185BFB2_Out_0, _SimpleNoise_9E166531_Out_2);\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_D6A4B620_Out_0 = Vector1_4EBB095E;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_D6A4B620_Out_0 = DistortionAmount_;\n\t\t\t\n\t\t\t   
       // Node: Lerp\n\t\t\t    float4 _Lerp_80EA9DE1_Out_3;\n\t\t\t    Unity_Lerp_float4(_UV_AB9570E7_Out_0,
       (_SimpleNoise_9E166531_Out_2.xxxx), (_Property_D6A4B620_Out_0.xxxx), _Lerp_80EA9DE1_Out_3);\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_8AFD8777_Out_0 = Vector1_B6073D0E;\n\t\t\t\n\t\t\t   
-      // Node: Property\n\t\t\t    float _Property_62B6ACB6_Out_0 = Vector1_951C506E;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_8AFD8777_Out_0 = Width_;\n\t\t\t\n\t\t\t   
+      // Node: Property\n\t\t\t    float _Property_62B6ACB6_Out_0 = Height_;\n\t\t\t\n\t\t\t   
       // Node: Rectangle\n\t\t\t    float _Rectangle_E40B2C4D_Out_3;\n\t\t\t    Unity_Rectangle_float((_Lerp_80EA9DE1_Out_3.xy),
       _Property_8AFD8777_Out_0, _Property_62B6ACB6_Out_0, _Rectangle_E40B2C4D_Out_3);\n\t\t\t\n\t\t\t   
       // Node: Multiply\n\t\t\t    float4 _Multiply_42FA9C6E_Out_2;\n\t\t\t    Unity_Multiply_float(_Property_3A93FC42_Out_0,
@@ -754,14 +749,14 @@ VisualEffectResource:
       normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
       = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
       = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t       
-      #if VFX_SHADERGRAPH        \n\t\t            float Vector1_B6073D0E = i.Vector1_B6073D0E;float
-      Vector1_951C506E = i.Vector1_951C506E;float Vector1_15257C48 = i.Vector1_15257C48;float2
-      Vector2_7FCF5052 = i.Vector2_7FCF5052;float Vector1_4EBB095E = i.Vector1_4EBB095E;\n\t\t           
+      #if VFX_SHADERGRAPH        \n\t\t            float Width_ = i.Width_;float
+      Height_ = i.Height_;float NoiseScale_ = i.NoiseScale_;float2 NoiseSpeed_ =
+      i.NoiseSpeed_;float DistortionAmount_ = i.DistortionAmount_;\n\t\t           
       //Call Shader Graph\n\t\t            SG_Input_e871b10ca0f04e24588211b47ed8e480
       INSG = (SG_Input_e871b10ca0f04e24588211b47ed8e480)0;\n\t\t            INSG.uv0.xy
       = i.uv;\n\t\t            INSG.TimeParameters = _TimeParameters.xyz;\n\t\t           
-      \n\t\t            SG_Output_e871b10ca0f04e24588211b47ed8e480 OUTSG = SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(INSG,Vector1_B6073D0E,
-      Vector1_951C506E, Vector1_15257C48, Vector2_7FCF5052, Vector1_4EBB095E, Color_84574A94);\n\t\t           
+      \n\t\t            SG_Output_e871b10ca0f04e24588211b47ed8e480 OUTSG = SG_Evaluate_e871b10ca0f04e24588211b47ed8e480(INSG,Width_,
+      Height_, NoiseScale_, NoiseSpeed_, DistortionAmount_, Color_);\n\t\t           
       \n\n\t\t            \n\t\t            #if HAS_SHADERGRAPH_PARAM_COLOR\n\t\t               
       o.color.rgb = OUTSG.Color_6.rgb;\n\t\t            #endif\n\t\t            \n\t\t           
       #if HAS_SHADERGRAPH_PARAM_ALPHA \n\t\t                o.color.a = OUTSG.Alpha_4;\n\t\t           
@@ -1260,7 +1255,7 @@ VisualEffectResource:
         index: 2
       - nameId: uniform_b
         index: 3
-      - nameId: Color_84574A94
+      - nameId: Color_
         index: 14
       params:
       - nameId: mesh
@@ -3244,7 +3239,7 @@ MonoBehaviour:
       m_RegexMaxLength: 0
   m_Direction: 1
   m_LinkedSlots:
-  - {fileID: 8926484042661614729}
+  - {fileID: 8926484042661614749}
 --- !u!114 &8926484042661614665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3482,7 +3477,7 @@ MonoBehaviour:
   - m_Id: 0
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614672}
-      inputSlot: {fileID: 8926484042661614736}
+      inputSlot: {fileID: 8926484042661614756}
     position: {x: 697, y: 1194}
     expandedSlots: []
     expanded: 1
@@ -3524,7 +3519,7 @@ MonoBehaviour:
     attributes: []
   m_Direction: 1
   m_LinkedSlots:
-  - {fileID: 8926484042661614736}
+  - {fileID: 8926484042661614756}
 --- !u!114 &8926484042661614673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4320,12 +4315,12 @@ MonoBehaviour:
   - {fileID: 8926484042661614726}
   - {fileID: 8926484042661614727}
   - {fileID: 8926484042661614728}
-  - {fileID: 8926484042661614729}
-  - {fileID: 8926484042661614730}
-  - {fileID: 8926484042661614731}
-  - {fileID: 8926484042661614732}
-  - {fileID: 8926484042661614735}
-  - {fileID: 8926484042661614736}
+  - {fileID: 8926484042661614749}
+  - {fileID: 8926484042661614750}
+  - {fileID: 8926484042661614751}
+  - {fileID: 8926484042661614752}
+  - {fileID: 8926484042661614755}
+  - {fileID: 8926484042661614756}
   m_OutputSlots: []
   m_Label: 
   m_Data: {fileID: 8926484042661614568}
@@ -4504,7 +4499,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614729}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -4518,8 +4513,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
     attributes: []
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614664}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661614730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4539,7 +4533,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614730}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -4573,7 +4567,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614731}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -4609,7 +4603,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614732}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -4709,7 +4703,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614735}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -4747,7 +4741,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614736}
   m_MasterData:
-    m_Owner: {fileID: 8926484042661614721}
+    m_Owner: {fileID: 0}
     m_Value:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -4761,8 +4755,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     attributes: []
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614672}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661614737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5173,5 +5166,415 @@ MonoBehaviour:
       m_Tooltip: 
       m_Regex: 
       m_RegexMaxLength: 0
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614749}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.1
+    m_Space: 2147483647
+  m_Property:
+    name: Width_
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots:
+  - {fileID: 8926484042661614664}
+--- !u!114 &8926484042661614750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614750}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 2
+    m_Space: 2147483647
+  m_Property:
+    name: Height_
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614751}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 43.9
+    m_Space: 2147483647
+  m_Property:
+    name: NoiseScale_
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2b751071c7fc14f9fa503163991826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children:
+  - {fileID: 8926484042661614753}
+  - {fileID: 8926484042661614754}
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614752}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":0.20000000298023225,"y":0.0}'
+    m_Space: 2147483647
+  m_Property:
+    name: NoiseSpeed_
+    m_serializedType:
+      m_SerializableType: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614752}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614752}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: x
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614752}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614752}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: y
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614755}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.2
+    m_Space: 2147483647
+  m_Property:
+    name: DistortionAmount_
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82227d5759e296488798b1554a72a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 0}
+  m_Children:
+  - {fileID: 8926484042661614757}
+  - {fileID: 8926484042661614758}
+  - {fileID: 8926484042661614759}
+  - {fileID: 8926484042661614760}
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614756}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614721}
+    m_Value:
+      m_Type:
+        m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"r":3.2774319648742677,"g":0.4461425840854645,"b":0.0,"a":0.0}'
+    m_Space: 2147483647
+  m_Property:
+    name: Color_
+    m_serializedType:
+      m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots:
+  - {fileID: 8926484042661614672}
+--- !u!114 &8926484042661614757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614756}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614756}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: r
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614756}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614756}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: g
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614756}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614756}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: b
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
+  m_Direction: 0
+  m_LinkedSlots: []
+--- !u!114 &8926484042661614760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parent: {fileID: 8926484042661614756}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661614756}
+  m_MasterData:
+    m_Owner: {fileID: 0}
+    m_Value:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    m_Space: 2147483647
+  m_Property:
+    name: a
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    attributes: []
   m_Direction: 0
   m_LinkedSlots: []

@@ -96,6 +96,9 @@ public class StoreManager : MonoBehaviour
             _playerColor.b = PlayerPrefs.GetFloat("_playerColor.b");
 
             player.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+            GameObject stuntPlayer = GameObject.FindGameObjectWithTag("Stunt");
+            Debug.Log("the player whose color you should be changing is " + stuntPlayer.name);
+            stuntPlayer.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
 
         }
         if(item.itemType == ItemType.Trail)

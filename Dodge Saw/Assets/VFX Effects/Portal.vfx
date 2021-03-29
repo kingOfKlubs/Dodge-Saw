@@ -462,9 +462,9 @@ MonoBehaviour:
   - title: Ring breathing
     position:
       serializedVersion: 2
-      x: 1463
+      x: 1382
       y: -337
-      width: 672
+      width: 753
       height: 1828
     contents:
     - model: {fileID: 8926484042661614867}
@@ -585,9 +585,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -836
-    y: -2437
+    y: -2436
     width: 3774
-    height: 4645
+    height: 4640
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19176,7 +19176,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"51d50113c714d4aca8dd3334b18b3a87","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"2608701b4ecc3c54e8086b689698f42b","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -29043,7 +29043,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615681}
       inputSlot: {fileID: 8926484042661614887}
-    position: {x: 1488, y: 833}
+    position: {x: 1407, y: 833}
     expandedSlots: []
     expanded: 0
   - m_Id: 3

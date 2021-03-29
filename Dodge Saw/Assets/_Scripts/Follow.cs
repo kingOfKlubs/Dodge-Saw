@@ -19,7 +19,7 @@ public class Follow : MonoBehaviour
         if(target != null)
         {
             transform.position = GetBehindPosition(target);
-            this.transform.LookAt(target);
+            this.transform.LookAt(target, Camera.main.transform.position);
         }
     }
     Vector2 GetBehindPosition(Transform target)

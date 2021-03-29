@@ -86,6 +86,8 @@ public class EdgeMove : EnemyMovement
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
         AudioManager.instance.Stop("ImElectric");
+
+        GetComponentInChildren<Detector>().StopConnection();
         base.Death();
     }
 }

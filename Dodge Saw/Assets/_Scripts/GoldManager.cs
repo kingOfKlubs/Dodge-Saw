@@ -73,10 +73,10 @@ public class GoldManager : MonoBehaviour
                 coin.SetActive(true);
 
                 //move coin to the collected coin pos
-                coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
+                coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), 0f);
 
                 //animate coin to target position
-                float duration = AnimDuration++;
+                float duration = AnimDuration;
                 targetPosition = target.position;
                 coin.transform.LeanMove(targetPosition, duration)
                 .setEase(easeType)
@@ -84,10 +84,12 @@ public class GoldManager : MonoBehaviour
                     //executes whenever coin reach target position
                     coin.SetActive(false);
                     coinsQueue.Enqueue(coin);
-                    target.LeanScale(new Vector3(1f, 1f, 1f), .05f).setLoopPingPong(1);
                     Coins++;
+                    target.LeanScale(new Vector3(1f, 1f, 1f), .05f);
+                    target.LeanScale(new Vector3(.7111111f, .7111111f, .7111111f), .05f).setDelay(.05f);
                 });
             }
+            
         }
     }
 

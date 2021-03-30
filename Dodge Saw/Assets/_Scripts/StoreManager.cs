@@ -99,7 +99,14 @@ public class StoreManager : MonoBehaviour
             GameObject stuntPlayer = GameObject.FindGameObjectWithTag("Stunt");
             Debug.Log("the player whose color you should be changing is " + stuntPlayer.name);
             stuntPlayer.GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
-
+            if (stuntPlayer.GetComponent<MeshRenderer>().sharedMaterials.Length > 2)
+            {
+                Material[] meshes = stuntPlayer.GetComponent<MeshRenderer>().sharedMaterials;
+                for (int j = 0; j < meshes.Length; j++)
+                {
+                    meshes[j].SetColor("_EmissionColor", _playerColor);
+                }
+            }
         }
         if(item.itemType == ItemType.Trail)
         {

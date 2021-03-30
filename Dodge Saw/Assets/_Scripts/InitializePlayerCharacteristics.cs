@@ -55,7 +55,16 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             for (int i = 0; i < _players.Length; i++)
             {
                 _players[i].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
-                _players[i].transform.GetChild(0).GetComponent<TrailRenderer>().colorGradient = gradient;
+                if(_players[i].GetComponent<MeshRenderer>().sharedMaterials.Length > 2)
+                {
+                    Material[] meshes = _players[i].GetComponent<MeshRenderer>().sharedMaterials;
+                    for (int j = 0; j < meshes.Length ; j++)
+                    {
+                        meshes[j].SetColor("_EmissionColor", _playerColor);
+                    }
+                    _players[i].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+                }
+                _players[i].GetComponentInChildren<TrailRenderer>().colorGradient = gradient;
             }
         }
         SetDeathColor();
@@ -82,7 +91,9 @@ public class InitializePlayerCharacteristics : MonoBehaviour
                 break;
             case ("Player Skin 2"):
                 _players[2].SetActive(true);
-
+                break;
+            case ("Equinox"):
+                _players[3].SetActive(true);
                 break;
             default:
                 _players[0].SetActive(true);
@@ -132,6 +143,12 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             case ("Player Skin 2"):
                 _playerSkinPrefab[2].SetActive(true);
                 _playerSkinPrefab[2].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+                break;
+            case ("Equinox"):
+                _playerSkinPrefab[3].SetActive(true);
+                _playerSkinPrefab[3].GetComponent<MeshRenderer>().sharedMaterials[1].SetColor("_EmissionColor", _playerColor);
+                _playerSkinPrefab[3].GetComponent<MeshRenderer>().sharedMaterials[2].SetColor("_EmissionColor", _playerColor);
+                _playerSkinPrefab[3].GetComponent<MeshRenderer>().sharedMaterials[3].SetColor("_EmissionColor", _playerColor);
                 break;
             default:
                 _playerSkinPrefab[0].SetActive(true);

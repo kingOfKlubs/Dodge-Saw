@@ -47,7 +47,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Player Skin 1
   _buttonText: Buy
-  cost: 10
+  cost: 300
   equipped: 0
   purchased: 0
   itemType: 2

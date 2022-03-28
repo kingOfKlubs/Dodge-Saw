@@ -47,7 +47,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Purple
   _buttonText: Buy
-  cost: 5
+  cost: 100
   equipped: 0
   purchased: 0
   itemType: 0

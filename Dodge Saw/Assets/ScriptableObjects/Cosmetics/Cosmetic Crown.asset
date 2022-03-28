@@ -47,7 +47,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _itemName: Crown
   _buttonText: Buy
-  cost: 15
+  cost: 350
   equipped: 0
   purchased: 0
   itemType: 3

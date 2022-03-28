@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -53,6 +53,7 @@ public class DataManager : MonoBehaviour {
                 }
                 catch (IOException e)
                 {
+                    throw new Exception("You had an error saving the game data. The Error was: " + e);
                     Debug.LogError("You had an error saving the game data. The Error was: " + e);
                 }
                 finally
@@ -93,6 +94,7 @@ public class DataManager : MonoBehaviour {
                     }
                     catch (IOException e)
                     {
+                        throw new Exception("You had an error loading your saved data. The error was: " + e);
                         Debug.LogError("You had an error loading your saved data. The error was: " + e);
                     }
                     finally

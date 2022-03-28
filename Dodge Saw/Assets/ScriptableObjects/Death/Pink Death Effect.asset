@@ -47,7 +47,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   _itemName: Pink
   _buttonText: Buy
-  cost: 5
+  cost: 200
   equipped: 0
   purchased: 0
   itemType: 4

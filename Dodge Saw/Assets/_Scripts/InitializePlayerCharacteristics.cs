@@ -121,6 +121,9 @@ public class InitializePlayerCharacteristics : MonoBehaviour
             case ("Rockets"):
                 CosmeticItems[3].SetActive(true);
                 break;
+            case ("Lightning"):
+                CosmeticItems[4].SetActive(true);
+                break;
             default:
                 foreach (GameObject go in CosmeticItems)
                 {

@@ -10,6 +10,7 @@ public class Static : EnemyMovement
     {
         Initiate();
         _moveDirection = Vector2.zero;
+        AudioManager.instance.Play("OnFire");
     }
 
     // Update is called once per frame
@@ -35,6 +36,7 @@ public class Static : EnemyMovement
 
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
+        AudioManager.instance.Stop("OnFire");
         base.Death();
     }
 }

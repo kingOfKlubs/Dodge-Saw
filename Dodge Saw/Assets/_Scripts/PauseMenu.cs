@@ -8,20 +8,30 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool _isGamePaused = false;
     public GameObject _pauseMenuUI;
+    public GameObject _pauseUI;
     public GameObject _optionsUI;
+
+    AudioManager audioManager;
+
+    Movement movement;
 
     private void Start()
     {
         Time.timeScale = 1;
+        movement = FindObjectOfType<Movement>();
+    }
+
+    private void OnEnable()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
     {
         if(_isGamePaused)
         {
-            Movement movement = FindObjectOfType<Movement>();
-            if (movement != null)
-                movement._coolDownImageLarge.gameObject.SetActive(false);
+            //if (movement != null)
+                //movement._coolDownImageLarge.gameObject.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -39,9 +49,9 @@ public class PauseMenu : MonoBehaviour
     {
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        FindObjectOfType<AudioManager>().Play("Theme");
+        AudioManager.instance.Play("Theme");
         _isGamePaused = false;
-
+        AudioManager.instance.Play("ButtonPressed");
     }
     public void Pause()
     {
@@ -51,18 +61,21 @@ public class PauseMenu : MonoBehaviour
         }
         else {
             _pauseMenuUI.SetActive(true);
+            _pauseUI.SetActive(true);
             Time.timeScale = 0f;
-            FindObjectOfType<AudioManager>().Stop("Theme");
+            AudioManager.instance.Mute("Theme");
             _isGamePaused = true;
             if(_optionsUI.activeSelf == true)
             {
                 _optionsUI.SetActive(false);
             }
+            AudioManager.instance.Play("ButtonPressed");
         }
     }
     public void Options()
     {
-        _pauseMenuUI.SetActive(false);
+        _pauseUI.SetActive(false);
         _optionsUI.SetActive(true);
+        AudioManager.instance.Play("ButtonPressed");
     }
 }

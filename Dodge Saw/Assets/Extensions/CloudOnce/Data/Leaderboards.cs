@@ -18,7 +18,7 @@ namespace CloudOnce
 #if !UNITY_EDITOR && (UNITY_IOS || UNITY_TVOS)
             "com.DevMau.TimeDasher"
 #elif !UNITY_EDITOR && UNITY_ANDROID && CLOUDONCE_GOOGLE
-            ""
+            "CgkIj9nRpcwZEAIQAA"
 #else
             "HighScore"
 #endif

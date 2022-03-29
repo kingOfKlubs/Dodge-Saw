@@ -9,15 +9,18 @@ public class FollowPlayer : MonoBehaviour
     Transform PlayerPos;
     GameObject[] TimerUI;
 
-    private void Awake()
+    private void OnEnable()
     {
         SetUIColor();
     }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //SetUIColor();
         PlayerPos = GameObject.FindGameObjectWithTag("Player").transform;
-       
     }
 
     // Update is called once per frame
@@ -26,7 +29,6 @@ public class FollowPlayer : MonoBehaviour
         if(PlayerPos != null)
         {
             this.transform.position = PlayerPos.position;
-
         }
         this.transform.LookAt(Camera.main.transform);
     }
@@ -40,9 +42,8 @@ public class FollowPlayer : MonoBehaviour
             Debug.Log(timerUI.name);
             GameObject _playerr = GameObject.FindGameObjectWithTag("Player");
             Color _playerColor = _playerr.GetComponent<MeshRenderer>().sharedMaterials[1].GetColor("_EmissionColor");
-            _playerColor.a = .5f;
+            _playerColor.a = .7f;
             timerUI.GetComponent<Image>().color = _playerColor;
-
         }
     }
 }

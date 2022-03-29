@@ -7,25 +7,25 @@ public class VolumeControl : MonoBehaviour
 {
 
     public AudioMixer mixer;
+    public AudioMixer sfxMixer;
     public Slider slider;
+    public volumeType audioType;
 
     // Start is called before the first frame update
     void Start()
     {
+        sfxMixer = FindObjectOfType<SceneChanger>().sfxMixer;
         mixer = FindObjectOfType<SceneChanger>().mixer;
         slider = GetComponent<Slider>();
-        slider.value = PlayerPrefs.GetFloat("Volume");
+        if(audioType == volumeType.music)
+        {
+            slider.value = PlayerPrefs.GetFloat("Volume");
+        }
+        if(audioType == volumeType.sfx)
+        {
+            slider.value = PlayerPrefs.GetFloat("sfxVolume");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
-    public void SetVolume(float volume)
-    {
-        mixer.SetFloat("Volume", volume);
-        PlayerPrefs.SetFloat("Volume", volume);
-    }
+    public enum volumeType { music, sfx};
 }

@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     public float _startTime = 0;
     public VisualEffect Warp;
     public VisualEffect altWarp;
+    public Vector2 _direction;
     public GameObject _deathEffect;
     public Image _coolDownImage;
     public Image _coolDownImageLarge;
@@ -33,7 +34,6 @@ public class Movement : MonoBehaviour
     Ray _ray;
     Touch touch;
     Vector2 _velocity;
-    Vector2 _direction;
     Vector2 _initialPos;
     Vector2 _endPos;
     float _initialSpeed;
@@ -55,11 +55,11 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
         _timeStopped = _startTime;
         _coolDownImage.gameObject.SetActive(true);
-        _coolDownImageLarge.gameObject.SetActive(false);
+        //_coolDownImageLarge.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         _rigid.velocity = _velocity * _moveSpeed;
         Reflect();
         Move();
@@ -229,6 +229,11 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position,_direction * _dst);
+    }
+
     public GameStates UpdateStates(GameStates newGameState)
     {
         currentState = newGameState;
@@ -286,14 +291,15 @@ public class Movement : MonoBehaviour
 
     public void MoveSlow()
     {
+
         _cooldown = false;
         _coolDownImage.fillAmount -= 1 / _startTime * Time.deltaTime;
         _coolDownImageLarge.fillAmount -= 1 / _startTime * Time.deltaTime;
-        if (!PauseMenu._isGamePaused)
-        {
-            _coolDownImage.gameObject.SetActive(false);
-            _coolDownImageLarge.gameObject.SetActive(true);
-        }
+        //if (!PauseMenu._isGamePaused)
+        //{
+        _coolDownImage.gameObject.SetActive(false);
+        _coolDownImageLarge.gameObject.SetActive(true);
+        //}
         _moveSpeed = .3f;
         anim.speed = .3f;
         Warp.playRate = .3f;

@@ -367,10 +367,10 @@ MonoBehaviour:
   - title: Ring
     position:
       serializedVersion: 2
-      x: 81
-      y: -2252
-      width: 645
-      height: 1739
+      x: 40
+      y: -2248
+      width: 686
+      height: 1757
     contents:
     - model: {fileID: 8926484042661614620}
       id: 0
@@ -436,10 +436,10 @@ MonoBehaviour:
   - title: Shockwave
     position:
       serializedVersion: 2
-      x: 2202
-      y: -333
-      width: 645
-      height: 1739
+      x: 2178
+      y: -227
+      width: 664
+      height: 1755
     contents:
     - model: {fileID: 8926484042661614833}
       id: 0
@@ -462,10 +462,10 @@ MonoBehaviour:
   - title: Ring breathing
     position:
       serializedVersion: 2
-      x: 1490
-      y: -341
-      width: 645
-      height: 1812
+      x: 1382
+      y: -337
+      width: 753
+      height: 1828
     contents:
     - model: {fileID: 8926484042661614867}
       id: 0
@@ -488,10 +488,10 @@ MonoBehaviour:
   - title: Ring ping pong
     position:
       serializedVersion: 2
-      x: 2293
-      y: -2440
-      width: 645
-      height: 1993
+      x: 2279
+      y: -2436
+      width: 659
+      height: 2142
     contents:
     - model: {fileID: 8926484042661614943}
       id: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
     x: -836
     y: -2436
     width: 3774
-    height: 4621
+    height: 4640
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,7 +675,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ea7efc7b2c6949e4daa04284ad791a08","type":3}}'
     min: -Infinity
     max: Infinity
     descendantCount: 0
@@ -8330,7 +8330,7 @@ VisualEffectResource:
       m_NamedObject:
         m_Array:
         - m_ExpressionIndex: 70
-          m_Value: {fileID: 2800000, guid: 276d9e395ae18fe40a9b4988549f2349, type: 3}
+          m_Value: {fileID: 2800000, guid: ea7efc7b2c6949e4daa04284ad791a08, type: 3}
         - m_ExpressionIndex: 95
           m_Value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         - m_ExpressionIndex: 101
@@ -17486,7 +17486,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614834}
-  m_UIPosition: {x: 2396, y: -272}
+  m_UIPosition: {x: 2391, y: -170}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -17636,7 +17636,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614848}
-  m_UIPosition: {x: 2396, y: 123}
+  m_UIPosition: {x: 2391, y: 225}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -18085,7 +18085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 2397, y: 516}
+  m_UIPosition: {x: 2392, y: 618}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -18123,7 +18123,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614858}
   - {fileID: 8926484042661614863}
   - {fileID: 8926484042661614865}
-  m_UIPosition: {x: 2398, y: 666}
+  m_UIPosition: {x: 2393, y: 768}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -19176,7 +19176,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ea7efc7b2c6949e4daa04284ad791a08","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"2608701b4ecc3c54e8086b689698f42b","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: mainTexture
@@ -28763,7 +28763,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615675}
       inputSlot: {fileID: 8926484042661614859}
-    position: {x: 2227, y: 1000}
+    position: {x: 2222, y: 1102}
     expandedSlots: []
     expanded: 0
   - m_Id: 3
@@ -29029,28 +29029,28 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615681}
       inputSlot: {fileID: 8926484042661614651}
-    position: {x: 111.00003, y: -1172.3}
+    position: {x: 65, y: -1075}
     expandedSlots: []
     expanded: 0
   - m_Id: 1
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615681}
       inputSlot: {fileID: 8926484042661614963}
-    position: {x: 2331.8225, y: -1064.7749}
+    position: {x: 2304, y: -1007}
     expandedSlots: []
     expanded: 0
   - m_Id: 2
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615681}
       inputSlot: {fileID: 8926484042661614887}
-    position: {x: 1540.8352, y: 760.20886}
+    position: {x: 1407, y: 833}
     expandedSlots: []
     expanded: 0
   - m_Id: 3
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615681}
       inputSlot: {fileID: 8926484042661614853}
-    position: {x: 2257.1672, y: 770.855}
+    position: {x: 2203, y: 943}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615681
@@ -29077,7 +29077,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ea7efc7b2c6949e4daa04284ad791a08","type":3}}'
     m_Space: 2147483647
   m_Property:
     name: o

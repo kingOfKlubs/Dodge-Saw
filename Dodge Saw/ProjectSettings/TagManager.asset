@@ -22,6 +22,9 @@ TagManager:
   - Portal
   - Options
   - Round
+  - Currency
+  - Lightning Rod
+  - Stunt
   layers:
   - Default
   - TransparentFX
@@ -36,7 +39,7 @@ TagManager:
   - Coin
   - Enemy
   - Portal
-  - 
+  - ignore
   - 
   - 
   - 

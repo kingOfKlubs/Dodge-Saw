@@ -85,6 +85,9 @@ public class miniDiamond : MonoBehaviour
 
         _destroyEffect.SetVector4("Base Color", BaseColor);
         _destroyEffect.SetVector4("Sparks", Sparks);
+
+        AudioManager.instance.Play("EnemyDeath");
+
         VisualEffect deathClone = Instantiate(_destroyEffect, transform.position, Quaternion.identity);
         Destroy(deathClone.gameObject, 2);
         Destroy(this.gameObject);

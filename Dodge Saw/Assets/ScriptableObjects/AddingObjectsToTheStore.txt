@@ -1,0 +1,21 @@
+How to add an item to the store
+
+Skin:
+1. make a preview of item in the Enviorment object
+   make a stunt version of the character 
+	this needs to have a tag of "Stunt"
+	this needs to have a slower version of the animation 
+2. add scriptable object in the appropriate folder
+3. add that new item to the objectToRef list in the DataManager script
+4. make sure all the lists length are the same
+5. add to the players list in the intializePlayerCharacteristics script in GameLevel scene
+6. add to the playersSkin list in the initializePlayerCharacteristics script in the MainMenu scene
+7. add to the switch case for both stunt and skin methods
+
+Cosmetic
+1. make a preview of item in the Enviorment object
+2. add scriptable object in the appropriate folder
+3. add that new item to the objectToRef list in the DataManager script
+4. make sure all the lists length are the same
+5. add to the Cosmetic list in the intializePlayerCharacteristics script in GameLevel scene
+6. add cosmetic object to the Cosmetic object in the scene

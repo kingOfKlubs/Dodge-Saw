@@ -36,7 +36,7 @@ public class ShopItem : ScriptableObject
     public bool purchased;
 
     //to manage the type of item this is
-    public Item.ItemType itemType;
+    public ItemType itemType;
 
     private void OnEnable()
     {

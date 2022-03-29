@@ -29,7 +29,6 @@ public class Score : MonoBehaviour
         _scoreRecord = 0;
         if(UI != null)
         UI.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -46,23 +45,18 @@ public class Score : MonoBehaviour
             UI.SetActive(true);
             // Turn on the firework visual effect 
         }
-        GetMoney();
     }
 
     public void ResetHighScore()
     {
+        AudioManager.instance.Play("ButtonPressed");
         PlayerPrefs.DeleteKey("HighScore");
-        _highScore.text = "0";
     }
 
-    public void GetMoney()
+    public static void GetMoney()
     {
-        if (_scoreRecord >= 99)
-        {
-            _scoreRecord = 0;
-            _reward++;
-            Debug.Log(_reward);
-        }
+        _reward = _scoreRecord / 100;
+        Debug.Log("Reward is " + _reward); 
     }
 
     public void ShowScore()

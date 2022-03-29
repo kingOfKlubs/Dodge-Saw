@@ -7,162 +7,151 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using TMPro;
 
-public class SceneChanger : MonoBehaviour
-{
+public class SceneChanger : MonoBehaviour {
     public AudioMixer mixer;
+    public AudioMixer sfxMixer;
     public Animator anim;
+
+    [Header("Main Menu Pages")]
     public GameObject mainMenu;
     public GameObject options;
     public GameObject store;
     public Slider slider;
+
+    [Header("Game Level Pages")]
     public GameObject _gameOverUI;
     public GameObject _gameOver;
     public GameObject _gameOverRewardUI;
+    public GameObject coinNumPrefab;
+    public ParticleSystem CoinCollectEffect;
+
     [SerializeField]
     public string startGameName;
     public string mainMenuName;
     public TextMeshProUGUI rewardNumber;
-    AudioManager AM;
-    
-    [Header("Meta")]
-    public string persisterName;
-    [Header("Scriptable Objects")]
-    public List<ScriptableObject> objectsToPersist;
-   
-    protected void OnEnable()
-    {
-        //for (int i = 0; i < objectsToPersist.Count; i++)
-        //{
-        //    if (File.Exists(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i)))
-        //    {
-        //        BinaryFormatter bf = new BinaryFormatter();
-        //        FileStream file = File.Open(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i), FileMode.Open);
-        //        JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), objectsToPersist[i]);
-        //        file.Close();
-        //    }
-        //    else
-        //    {
-                
-        //    }
-        //}
-    }
 
-    protected void OnDisable()
-    {
-        //for (int i = 0; i < objectsToPersist.Count; i++)
-        //{
-        //    BinaryFormatter bf = new BinaryFormatter();
-        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
-        //    bf.Serialize(file, json);
-        //    file.Close();
-        //}
-    }
+    [Header("Tweening Info")]
+    public LeanTweenType easeType;
+    public float duration;
+    public float moveLeft, moveY;
+
+    float timer = 1.25f;
+    float stopTimer = 4f;
 
     public void Start()
     {
-        float volume = PlayerPrefs.GetFloat("Volume");
+        float volume = PlayerPrefs.GetFloat("Volume",0);
         mixer.SetFloat("Volume", volume);
+        float sfxVolume = PlayerPrefs.GetFloat("sfxVolume",0);
+        sfxMixer.SetFloat("Volume", sfxVolume);
+    }
+
+    public void Update()
+    {
+        GameOver();
     }
 
     public void StartGame()
     {
+        AudioManager.instance.Play("ButtonPressed");
         SceneManager.LoadScene(startGameName);
-        AM = FindObjectOfType<AudioManager>();
-        //slider = GameObject.FindGameObjectWithTag("Slider").GetComponent<Slider>();
-    }     
+    }
 
     public void QuitGame()
     {
-        //for (int i = 0; i < objectsToPersist.Count; i++)
-        //{
-        //    BinaryFormatter bf = new BinaryFormatter();
-        //    FileStream file = File.Create(Application.persistentDataPath + string.Format("/{0}_{1}.pso", persisterName, i));
-        //    var json = JsonUtility.ToJson(objectsToPersist[i]);
-        //    bf.Serialize(file, json);
-        //    file.Close();
-        //}
         Application.Quit();
     }
 
     public void Options()
     {
-        FindObjectOfType<AudioManager>().Stop("Theme");
-		FindObjectOfType<AudioManager>().Play("HipHop");
-        if(anim != null)
-        {
-            anim.SetBool("Options", true);
-        }
-        if (mainMenu != null)
-            mainMenu.SetActive(false);
-        if (options != null)
-            options.SetActive(true);
+        AudioManager.instance.Stop("Theme");
+        AudioManager.instance.Play("HipHop");
     }
+
+    public void OptionsAction()
+    {
+        AudioManager.instance.Play("ButtonPressed");
+        LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
+        LeanTween.moveLocalY(options, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Options);
+    }
+
+    public void BackAction()
+    {
+        AudioManager.instance.Play("ButtonPressed");
+        LeanTween.moveLocalY(options, -moveY, duration).setEase(easeType);
+        LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
+    }
+
+    public void StoreAction()
+    {
+        //store.SetActive(true);
+        AudioManager.instance.Play("ButtonPressed");
+        LeanTween.moveLocalX(mainMenu, -moveLeft, duration).setEase(easeType);
+        LeanTween.moveLocalY(store, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Store);
+    }
+
+    public void ExitStoreAction()
+    {
+        AudioManager.instance.Play("ButtonPressed");
+        LeanTween.moveLocalY(store, moveY, duration).setEase(easeType);
+        LeanTween.moveLocalX(mainMenu, 0, duration).setDelay(duration).setEase(easeType).setOnComplete(Main);
+    }
+
     public void Store()
     {
-        FindObjectOfType<AudioManager>().Stop("Theme");
-        FindObjectOfType<AudioManager>().Play("HipHop");
-        if (anim != null)
-        {
-            anim.SetBool("Store", true);
-        }
-        if (store != null)
-            store.SetActive(true);
-        if (mainMenu != null)
-            mainMenu.SetActive(false);
+        AudioManager.instance.Stop("Theme");
+        AudioManager.instance.Play("HipHop");
     }
 
     public void MainMenu()
     {
         Movement player = FindObjectOfType<Movement>();
-        if(player != null)
+        if (player != null)
         {
             Destroy(player.gameObject);
         }
+        Score._reward = 0;
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
-		FindObjectOfType<AudioManager>().Play("Theme");
-        FindObjectOfType<AudioManager>().Stop("HipHop");
+        AudioManager.instance.Play("Theme");
+        AudioManager.instance.Stop("HipHop");
     }
 
     public void Main()
     {
-        if(anim != null)
-        {
-            anim.SetBool("Options", false);
-            anim.SetBool("Store", false);
-        }
+        //if (store != null)
+            //store.SetActive(false);
         Time.timeScale = 1;
-        if(options != null)
-            options.SetActive(false);
-        if(mainMenu != null)
-            mainMenu.SetActive(true);
-        if(store != null)
-            store.SetActive(false);
-        FindObjectOfType<AudioManager>().Play("Theme");
-        FindObjectOfType<AudioManager>().Stop("HipHop");
+        AudioManager.instance.Play("Theme");
+        AudioManager.instance.Stop("HipHop");
     }
 
     public void SetVolume(float volume)
     {
         mixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
+        AudioManager.instance.Play("ButtonPressed");
+    }
+    public void SetSFXVolume(float volume)
+    {
+        sfxMixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("sfxVolume", volume);
+        AudioManager.instance.Play("ButtonPressed");
     }
 
-    float timer = 2;
-
-    public void Update()
+    public void GameOver()
     {
         if (_gameOverUI != null)
         {
             if (Movement.Death == true)
             {
+                Score.GetMoney();
                 timer -= Time.fixedDeltaTime;
                 if (timer <= 0)
                 {
                     _gameOverUI.SetActive(true);
                     FindObjectOfType<Score>().ShowScore();
-                    if(_gameOver != null)
+                    if (_gameOver != null)
                         _gameOver.gameObject.SetActive(true);
                     Movement movement = FindObjectOfType<Movement>();
                     if (movement != null)
@@ -172,20 +161,32 @@ public class SceneChanger : MonoBehaviour
                         _gameOverRewardUI.SetActive(true);
                         if (rewardNumber != null)
                             rewardNumber.text = "+ " + Score._reward;
-
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            CoinCollectEffect.Play();
+                            AudioManager.instance.Play("TapCollect");
+                        }
                     }
+                    
                     if (Input.GetMouseButtonUp(0))
                     {
-                        _gameOverRewardUI.SetActive(false);
-                        GoldCurrency GC = FindObjectOfType<GoldCurrency>();
-                        GC.AddMoneyToBank(Score._reward);
+                        GoldManager gm = FindObjectOfType<GoldManager>();
+                        gm.AddCoins(new Vector2(0,0), Score._reward);
+                        BankManager.instance.AddMoneyToBank(Score._reward);
                         Score._reward = 0;
+                        Score._scoreRecord = 0;
+                        _gameOverRewardUI.SetActive(false);
                     }
-                    Time.timeScale = 0;
                 }
+                stopTimer -= Time.deltaTime;
+                //if (stopTimer <= 0)
+                //{
+                //    Time.timeScale = 0;
+                //}
             }
             else
                 _gameOverUI.SetActive(false);
         }
     }
 }
+

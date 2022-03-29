@@ -156,6 +156,7 @@ public class TutorialManager : MonoBehaviour
     {
         PlayerPrefsX.SetBool("hasCompletedTutorial", false);
         Debug.Log(PlayerPrefsX.GetBool("hasCompletedTutorial"));
+        AudioManager.instance.Play("ButtonPressed");
     }
 
     public void CompleteTutorial()

@@ -57,32 +57,130 @@ MonoBehaviour:
     pitch: 0.95
     loop: 0
     soure: {fileID: 0}
-    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
   - Name: HipHop
     clip: {fileID: 8300000, guid: 1b1d0f6b4587841ed8f020e7c36c35a4, type: 3}
     volume: 0.75
     pitch: 1.11
     loop: 0
     soure: {fileID: 0}
-    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
   - Name: Coin
     clip: {fileID: 8300000, guid: a843f2dc92fb045e28caaf7fc6f0ff08, type: 3}
     volume: 0.75
     pitch: 1.11
     loop: 0
     soure: {fileID: 0}
-    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
   - Name: Bump
-    clip: {fileID: 8300000, guid: a8e85fe82a8b5483d8172f0e48941c01, type: 3}
-    volume: 0.75
-    pitch: 1.11
+    clip: {fileID: 8300000, guid: 691369bf7ca60cb4799d0af702d14d69, type: 3}
+    volume: 0.33
+    pitch: 0.85
     loop: 0
     soure: {fileID: 0}
-    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
   - Name: EndOfRound
     clip: {fileID: 8300000, guid: e4ecbf93e48ce446b84192f24866075b, type: 3}
     volume: 0.75
     pitch: 1.11
     loop: 0
     soure: {fileID: 0}
-    Output: {fileID: 24300002, guid: bb4d95772d82642a9b5622b835b6a0ba, type: 2}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: ButtonPressed
+    clip: {fileID: 8300000, guid: 604588be2879c0243a2739eb5c6e434e, type: 3}
+    volume: 0.75
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: ChaChing
+    clip: {fileID: 8300000, guid: 7b705b988a95fe24a881b618d76fa076, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: Denied
+    clip: {fileID: 8300000, guid: 39ffd3c06c6b73647a78b5eb76fdbf4f, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: Equip
+    clip: {fileID: 8300000, guid: 375df245e57c36a42bcb0cca53285b8f, type: 3}
+    volume: 1
+    pitch: 1.11
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: EnemyBump
+    clip: {fileID: 8300000, guid: fc93c7bc996f5a543a7a9e60ba5975b0, type: 3}
+    volume: 1
+    pitch: 1.28
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: EnemyDeath
+    clip: {fileID: 8300000, guid: 3bd76611d26783a45b7f2f3086029b72, type: 3}
+    volume: 0.33
+    pitch: 0.88
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: EnemySpawn
+    clip: {fileID: 8300000, guid: c695434c5b469f142b87a66714389115, type: 3}
+    volume: 0.5
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: CoinSpawn
+    clip: {fileID: 8300000, guid: 767678af916f71b419295e89c63ac14a, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: EnemySplit
+    clip: {fileID: 8300000, guid: 7935b5795880b3a48ba0a0724eedbd4e, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: Portal
+    clip: {fileID: 8300000, guid: 5bfa9e60f1901784ab515ce2c21e6d3e, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: Warp
+    clip: {fileID: 8300000, guid: 63a3c0c6f53d770448b3a9a3aceed01c, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: TapCollect
+    clip: {fileID: 8300000, guid: 513abf2863623c343a1e574699ec040e, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: OnFire
+    clip: {fileID: 8300000, guid: 36f9bef60b427b54a99ab7ecc5ce53de, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}
+  - Name: ImElectric
+    clip: {fileID: 8300000, guid: 32430140d942e0243849babf75eded9d, type: 3}
+    volume: 0.755
+    pitch: 0.9
+    loop: 0
+    soure: {fileID: 0}
+    Output: {fileID: 24300002, guid: 150b229720268f948b51d1940acdac8b, type: 2}

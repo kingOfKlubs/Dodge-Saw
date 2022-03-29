@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e2e32e102e44abeb72209e7ce030c3, type: 3}
+  m_Script: {fileID: 0}
   m_Name: NewKawaseBlur
   m_EditorClassIdentifier: 
-  m_Active: 0
-  settings:
-    renderPassEvent: 500
-    blurMaterial: {fileID: 2100000, guid: a00afda211f274f6ca6cce958e4e13a5, type: 2}
-    blurPasses: 7
-    downsample: 4
-    copyToFramebuffer: 0
-    targetName: _blurTexture
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,10 +24,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
   m_Name: UniversalRenderPipelineAsset_Renderer
   m_EditorClassIdentifier: 
-  m_RendererFeatures:
-  - {fileID: 3304726219332995767}
-  - {fileID: -6172447883515017905}
-  m_RendererFeatureMap: b74a43bffcbedc2d4fc5795c5a0f57aa
+  m_RendererFeatures: []
+  m_RendererFeatureMap: 
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -57,8 +47,8 @@ MonoBehaviour:
     passOperation: 0
     failOperation: 0
     zFailOperation: 0
-  m_ShadowTransparentReceive: 1
---- !u!114 &3304726219332995767
+  m_ShadowTransparentReceive: 0
+--- !u!114 &4816302523222565379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: NewRenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
     passTag: NewRenderObjects
     Event: 300

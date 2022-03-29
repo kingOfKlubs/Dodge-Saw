@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9198646435331518785}
   - component: {fileID: 978993915872138650}
   - component: {fileID: 978993915872138649}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PLAYER
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9198646434807786483}
-  m_Mesh: {fileID: 4300000, guid: 75781623dcfa742e0b1eabfb2f4737cf, type: 3}
+  m_Mesh: {fileID: -3190485236019160658, guid: 96020f08275ca684b82bba524496e6a2, type: 3}
 --- !u!23 &9198646434805790003
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   _startTime: 3
   Warp: {fileID: 0}
   altWarp: {fileID: 0}
+  _direction: {x: 0, y: 0}
   _deathEffect: {fileID: 2946822990361950966, guid: 7aea6d569deca45e5a693b4a6f5840fb,
     type: 3}
   _coolDownImage: {fileID: 0}
@@ -172,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9198646435194168198}
   - component: {fileID: 9198646435194168193}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +264,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}

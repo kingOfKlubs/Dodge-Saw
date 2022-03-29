@@ -1,0 +1,309 @@
+fileFormatVersion: 2
+guid: 494a357d427fc8d4e9d8cd35aa385ddf
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 3611337713092935139
+    second: Pentagon 1 Outer|Circle.001Action
+  - first:
+      74: 5189692342426112641
+    second: Pentagon 1 Outer|Circle.002Action
+  - first:
+      74: -7125961480805662687
+    second: Pentagon 1 Outer|Circle.003Action
+  - first:
+      74: -2444332616958466201
+    second: Pentagon 1 Outer|Circle.004Action
+  - first:
+      74: -7142699003190446203
+    second: Pentagon 1 Outer|Circle.005Action
+  - first:
+      74: -2387473698924275527
+    second: Pentagon 1 Outer|Circle.006Action
+  - first:
+      74: -4572160184854278418
+    second: Pentagon 1 Outer|Circle.007Action
+  - first:
+      74: 1413523697020885181
+    second: Pentagon 1 Outer|Circle.008Action
+  - first:
+      74: 5667501359615667951
+    second: Pentagon 2|Circle.001Action
+  - first:
+      74: 8683407346874199486
+    second: Pentagon 2|Circle.002Action
+  - first:
+      74: 6858903991154126375
+    second: Pentagon 2|Circle.003Action
+  - first:
+      74: 5599163642679381149
+    second: Pentagon 2|Circle.004Action
+  - first:
+      74: -4306895717565355478
+    second: Pentagon 2|Circle.005Action
+  - first:
+      74: -8550622360607178995
+    second: Pentagon 2|Circle.006Action
+  - first:
+      74: -2534867201999017300
+    second: Pentagon 2|Circle.007Action
+  - first:
+      74: -7977202629860440609
+    second: Pentagon 2|Circle.008Action
+  - first:
+      74: 6492188389035925957
+    second: Pentagon 3|Circle.001Action
+  - first:
+      74: -929176830151544594
+    second: Pentagon 3|Circle.002Action
+  - first:
+      74: -8547302501781556622
+    second: Pentagon 3|Circle.003Action
+  - first:
+      74: 5735933484854826304
+    second: Pentagon 3|Circle.004Action
+  - first:
+      74: -435838270106091442
+    second: Pentagon 3|Circle.005Action
+  - first:
+      74: 3185855461755041684
+    second: Pentagon 3|Circle.006Action
+  - first:
+      74: 5421319207115600444
+    second: Pentagon 3|Circle.007Action
+  - first:
+      74: -4853977507855461399
+    second: Pentagon 3|Circle.008Action
+  - first:
+      74: -7210198248599703904
+    second: Pentagon 4 middle|Circle.001Action
+  - first:
+      74: -5970817763312434279
+    second: Pentagon 4 middle|Circle.002Action
+  - first:
+      74: 3200076790844267662
+    second: Pentagon 4 middle|Circle.003Action
+  - first:
+      74: -4963516101975601078
+    second: Pentagon 4 middle|Circle.004Action
+  - first:
+      74: -717619329286600406
+    second: Pentagon 4 middle|Circle.005Action
+  - first:
+      74: -9160363719780228340
+    second: Pentagon 4 middle|Circle.006Action
+  - first:
+      74: -7033707530837934003
+    second: Pentagon 4 middle|Circle.007Action
+  - first:
+      74: 2366149288437590004
+    second: Pentagon 4 middle|Circle.008Action
+  - first:
+      74: -426098216727211150
+    second: Pentagon 5|Circle.001Action
+  - first:
+      74: 3871569405114874231
+    second: Pentagon 5|Circle.002Action
+  - first:
+      74: 1195971276134119624
+    second: Pentagon 5|Circle.003Action
+  - first:
+      74: -569476919390044270
+    second: Pentagon 5|Circle.004Action
+  - first:
+      74: -246512180555079246
+    second: Pentagon 5|Circle.005Action
+  - first:
+      74: 4952662423819269625
+    second: Pentagon 5|Circle.006Action
+  - first:
+      74: -6995939325499942669
+    second: Pentagon 5|Circle.007Action
+  - first:
+      74: 5293061375661859784
+    second: Pentagon 5|Circle.008Action
+  - first:
+      74: 8661580164615721566
+    second: Pentagon 6|Circle.001Action
+  - first:
+      74: -8890621089271517135
+    second: Pentagon 6|Circle.002Action
+  - first:
+      74: -1197626104320237129
+    second: Pentagon 6|Circle.003Action
+  - first:
+      74: 6448150553736671251
+    second: Pentagon 6|Circle.004Action
+  - first:
+      74: 8101979601561637330
+    second: Pentagon 6|Circle.005Action
+  - first:
+      74: 5214706122027988996
+    second: Pentagon 6|Circle.006Action
+  - first:
+      74: 5323750952133001921
+    second: Pentagon 6|Circle.007Action
+  - first:
+      74: 8295717294859592296
+    second: Pentagon 6|Circle.008Action
+  - first:
+      74: 8754570139138112237
+    second: Pentagon 7|Circle.001Action
+  - first:
+      74: -8159250449527268221
+    second: Pentagon 7|Circle.002Action
+  - first:
+      74: -66045439295010164
+    second: Pentagon 7|Circle.003Action
+  - first:
+      74: -410714347131552846
+    second: Pentagon 7|Circle.004Action
+  - first:
+      74: -6520782209505602300
+    second: Pentagon 7|Circle.005Action
+  - first:
+      74: 6575104110728768971
+    second: Pentagon 7|Circle.006Action
+  - first:
+      74: -7429445903866329943
+    second: Pentagon 7|Circle.007Action
+  - first:
+      74: 2807672932327806611
+    second: Pentagon 7|Circle.008Action
+  - first:
+      74: -1719891454756846229
+    second: Pentagon 8 Inner|Circle.001Action
+  - first:
+      74: 7293604468526220659
+    second: Pentagon 8 Inner|Circle.002Action
+  - first:
+      74: -7888898487178457666
+    second: Pentagon 8 Inner|Circle.003Action
+  - first:
+      74: -3452541446576854282
+    second: Pentagon 8 Inner|Circle.004Action
+  - first:
+      74: -2451666690041480696
+    second: Pentagon 8 Inner|Circle.005Action
+  - first:
+      74: -61271054477084670
+    second: Pentagon 8 Inner|Circle.006Action
+  - first:
+      74: 9011928719671829264
+    second: Pentagon 8 Inner|Circle.007Action
+  - first:
+      74: -8416163103972287719
+    second: Pentagon 8 Inner|Circle.008Action
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: cd61d72f8ca47c248a7557b48408bd42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 4fda156019f2bac44bff590028e0c6f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 5aa1f5b4352406a4e819ec43b94ba99c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 2f7c77349e622494bb1ba3c50e4c9100, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.01
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

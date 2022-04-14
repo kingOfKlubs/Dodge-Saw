@@ -4,8 +4,8 @@ using UnityEngine.Advertisements;
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
     string placement = "rewardedVideo";
-    string appStoreId = "4061387";
-    string googleStoreId = "4061386";
+    string appStoreId = "4061386";
+    string googleStoreId = "4061387";
 
     public bool isTargetAppstore;
     public bool isTestMode;
@@ -46,9 +46,9 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
         if(showResult == ShowResult.Finished) {
             //reward the player here
-            BankManager.instance.AddMoneyToBank(3);
+            BankManager.instance.AddMoneyToBank(5);
             GoldManager gm = FindObjectOfType<GoldManager>();
-            gm.AddCoins(new Vector2(0, 0), 3);
+            gm.AddCoins(new Vector2(0, 0), 5);
             AudioManager.instance.Play("TapCollect");
             hasWatched = true;
             Debug.Log("Finished the ad");

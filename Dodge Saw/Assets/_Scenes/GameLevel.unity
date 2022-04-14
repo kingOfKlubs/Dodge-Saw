@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06575257, g: 0.09056048, b: 0.23080252, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9732,6 +9732,8 @@ MonoBehaviour:
   panel: {fileID: 1743981496}
   HoldAnim: {fileID: 1986813759}
   SwipeAnim: {fileID: 1763385213}
+  tutorialCoin: {fileID: 6435639912950891419, guid: 259b81b5b732b41fb814592fe24e06fa,
+    type: 3}
   _coinSpawning: {fileID: 423090870}
   _popUpIndex: 0
 --- !u!114 &1494035865

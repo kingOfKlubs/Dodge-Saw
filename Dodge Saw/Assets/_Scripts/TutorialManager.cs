@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject panel;
     public GameObject HoldAnim;
     public GameObject SwipeAnim;
+    public GameObject tutorialCoin;
     #endregion
 
     #region Private Variables
@@ -108,7 +109,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (!oneTimeCall)
             {
-                _coinSpawning.TutorialSpawnCoin(new Vector2(-1.68f, 0), _coinSpawning._coin);
+                _coinSpawning.TutorialSpawnCoin(new Vector2(-1.68f, 0), tutorialCoin);
                 oneTimeCall = true;
             }
         }
